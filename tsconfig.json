@@ -1,0 +1,21 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "build",
+    "target": "es6" /* what version of js the ts is compiled to */,
+    "lib": ["es6"] /* saem as target basically */,
+    "module": "commonJS" /* What module resolution version is used in the compiled js */,
+    "moduleResolution": "node" /* what module resolutions ts is configured to */,
+    "resolveJsonModule": true,
+    "baseUrl": "src" /* Specify the base directory to resolve non-relative module names. */,
+    "paths": {
+      // "@application/*": ["application/*"]
+    } /* Specify a set of entries that re-map imports to additional lookup locations. */,
+    "esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility. */,
+    "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+    "strict": true /* Enable all strict type-checking options. */,
+    "skipLibCheck": true /* Skip type checking all .d.ts files. */
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
