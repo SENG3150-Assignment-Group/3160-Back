@@ -36,13 +36,13 @@ CREATE TABLE `PlaneType` (
 CREATE TABLE `Location` (
   `LocationName` char(30) NOT NULL,
   `LocationCode` char(3) NOT NULL,
-  `LocationId` int(6) NOT NULL,
+  `LocationId` int(6) UNIQUE NOT NULL,
   `Airport` varchar(30) NOT NULL,
   `Restricted` boolean NOT NULL,
   `CountryCode3` char(3) NOT NULL,
   `RestricationStart` datetime NOT NULL,
   `RestricationEnd` datetime NOT NULL,
-  PRIMARY KEY (`LocationCode`, `CountryCode3`, `LocationId`),
+  PRIMARY KEY (`LocationCode`, `LocationId`, `CountryCode3`),
   KEY `LocationCountryCode_FK` (`CountryCode3`),
   CONSTRAINT `LocationCountryCode_FK` FOREIGN KEY (`CountryCode3`) REFERENCES `Country` (`CountryCode3`)
 );
@@ -76,28 +76,26 @@ CREATE TABLE `Ticket` (
 );
 
 CREATE TABLE `Distances` (
-  `LocationCode1` char(3) NOT NULL,
-  `LocationCode2` char(3) NOT NULL,
-  `LocationId1` int(6) NOT NULL,
-  `LocationId2` int(6) NOT NULL,
+  `LocationId1` int(6) UNIQUE NOT NULL,
+  `LocationId2` int(6) UNIQUE NOT NULL,
   `DistanceInKM` int(11) NOT NULL,
-  PRIMARY KEY (`LocationCode1`, `LocationCode2`),
-  KEY `DistancesLocationId1_FK` (`LocationCode1`),
-  KEY `DistancesLocationId2_FK` (`LocationCode2`),
-  CONSTRAINT `DistancesLocationId1_FK` FOREIGN KEY (`LocationCode1`) REFERENCES `Location` (`LocationCode`),
-  CONSTRAINT `DistancesLocationId2_FK` FOREIGN KEY (`LocationCode2`) REFERENCES `Location` (`LocationCode`)
+  PRIMARY KEY (`LocationId1`, `LocationId2`),
+  KEY `DistancesLocationId1_FK` (`LocationId1`),
+  KEY `DistancesLocationId2_FK` (`LocationId2`),
+  CONSTRAINT `DistancesLocationId1_FK` FOREIGN KEY (`LocationId1`) REFERENCES `Location` (`LocationId`),
+  CONSTRAINT `DistancesLocationId2_FK` FOREIGN KEY (`LocationId2`) REFERENCES `Location` (`LocationId`)
 );
 
 CREATE TABLE `Flight` (
   `FlightCode` varchar(6) NOT NULL,
   `DepartureCode` char(3) NOT NULL,
-  `DepartureId` int(6) NOT NULL,
+  `DepartureId` int(6) UNIQUE NOT NULL,
   `DestinationCode` char(3) NOT NULL,
-  `DestinationId` int(6) NOT NULL,
+  `DestinationId` int(6) UNIQUE NOT NULL,
   `DepartureDateTime` datetime NOT NULL,
   `DestinationDateTime` datetime NOT NULL,
   `StopOverCode` char(3) DEFAULT NULL,
-  `StopOverId` int(6) DEFAULT NULL,
+  `StopOverId` int(6) UNIQUE DEFAULT NULL,
   `AirlineCode` char(2) NOT NULL,
   `PlaneCode` varchar(20) NOT NULL,
   `Duration` time NOT NULL,
@@ -127,13 +125,13 @@ CREATE TABLE `WatchListedFlight` (
 
 CREATE TABLE `WishListedLocation` (
   `AccountId` int(6) NOT NULL,
-  `LocationCode` char(3) NOT NULL,
+  `LocationId` int(6) UNIQUE NOT NULL,
   `DateAdded` date NOT NULL,
-  PRIMARY KEY (`AccountId`, `LocationCode`, `DateAdded`),
+  PRIMARY KEY (`AccountId`, `LocationId`, `DateAdded`),
   KEY `WishListedLocationAcountId_FK` (`AccountId`),
-  KEY `WishListedLocationLocationId_FK` (`LocationCode`),
+  KEY `WishListedLocationLocationId_FK` (`LocationId`),
   CONSTRAINT `WishListedLocationAcountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`),
-  CONSTRAINT `WishListedLocationLocationId_FK` FOREIGN KEY (`LocationCode`) REFERENCES `Location` (`LocationCode`)
+  CONSTRAINT `WishListedLocationLocationId_FK` FOREIGN KEY (`LocationId`) REFERENCES `Location` (`LocationId`)
 );
 
 CREATE TABLE `DestinationPreference` (
@@ -148,13 +146,9 @@ CREATE TABLE `DestinationPreference` (
   `NumberOfStops` int(2) NOT NULL,
   `CarryOnBaggagePreference` boolean DEFAULT FALSE,
   `CheckedBaggagePreference` boolean DEFAULT FALSE,
-  PRIMARY KEY (`PreferenceId`, `PreferenceName`, `AccountId`),
+  PRIMARY KEY (`PreferenceId`, `AccountId`),
   KEY `DestinationPreferenceAccountId_FK` (`AccountId`),
-  KEY `DestinationPreferenceSeatClass_FK` (`SeatClass`),
-  KEY `DestinationPreferenceAirline_FK` (`Airline`),
-  CONSTRAINT `DestinationPreferenceAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`),
-  CONSTRAINT `DestinationPreferenceSeatClass_FK` FOREIGN KEY (`SeatClass`) REFERENCES `Ticket` (`TicketClass`),
-  CONSTRAINT `DestinationPreferenceAirline_FK` FOREIGN KEY (`Airline`) REFERENCES `Airline` (`AirlineName`)
+  CONSTRAINT `DestinationPreferenceAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
 CREATE TABLE `FlightPreference` (
