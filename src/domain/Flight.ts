@@ -1,140 +1,116 @@
 class Flight {
-  private flightCode: number;
-  private departureDate: Date;
-  private departureTime: string;
-  private departureCode: number;
-  private destinationCode: number;
-  private airlineCode: number;
-  private planeCode: number;
-  private duration: number;
-  private numberOfSeats: number;
+  flightCode: string;
+  departureId: number;
+  departureCode: string;
+  departureDateTime: Date;    
+  destinationCode: string;
+  destinationId: number;
+  destinationDateTime: Date;    
+  airlineCode: string;
+  planeCode: string;
+  duration: number;    
+  numSeats: number;
 
   constructor(
-    flightCode: number,
-    departureDate: Date,
-    departureTime: string,
-    departureCode: number,
-    destinationCode: number,
-    airlineCode: number,
-    planeCode: number,
-    duration: number,
-    numberOfSeats: number
+      flightCode: string,
+      departureCode: string,
+      departureId: number,
+      departureDateTime: Date,        
+      destinationCode: string,
+      destinationId: number,
+      destinationDateTime: Date,        
+      airlineCode: string,
+      planeCode: string,
+      duration: number,        
+      numSeats: number
   ) {
-    this.flightCode = flightCode;
-    this.departureDate = departureDate;
-    this.departureTime = departureTime;
-    this.departureCode = departureCode;
-    this.destinationCode = destinationCode;
-    this.airlineCode = airlineCode;
-    this.planeCode = planeCode;
-    this.duration = duration;
-    this.numberOfSeats = numberOfSeats;
+      this.flightCode = flightCode;
+      this.departureCode = departureCode;
+      this.departureId = departureId;
+      this.departureDateTime = departureDateTime;        
+      this.destinationCode = destinationCode;
+      this.destinationId = destinationId;
+      this.destinationDateTime = destinationDateTime;        
+      this.airlineCode = airlineCode;
+      this.planeCode = planeCode; 
+      this.duration = duration;        
+      this.numSeats = numSeats;
   }
 
-  /*
-   * Static factory method
-   */
-  public static createFlight = (
-    flightCode: number,
-    departureDate: Date,
-    departureTime: string,
-    departureCode: number,
-    destinationCode: number,
-    airlineCode: number,
-    planeCode: number,
-    duration: number,
-    numberOfSeats: number
-  ) => {
-    return new Flight(
-      flightCode,
-      departureDate,
-      departureTime,
-      departureCode,
-      destinationCode,
-      airlineCode,
-      planeCode,
-      duration,
-      numberOfSeats
-    );
-  };
-
-  /*
-   * Getters
-   */
-  public getFlightCode = (): number => {
-    return this.flightCode;
-  };
-
-  public getDepartureDate = (): Date => {
-    return this.departureDate;
-  };
-
-  public getDepartureTime = (): string => {
-    return this.departureTime;
-  };
-
-  public getDepartureCode = (): number => {
-    return this.departureCode;
-  };
-
-  public getDestinationCode = (): number => {
-    return this.destinationCode;
-  };
-
-  public getAirlineCode = (): number => {
-    return this.airlineCode;
-  };
-
-  public getPlaneCode = (): number => {
-    return this.planeCode;
-  };
-
+  // Getters
+  public getFlightCode = (): string => {
+      return this.flightCode;
+  }
+  public getDepartureCode = (): string => {
+      return this.departureCode;
+  }
+  public getDepartureId = (): number => {
+      return this.departureId;
+  }
+  public getDepartureDateTime = (): Date => {
+      return this.departureDateTime;
+  }
+  public getDestinationCode = (): string => {
+      return this.destinationCode;
+  }
+  public getDestinationId = (): number => {
+      return this.departureId;
+  }
+  public getDestinationDateTime = (): Date => {
+      return this.destinationDateTime;
+  }
+  public getAirlineCode = (): string => {
+      return this.airlineCode;
+  }
+  public getPlaneCode = (): string => {
+      return this.planeCode;
+  }
   public getDuration = (): number => {
-    return this.duration;
-  };
+      return this.duration;
+  }
+  public getNumSeats = (): number => {
+      return this.numSeats;
+  }
 
-  public getNumberOfSeats = (): number => {
-    return this.numberOfSeats;
-  };
 
-  /*
-   * Setters
-   */
-  public setFlightCode = (flightCode: number): void => {
-    this.flightCode = flightCode;
-  };
 
-  public setDepartureDate = (departureDate: Date): void => {
-    this.departureDate = departureDate;
-  };
+  // Setters
+  public setFlightCode = (flightCode: string) => {
+      this.flightCode = flightCode;
+  }
+  public setDepartureCode = (departureCode: string) => {
+      this.departureCode = departureCode;
+  }
+  public setDepartureId = (departureId: number) => {
+      this.departureId = departureId;
+  }
+  public setDepartureDateTime = (departureDateTime: Date) => {
+      this.departureDateTime = departureDateTime;
+  }
+  public setDestinationCode = (destinationCode: string) => {
+      this.destinationCode = destinationCode;
+  }
+  public setDestinationId = (destinationId: number) => {
+      this.destinationId = destinationId;
+  }
+  public setDestinationDateTime = (destinationDateTime: Date) => {
+      this.destinationDateTime = destinationDateTime;
+  }
+  public setAirlineCode = (airlineCode: string) => {
+      this.airlineCode = airlineCode;
+  }
+  public setPlaneCode = (planeCode: string) => {
+      this.planeCode = planeCode;
+  }
+  public setDuration = (duration: number) => {
+      this.duration = duration;
+  }
+  public setNumSeats = (numSeats: number) => {
+      this.numSeats = numSeats;
+  }
 
-  public setDepartureTime = (departureTime: string): void => {
-    this.departureTime = departureTime;
-  };
 
-  public setDepartureCode = (departureCode: number): void => {
-    this.departureCode = departureCode;
-  };
 
-  public setDestinationCode = (destinationCode: number): void => {
-    this.destinationCode = destinationCode;
-  };
-
-  public setAirlineCode = (airlineCode: number): void => {
-    this.airlineCode = airlineCode;
-  };
-
-  public setPlaneCode = (planeCode: number): void => {
-    this.planeCode = planeCode;
-  };
-
-  public setDuration = (duration: number): void => {
-    this.duration = duration;
-  };
-
-  public setNumberOfSeats = (numberOfSeats: number) => {
-    this.numberOfSeats = numberOfSeats;
-  };
 }
 
 export default Flight;
