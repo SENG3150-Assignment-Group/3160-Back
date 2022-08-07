@@ -42,7 +42,7 @@ CREATE TABLE `Location` (
   `CountryCode3` char(3) NOT NULL,
   `RestricationStart` datetime NOT NULL,
   `RestricationEnd` datetime NOT NULL,
-  PRIMARY KEY (`LocationCode3`, `CountryCode3`, `LocationId`),
+  PRIMARY KEY (`LocationCode`, `CountryCode3`, `LocationId`),
   KEY `LocationCountryCode_FK` (`CountryCode3`),
   CONSTRAINT `LocationCountryCode_FK` FOREIGN KEY (`CountryCode3`) REFERENCES `Country` (`CountryCode3`)
 );
