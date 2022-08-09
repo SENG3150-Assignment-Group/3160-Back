@@ -21,7 +21,7 @@ console.log(User === sequelize.models.User); // true */
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('CategoryModel', {
+const User = sequelize.define('FlightModel', {
   // Model attributes are defined here
   flightCode: {
     type: DataTypes.STRING,
@@ -76,4 +76,4 @@ const User = sequelize.define('CategoryModel', {
 });
 
 // `sequelize.define` also returns the model
-console.log(CategoryModel === sequelize.models.CategoryModel); // true
+console.log(FlightModel === sequelize.models.FlightModel); // true
