@@ -6,6 +6,7 @@ class Flight {
   destinationCode: string;
   destinationId: number;
   destinationDateTime: Date;    
+  stopOverCode: string;
   airlineCode: string;
   planeCode: string;
   duration: number;    
@@ -18,7 +19,8 @@ class Flight {
       departureDateTime: Date,        
       destinationCode: string,
       destinationId: number,
-      destinationDateTime: Date,        
+      destinationDateTime: Date, 
+      stopOverCode: string,       
       airlineCode: string,
       planeCode: string,
       duration: number,        
@@ -30,7 +32,8 @@ class Flight {
       this.departureDateTime = departureDateTime;        
       this.destinationCode = destinationCode;
       this.destinationId = destinationId;
-      this.destinationDateTime = destinationDateTime;        
+      this.destinationDateTime = destinationDateTime;  
+      this.stopOverCode = stopOverCode;      
       this.airlineCode = airlineCode;
       this.planeCode = planeCode; 
       this.duration = duration;        
@@ -59,6 +62,9 @@ class Flight {
   public getDestinationDateTime = (): Date => {
       return this.destinationDateTime;
   }
+  public getStopOverCode = (): string => {
+    return this.stopOverCode;
+}
   public getAirlineCode = (): string => {
       return this.airlineCode;
   }
@@ -96,6 +102,9 @@ class Flight {
   public setDestinationDateTime = (destinationDateTime: Date) => {
       this.destinationDateTime = destinationDateTime;
   }
+  public setStopOverCode = (stopOverCode: string) => {
+    this.stopOverCode = stopOverCode;
+}
   public setAirlineCode = (airlineCode: string) => {
       this.airlineCode = airlineCode;
   }
