@@ -1,6 +1,6 @@
 class PlaneType{
     planeCode: string;
-    planeType: string;
+    type: string;
     numFirstClass: number;
     numBusiness: number;
     numPremiumEconomy: number;
@@ -8,14 +8,14 @@ class PlaneType{
 
     constructor(
         planeCode: string,
-        planeType: string,
+        type: string,
         numFirstClass: number,
         numBusiness: number,
         numPremiumEconomy: number,
         numEconomy: number
     ){
         this.planeCode = planeCode;
-        this.planeType = planeType;
+        this.type = type;
         this.numFirstClass = numFirstClass;
         this.numBusiness = numBusiness
         this.numPremiumEconomy = numPremiumEconomy;
@@ -27,7 +27,7 @@ class PlaneType{
         return this.planeCode;
     }
     public getPlaneType = (): string => {
-        return this.planeType;
+        return this.type;
     }
     public getNumFirstClass = (): number => {
         return this.numFirstClass;
@@ -46,8 +46,8 @@ class PlaneType{
     public setPlaneCode = (planeCode: string) => {
         this.planeCode = planeCode;
     }
-    public setPlaneType = (planeType: string) => {
-        this.planeType = planeType;
+    public setType = (type: string) => {
+        this.type = type;
     }
     public setNumFirstClass = (numFirstClass: number) => {
         this.numFirstClass = numFirstClass;
