@@ -21,6 +21,7 @@ const User = sequelize.define('AirlineModel', {
   }
 }, {
   // Other model options go here
+  //name of table in DB
 });
 
 // `sequelize.define` also returns the model
