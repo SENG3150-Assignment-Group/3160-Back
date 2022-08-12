@@ -4,11 +4,11 @@ const sequelize = new Sequelize('sqlite::memory:');
 const LocationDescriptorModel = sequelize.define('LocationDescriptorModel', {
   // Model attributes are defined here
   descriptorId: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   locationId: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 }, {

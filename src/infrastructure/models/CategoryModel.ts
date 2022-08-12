@@ -24,7 +24,7 @@ const sequelize = new Sequelize('sqlite::memory:');
 const User = sequelize.define('CategoryModel', {
   // Model attributes are defined here
   categoryId: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   categoryName: {
