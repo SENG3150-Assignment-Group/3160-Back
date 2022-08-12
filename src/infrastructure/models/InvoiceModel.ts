@@ -1,17 +1,29 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const DistanceModel = sequelize.define('DistanceModel', {
+const InvoiceModel = sequelize.define('InvoiceModel', {
   // Model attributes are defined here
-  locationId1: {
+  transactionId: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  locationId2: {
+  date: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+  creditCardNumber: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  subtotal: {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  distanceInKms: {
+  tax: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  refundAmount: {
     type: DataTypes.INTEGER,
     allowNull: false
   }
@@ -20,4 +32,4 @@ const DistanceModel = sequelize.define('DistanceModel', {
 });
 
 // `sequelize.define` also returns the model
-console.log(DistanceModel === sequelize.models.DistanceModel); // true
+console.log(InvoiceModel === sequelize.models.InvoiceModel); // true

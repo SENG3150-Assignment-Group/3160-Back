@@ -1,60 +1,56 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('TicketModel', {
+const TicketModel = sequelize.define('TicketModel', {
   // Model attributes are defined here
-  ticketCode: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  ticketClass: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  price: {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  },
-  booked: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
-  transferrable: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
-  exchangeable: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
-  refundable: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
-  accountId: {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  },
-  personType: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  specialRequests: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  dietaryPreferences: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  carryOnBaggage: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  },
-  checkedBaggage: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false
-  }
+//   ticketId: {
+//     type: DataTypes.INTEGER,
+//     allowNull: false
+//   },
+//   ticket: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   destinationCode: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   departureId: {
+//     type: DataTypes.NUMBER,
+//     allowNull: false
+//   },
+//   destinationId: {
+//     type: DataTypes.NUMBER,
+//     allowNull: false
+//   },
+//   departureDateTime: {
+//     type: DataTypes.DATE,
+//     allowNull: false
+//   },
+//   destinationDateTime: {
+//     type: DataTypes.DATE,
+//     allowNull: false
+//   },
+//   stopOverCode: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   airlineCode: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   planeCode: {
+//     type: DataTypes.STRING,
+//     allowNull: false
+//   },
+//   duration: {
+//     type: DataTypes.NUMBER,
+//     allowNull: false
+//   },
+//   numSeats: {
+//     type: DataTypes.NUMBER,
+//     allowNull: false
+//   }
 }, {
   // Other model options go here
 });

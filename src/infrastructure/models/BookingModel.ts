@@ -1,28 +1,27 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('AirlineModel', {
+const BookingModel = sequelize.define('BookingModel', {
   // Model attributes are defined here
-  airlineCode: {
+  bookingId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  accountId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  email: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  airlineName: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  countryCode: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  sponsored: {
-    type: DataTypes.BOOLEAN,
+  dateCreated: {
+    type: DataTypes.DATE,
     allowNull: false
   }
 }, {
   // Other model options go here
-  //name of table in DB
 });
 
 // `sequelize.define` also returns the model
-console.log(AirlineModel === sequelize.models.AirlineModel); // true
+console.log(BookingModel === sequelize.models.BookingModel); // true
