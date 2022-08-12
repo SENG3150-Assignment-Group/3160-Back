@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('PlaneTypeModel', {
+const PlaneTypeModel = sequelize.define('PlaneTypeModel', {
   // Model attributes are defined here
   planeCode: {
     type: DataTypes.STRING,
