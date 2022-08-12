@@ -21,54 +21,26 @@ console.log(User === sequelize.models.User); // true */
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('FlightModel', {
+const AccountModel = sequelize.define('AccountModel', {
   // Model attributes are defined here
-  flightCode: {
+  accountId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  firstName: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  departureCode: {
+  lastName: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  destinationCode: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  departureId: {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  },
-  destinationId: {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  },
-  departureDateTime: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  destinationDateTime: {
-    type: DataTypes.DATE,
-    allowNull: false
-  },
-  stopOverCode: {
+  password: {
     type: DataTypes.STRING,
-    allowNull: false
-  },
-  airlineCode: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  planeCode: {
-    type: DataTypes.STRING,
-    allowNull: false
-  },
-  duration: {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  },
-  numSeats: {
-    type: DataTypes.NUMBER,
     allowNull: false
   }
 }, {
@@ -76,4 +48,4 @@ const User = sequelize.define('FlightModel', {
 });
 
 // `sequelize.define` also returns the model
-console.log(FlightModel === sequelize.models.FlightModel); // true
+console.log(AccountModel === sequelize.models.AccountModel); // true
