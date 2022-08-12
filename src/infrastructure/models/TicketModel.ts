@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('TicketModel', {
+const TicketModel = sequelize.define('TicketModel', {
   // Model attributes are defined here
   ticketCode: {
     type: DataTypes.STRING,
