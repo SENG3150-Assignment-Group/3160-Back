@@ -21,7 +21,7 @@ console.log(User === sequelize.models.User); // true */
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
-const User = sequelize.define('CategoryModel', {
+const CategoryModel = sequelize.define('CategoryModel', {
   // Model attributes are defined here
   categoryId: {
     type: DataTypes.INTEGER,
