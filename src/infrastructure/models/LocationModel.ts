@@ -26,7 +26,11 @@ const LocationModel = sequelize.define('LocationModel', {
   restrictionEnd: {
     type: DataTypes.DATE,
     // allowNull defaults to true
-  }
+  },
+  popularity: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
 }, {
   // Other model options go here
 });
