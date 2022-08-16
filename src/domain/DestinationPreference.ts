@@ -1,6 +1,7 @@
 class DestinationPreference{
     preferenceId: number;
     preferenceName: string;
+    accountId: number;
     weather: string;
     environment: string;
     interestAreas: string;
@@ -9,6 +10,7 @@ class DestinationPreference{
     constructor(
         preferenceId: number,
         preferenceName: string,
+        accountId: number,
         weather: string,
         environment: string,
         interestAreas: string,
@@ -16,6 +18,7 @@ class DestinationPreference{
     ) {
         this.preferenceId = preferenceId;
         this.preferenceName = preferenceName;
+        this.accountId = accountId;
         this.weather = weather;
         this.environment = environment;
         this.interestAreas = interestAreas;
@@ -28,6 +31,9 @@ class DestinationPreference{
     }
     public getPreferenceName = (): string => {
         return this.preferenceName;
+    }
+    public getAccountId = (): number => {
+        return this.accountId;
     }
     public getWeather = (): string => {
         return this.weather;
@@ -48,6 +54,9 @@ class DestinationPreference{
     }
     public setPreferenceName = (preferenceName: string) => {
         this.preferenceName = preferenceName;
+    }
+    public setAccountId = (accountId: number) => {
+        this.accountId = accountId;
     }
     public setWeather = (weather: string) => {
         this.weather = weather;
