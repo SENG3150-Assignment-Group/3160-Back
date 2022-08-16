@@ -42,6 +42,10 @@ const AccountModel = sequelize.define('AccountModel', {
   password: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  accountType: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {
   // Other model options go here
