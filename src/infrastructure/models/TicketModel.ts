@@ -12,7 +12,7 @@ const TicketModel = sequelize.define('TicketModel', {
     allowNull: false
   },
   price: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   booked: {
@@ -32,7 +32,7 @@ const TicketModel = sequelize.define('TicketModel', {
     allowNull: false
   },
   accountId: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   personType: {
