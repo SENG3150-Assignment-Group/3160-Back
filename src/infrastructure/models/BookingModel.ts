@@ -18,6 +18,10 @@ const BookingModel = sequelize.define('BookingModel', {
   dateCreated: {
     type: DataTypes.DATE,
     allowNull: false
+  },
+  state: {
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {
   // Other model options go here

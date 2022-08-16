@@ -36,11 +36,11 @@ const FlightModel = sequelize.define('FlightModel', {
     allowNull: false
   },
   departureId: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   destinationId: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   departureDateTime: {
@@ -64,11 +64,11 @@ const FlightModel = sequelize.define('FlightModel', {
     allowNull: false
   },
   duration: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   numSeats: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false
   }
 }, {

@@ -2,55 +2,51 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = new Sequelize('sqlite::memory:');
 
 const TicketModel = sequelize.define('TicketModel', {
-  // Model attributes are defined here
-//   ticketId: {
-//     type: DataTypes.INTEGER,
-//     allowNull: false
-//   },
-//   ticket: {
-//     type: DataTypes.STRING,
-//     allowNull: false
-//   },
-//   destinationCode: {
-//     type: DataTypes.STRING,
-//     allowNull: false
-//   },
-//   departureId: {
-//     type: DataTypes.NUMBER,
-//     allowNull: false
-//   },
-//   destinationId: {
-//     type: DataTypes.NUMBER,
-//     allowNull: false
-//   },
-//   departureDateTime: {
-//     type: DataTypes.DATE,
-//     allowNull: false
-//   },
-//   destinationDateTime: {
-//     type: DataTypes.DATE,
-//     allowNull: false
-//   },
-//   stopOverCode: {
-//     type: DataTypes.STRING,
-//     allowNull: false
-//   },
-//   airlineCode: {
-//     type: DataTypes.STRING,
-//     allowNull: false
-//   },
-//   planeCode: {
-//     type: DataTypes.STRING,
-//     allowNull: false
-//   },
-//   duration: {
-//     type: DataTypes.NUMBER,
-//     allowNull: false
-//   },
-//   numSeats: {
-//     type: DataTypes.NUMBER,
-//     allowNull: false
-//   }
+  //Model attributes are defined here
+  ticketId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  ticketClass: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  price: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  // booked: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false
+  // },
+  // transferrable: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false
+  // },
+  // exchangeable: {
+  //   type: DataTypes.DATE,
+  //   allowNull: false
+  // },
+  // refundable: {
+  //   type: DataTypes.DATE,
+  //   allowNull: false
+  // },
+  // name: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false
+  // },
+  // personType: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false
+  // },
+  // specialRequests: {
+  //   type: DataTypes.STRING,
+  //   allowNull: false
+  // },
+  // dietaryPreferences: {
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false
+  // }
 }, {
   // Other model options go here
 });
