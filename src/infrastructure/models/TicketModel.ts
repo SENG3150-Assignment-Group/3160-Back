@@ -3,8 +3,8 @@ const sequelize = new Sequelize('sqlite::memory:');
 
 const TicketModel = sequelize.define('TicketModel', {
   //Model attributes are defined here
-  ticketId: {
-    type: DataTypes.INTEGER,
+  ticketCode: {
+    type: DataTypes.STRING,
     allowNull: false
   },
   ticketClass: {
@@ -15,38 +15,46 @@ const TicketModel = sequelize.define('TicketModel', {
     type: DataTypes.INTEGER,
     allowNull: false
   },
-  // booked: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false
-  // },
-  // transferrable: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false
-  // },
-  // exchangeable: {
-  //   type: DataTypes.DATE,
-  //   allowNull: false
-  // },
-  // refundable: {
-  //   type: DataTypes.DATE,
-  //   allowNull: false
-  // },
-  // name: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false
-  // },
-  // personType: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false
-  // },
-  // specialRequests: {
-  //   type: DataTypes.STRING,
-  //   allowNull: false
-  // },
-  // dietaryPreferences: {
-  //   type: DataTypes.INTEGER,
-  //   allowNull: false
-  // }
+  booked: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  transferrable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  exchangeable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  refundable: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  accountId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  personType: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  specialRequests: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  dietaryPreferences: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  carryOnBaggage: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  },
+  checkedBaggage: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false
+  }
 }, {
   // Other model options go here
 });
