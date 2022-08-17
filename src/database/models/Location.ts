@@ -1,8 +1,6 @@
-'use strict';
+"use strict";
 
-import {
-  Model, UUIDV4
-} from 'sequelize';
+import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
 interface LocationDescriptorAttributes {
   LocationName: string;
@@ -13,17 +11,13 @@ interface LocationDescriptorAttributes {
   CountryCode3: string;
   RestricationStart: Date;
   RestricationEnd: Date;
-
 }
 
-module.exports = (sequelize: any, DataTypes: any) => {
-  class Location extends Model<LocationDescriptorAttributes> 
-  implements LocationDescriptorAttributes {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+export default (sequelize: any) => {
+  class Location
+    extends Model<LocationDescriptorAttributes>
+    implements LocationDescriptorAttributes
+  {
     LocationName!: string;
     LocationCode!: string;
     LocationId!: number;
@@ -32,49 +26,50 @@ module.exports = (sequelize: any, DataTypes: any) => {
     CountryCode3!: string;
     RestricationStart!: Date;
     RestricationEnd!: Date;
-    
-
-    static associate(models: any) {
-      // define association here
-      
+  }
+  Location.init(
+    {
+      LocationName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      LocationCode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      LocationId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      Airport: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      Restricted: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
+      CountryCode3: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      RestricationStart: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      RestricationEnd: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+    },
+    {
+      sequelize,
+      timestamps: false,
+      modelName: "Location",
     }
-  };
-  Location.init({
-    LocationName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    LocationCode: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    LocationId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    Airport: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    Restricted: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
-    },
-    CountryCode3: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    RestricationStart: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    RestricationEnd: {
-      type: DataTypes.DATE,
-      allowNull: false
-    }
-  }, {
-    sequelize,
-    modelName: 'Location',
-  });
+  );
   return Location;
 };

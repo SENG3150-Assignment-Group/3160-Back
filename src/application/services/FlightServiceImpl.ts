@@ -1,10 +1,9 @@
 import Flight from "../../domain/Flight";
-import FlightRepository from "../../infrastructure/repositories/FlightRepository";
 import FlightService from "./FlightService";
 
 class FlightServiceImpl implements FlightService {
   getFlight = (flightID: string): Flight | null => {
-    const flightRepository = new FlightRepository();
+    //const flightRepository = new FlightRepository();
     const flight = null; /*flightRepository.getFlight(flightID)*/
 
     return flight;

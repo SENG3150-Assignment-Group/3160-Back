@@ -1,37 +1,43 @@
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-const Sequelize = require('sequelize');
-const basename = path.basename(__filename);
-const env = 'development';
-const config = require(__dirname + '/..//../config/config.js')[env];
+import fs from "fs";
+import path from "path";
+import { Sequelize, Options, DataTypes } from "sequelize";
+import config from "../config/dbconfig.json";
+import applyAssociations from "./associations";
+
 const db: any = {};
+const basename = path.basename(__filename);
 
-let sequelize: any;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+const sequelize: Sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password,
+  <Options>config.options
+);
 
-fs
-  .readdirSync(__dirname)
-  .filter((file: string) => {
-    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.ts');
-  })
-  .forEach((file: any) => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+const instantiateModels = async (sequelize: Sequelize) => {
+  const files = fs.readdirSync(__dirname + "/models").filter((file: string) => {
+    return (
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+    );
   });
 
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
+  // console.log(files);
+
+  for (const file of files) {
+    const modelDefiner = await import(path.join(__dirname, "/models", file));
+    const model = modelDefiner.default(sequelize);
+    db[model.name] = model;
   }
-});
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
+  Object.keys(db).forEach((modelName) => {
+    if (db[modelName].associate) {
+      db[modelName].associate(db);
+    }
+  });
+};
 
-export default db;
+instantiateModels(sequelize).then(() => applyAssociations(sequelize));
+
+export default sequelize;

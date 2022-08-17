@@ -1,8 +1,6 @@
-'use strict';
+"use strict";
 
-import {
-  Model, UUIDV4
-} from 'sequelize';
+import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
 interface WishListedLocationAttributes {
   AccountId: number;
@@ -10,39 +8,36 @@ interface WishListedLocationAttributes {
   DateAdded: Date;
 }
 
-module.exports = (sequelize: any, DataTypes: any) => {
-  class WishListedLocation extends Model<WishListedLocationAttributes> 
-  implements WishListedLocationAttributes {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
+export default (sequelize: any) => {
+  class WishListedLocation
+    extends Model<WishListedLocationAttributes>
+    implements WishListedLocationAttributes
+  {
     AccountId!: number;
     LocationId!: number;
     DateAdded!: Date;
-    static associate(models: any) {
-      // define association here
-      
-    }
-  };
-  WishListedLocation.init({
-    AccountId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
+  }
+  WishListedLocation.init(
+    {
+      AccountId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      LocationId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      DateAdded: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+        unique: true,
+      },
     },
-    LocationId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    DateAdded: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-      unique: true
+    {
+      sequelize,
+      timestamps: false,
+      modelName: "WishListedLocation",
     }
-  }, {
-    sequelize,
-    modelName: 'WishListedLocation',
-  });
+  );
   return WishListedLocation;
 };

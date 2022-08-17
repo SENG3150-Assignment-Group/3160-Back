@@ -1,16 +1,15 @@
 import App from "./App";
-import sequelize from "./database/sequelize_setup";
+import sequelize from "./database/";
 
 import FlightController from "./application/controllers/FlightController";
-import FlightDAO from "./DAO/FlightDAO";
 
 const assertDatabaseConnectionOk = async () => {
   console.log(`Checking database connection...`);
   try {
     await sequelize.authenticate();
     console.log("Database connection OK!");
-    const flightDAO: FlightDAO = new FlightDAO();
-    console.log(await flightDAO.readAll());
+    await sequelize.sync({ force: true });
+    console.log("Database in sync!");
   } catch (error: unknown) {
     console.log("Unable to connect to the database:");
     console.log(error);
@@ -20,7 +19,6 @@ const assertDatabaseConnectionOk = async () => {
 
 const init = async () => {
   await assertDatabaseConnectionOk();
-
   const app = new App([new FlightController()], 8080);
 
   app.listen();

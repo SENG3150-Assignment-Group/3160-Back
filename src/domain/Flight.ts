@@ -2,43 +2,34 @@ class Flight {
   private flightId: number;
   private flightCode: string;
   private departureId: number;
-  private departureCode: string;
   private departureDateTime: Date;
-  private destinationCode: string;
   private destinationId: number;
   private destinationDateTime: Date;
-  private stopOverCode: string;
   private stopOverId: number;
   private airlineCode: string;
   private planeCode: string;
-  private duration: number;
+  private duration: Date;
   private numSeats: number;
 
   constructor(
     flightId: number,
     flightCode: string,
-    departureCode: string,
     departureId: number,
     departureDateTime: Date,
-    destinationCode: string,
     destinationId: number,
     destinationDateTime: Date,
-    stopOverCode: string,
     stopOverId: number,
     airlineCode: string,
     planeCode: string,
-    duration: number,
+    duration: Date,
     numSeats: number
   ) {
     this.flightId = flightId;
     this.flightCode = flightCode;
-    this.departureCode = departureCode;
     this.departureId = departureId;
     this.departureDateTime = departureDateTime;
-    this.destinationCode = destinationCode;
     this.destinationId = destinationId;
     this.destinationDateTime = destinationDateTime;
-    this.stopOverCode = stopOverCode;
     this.stopOverId = stopOverId;
     this.airlineCode = airlineCode;
     this.planeCode = planeCode;
@@ -53,26 +44,17 @@ class Flight {
   public getFlightCode = (): string => {
     return this.flightCode;
   };
-  public getDepartureCode = (): string => {
-    return this.departureCode;
-  };
   public getDepartureId = (): number => {
     return this.departureId;
   };
   public getDepartureDateTime = (): Date => {
     return this.departureDateTime;
   };
-  public getDestinationCode = (): string => {
-    return this.destinationCode;
-  };
   public getDestinationId = (): number => {
     return this.destinationId;
   };
   public getDestinationDateTime = (): Date => {
     return this.destinationDateTime;
-  };
-  public getStopOverCode = (): string => {
-    return this.stopOverCode;
   };
   public getStopOverId = (): number => {
     return this.stopOverId;
@@ -83,7 +65,7 @@ class Flight {
   public getPlaneCode = (): string => {
     return this.planeCode;
   };
-  public getDuration = (): number => {
+  public getDuration = (): Date => {
     return this.duration;
   };
   public getNumSeats = (): number => {
@@ -97,26 +79,17 @@ class Flight {
   public setFlightCode = (flightCode: string) => {
     this.flightCode = flightCode;
   };
-  public setDepartureCode = (departureCode: string) => {
-    this.departureCode = departureCode;
-  };
   public setDepartureId = (departureId: number) => {
     this.departureId = departureId;
   };
   public setDepartureDateTime = (departureDateTime: Date) => {
     this.departureDateTime = departureDateTime;
   };
-  public setDestinationCode = (destinationCode: string) => {
-    this.destinationCode = destinationCode;
-  };
   public setDestinationId = (destinationId: number) => {
     this.destinationId = destinationId;
   };
   public setDestinationDateTime = (destinationDateTime: Date) => {
     this.destinationDateTime = destinationDateTime;
-  };
-  public setStopOverCode = (stopOverCode: string) => {
-    this.stopOverCode = stopOverCode;
   };
   public setStopOverId = (stopOverId: number) => {
     this.stopOverId = stopOverId;
@@ -127,7 +100,7 @@ class Flight {
   public setPlaneCode = (planeCode: string) => {
     this.planeCode = planeCode;
   };
-  public setDuration = (duration: number) => {
+  public setDuration = (duration: Date) => {
     this.duration = duration;
   };
   public setNumSeats = (numSeats: number) => {

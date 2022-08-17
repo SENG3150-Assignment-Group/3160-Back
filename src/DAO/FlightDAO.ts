@@ -1,10 +1,28 @@
-import sequelize from "../../sequelize_setup";
+import { ModelStatic, Model } from "sequelize";
+import sequelize from "../database/";
+
+interface FlightAttributes {
+  FlightId: number;
+  FlightCode: string;
+  DepartureId: number;
+  DepartureCode: string;
+  DepartureDateTime: Date;
+  DestinationCode: string;
+  DestinationId: number;
+  DestinationDateTime: Date;
+  StopOverCode: string;
+  StopOverId: number;
+  AirlineCode: string;
+  PlaneCode: string;
+  Duration: Date;
+  NumSeats: number;
+}
 
 class FlightDAO {
-  private model;
+  private model: ModelStatic<Model<FlightAttributes>>;
 
   constructor() {
-    this.model = sequelize.models.FlightModel;
+    this.model = sequelize.models.Flight;
   }
 
   public readAll = async () => {

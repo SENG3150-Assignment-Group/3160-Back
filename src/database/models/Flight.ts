@@ -1,114 +1,90 @@
-'use strict';
+"use strict";
 
-import {
-  Model, UUIDV4
-} from 'sequelize';
+import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
 //TODO StopOverId has been added to database, either implement throught other levels or remove
 interface FlightAttributes {
+  FlightId: number;
   FlightCode: string;
   DepartureId: number;
-  DepartureCode: string;
-  DepartureDateTime: Date;    
-  DestinationCode: string;
+  DepartureDateTime: Date;
   DestinationId: number;
-  DestinationDateTime: Date;    
-  StopOverCode: string;
+  DestinationDateTime: Date;
   StopOverId: number;
   AirlineCode: string;
   PlaneCode: string;
-  Duration: Date;    
-  NumSeats: number;     
+  Duration: Date;
+  NumSeats: number;
 }
 
-module.exports = (sequelize: any, DataTypes: any) => {
-  class Flight extends Model<FlightAttributes> 
-  implements FlightAttributes {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-     FlightCode!: string;
-     DepartureId!: number;
-     DepartureCode!: string;
-     DepartureDateTime!: Date;    
-     DestinationCode!: string;
-     DestinationId!: number;
-     DestinationDateTime!: Date;    
-     StopOverCode!: string;
-     StopOverId!: number;
-     AirlineCode!: string;
-     PlaneCode!: string;
-     Duration!: Date;    
-     NumSeats!: number;
-    static associate(models: any) {
-      // define association here
- 
-    }
-  };
-  Flight.init({
-    FlightCode: {
-      type: DataTypes.STRING,      
-      allowNull: false,
-      primaryKey: true      
-    },
-    DepartureId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      unique: true                 
-    },
-    DepartureCode: {
-        type: DataTypes.STRING,
-        allowNull: false        
-    },
-    DepartureDateTime: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        primaryKey: true        
-    },
-    DestinationCode: {
-        type: DataTypes.STRING,
-        allowNull: false        
-    },
-    DestinationId: {
-        type: DataTypes.STRING,
-        allowNull: false        
-    },
-    DestinationDateTime: {
-        type: DataTypes.DATE,
-        allowNull: false        
-    },
-    StopOverCode: {
-        type: DataTypes.STRING,
-        allowNull: false        
-    },
-    StopOverId: {
+export default (sequelize: Sequelize) => {
+  class Flight extends Model<FlightAttributes> implements FlightAttributes {
+    FlightId!: number;
+    FlightCode!: string;
+    DepartureId!: number;
+    DepartureDateTime!: Date;
+    DestinationId!: number;
+    DestinationDateTime!: Date;
+    StopOverId!: number;
+    AirlineCode!: string;
+    PlaneCode!: string;
+    Duration!: Date;
+    NumSeats!: number;
+  }
+  Flight.init(
+    {
+      FlightId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        unique: true        
-    },
-    AirlineCode: {
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      FlightCode: {
         type: DataTypes.STRING,
         allowNull: false,
-        primaryKey: true        
-    },
-    PlaneCode: {
+      },
+      DepartureId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      DepartureDateTime: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      DestinationId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      DestinationDateTime: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      StopOverId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      AirlineCode: {
         type: DataTypes.STRING,
-        allowNull: false        
-    },
-    Duration: {
+        allowNull: false,
+      },
+      PlaneCode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      Duration: {
         type: DataTypes.TIME, //TODO in database as time datatype, but number in domain level
-        allowNull: false        
-    },
-    NumSeats: {
+        allowNull: false,
+      },
+      NumSeats: {
         type: DataTypes.INTEGER,
-        allowNull: false        
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      timestamps: false,
+      modelName: "Flight",
     }
-  }, {
-    sequelize,
-    modelName: 'Flight',
-    timestamps: false,
-  });
+  );
   return Flight;
 };
