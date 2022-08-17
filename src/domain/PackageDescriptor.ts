@@ -1,28 +1,28 @@
-class LocationDescriptor{
+class PackageDescriptor{
     descriptorId: number;
-    locationId: number;
+    packageId: number;
 
     constructor(
         descriptorId: number,
-        locationId: number
+        packageId: number
     ) {
         this.descriptorId = descriptorId;
-        this.locationId = locationId;
+        this.packageId = packageId;
     }
-
+    
     // Getters
     public getDescriptorId = (): number => {
         return this.descriptorId;
-    }
-    public getLocationId = (): number => {
-        return this.locationId;
+    }    
+    public getPackageId = (): number => {
+        return this.packageId;
     }
 
     // Setters
     public setDescriptorId = (descriptorId: number) => {
         this.descriptorId = descriptorId;
     }
-    public setLocationId = (locationId: number) => {
-        this.locationId = locationId;
+    public setPackageId = (packageId: number) => {
+        this.packageId = packageId;
     }
 }
