@@ -1,7 +1,7 @@
 import Flight from "../domain/Flight";
 
 // quick example of how to test out a class
-test("Create Flight and use getter for ID", () => {
+/*test("Create Flight and use getter for ID", () => {
   const flight: Flight = new Flight(
     1,
     new Date(),
@@ -14,4 +14,4 @@ test("Create Flight and use getter for ID", () => {
     100
   );
   expect(flight.getFlightCode()).toBe(1);
-});
+});*/

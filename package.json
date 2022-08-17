@@ -10,9 +10,9 @@
     "node": "16.13.1"
   },
   "scripts": {
-    "dev": "concurrently \"npx tsc --watch\" \"nodemon --es-module-specifier-resolution=node -q build/server.js\"",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon --es-module-specifier-resolution=node -q build/src/server.js\"",
     "build": "npx tsc",
-    "start": "node build/server.js",
+    "start": "node build/src/server.js",
     "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier src --check",
