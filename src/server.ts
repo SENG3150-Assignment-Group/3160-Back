@@ -1,8 +1,8 @@
 import App from "./App";
-import sequelize from "./sequelize_setup";
+import sequelize from "./database/sequelize_setup";
 
 import FlightController from "./application/controllers/FlightController";
-import FlightDAO from "./infrastructure/DAOs/FlightDAO";
+import FlightDAO from "./DAO/FlightDAO";
 
 const assertDatabaseConnectionOk = async () => {
   console.log(`Checking database connection...`);

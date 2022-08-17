@@ -1,7 +1,7 @@
 import { Sequelize, Options } from "sequelize";
 import dbconfig from "../dbconfig.json";
 
-import FlightModel from "./infrastructure/ORMs/FlightModel";
+import FlightModel from "./models/FlightModel";
 
 /*
 * format to follow

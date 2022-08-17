@@ -134,8 +134,8 @@ CREATE TABLE `WishListedLocation` (
   CONSTRAINT `WishListedLocationLocationId_FK` FOREIGN KEY (`LocationId`) REFERENCES `Location` (`LocationId`)
 );
 
-CREATE TABLE `DestinationPreference` (
-  `PreferenceId` int(6) NOT NULL,
+CREATE TABLE `FlightPreference` (
+  `PreferenceId` int(6) UNIQUE NOT NULL,
   `PreferenceName` varchar(30) NOT NULL,
   `AccountId` int(6) NOT NULL,
   `SeatClass` char(3) NOT NULL,
@@ -147,46 +147,81 @@ CREATE TABLE `DestinationPreference` (
   `CarryOnBaggagePreference` boolean DEFAULT FALSE,
   `CheckedBaggagePreference` boolean DEFAULT FALSE,
   PRIMARY KEY (`PreferenceId`, `AccountId`),
+  KEY `FlightPreferenceAccountId_FK` (`AccountId`),
+  CONSTRAINT `FlightPreferenceAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
+);
+
+CREATE TABLE `DestinationPreference` (
+  `PreferenceId` int(6) UNIQUE NOT NULL,
+  `PreferenceName` varchar(30) NOT NULL,
+  `AccountId` int(6) NOT NULL,
+  `Weather` varchar(30) DEFAULT NULL,
+  `Environment` varchar(30) DEFAULT NULL,
+  `InterestAreas` varchar(30) DEFAULT NULL,
+  `Budget` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`PreferenceId`, `AccountId`),
   KEY `DestinationPreferenceAccountId_FK` (`AccountId`),
   CONSTRAINT `DestinationPreferenceAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
-CREATE TABLE `FlightPreference` (
-   CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
-);
-
 CREATE TABLE `Descriptor` (
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
+  `DescriptorId` int(6) NOT NULL,
+  `CategoryId` int(6) NOT NULL,
+  `Name` varchar(30) NOT NULL,
+  PRIMARY KEY (`DescriptorId`)
 );
 
 CREATE TABLE `LocationDescriptor` (
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
+`DescriptorId` int(6) NOT NULL,
+`LocationId` int(6) NOT NULL,
+PRIMARY KEY (`DescriptorId`, `LocationId`),
+KEY `LocationDescriptorDescriptorId_FK` (`DescriptorId`),
+KEY `LocationDescriptorLocationId_FK` (`LocationId`),
+CONSTRAINT `LocationDescriptorDescriptorId_FK` FOREIGN KEY (`DescriptorId`) REFERENCES `Descriptor` (`DescriptorId`),
+CONSTRAINT `LocationDescriptorLocationId_FK` FOREIGN KEY (`LocationId`) REFERENCES `Location` (`LocationId`)
 );
 
 CREATE TABLE `Booking` (
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
-);
-
-CREATE TABLE `Payment` (
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
-);
-
-CREATE TABLE `PackageDescription` ( 
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
+`BookingId` int(6) UNIQUE NOT NULL,
+`AccountId` int(6) NOT NULL,
+`Email` nvarchar(255) NOT NULL,
+`DateCreated` datetime NOT NULL,
+`State` int(1) DEFAULT '1',
+PRIMARY KEY (`BookingId`, `AccountId`),
+KEY `BookingAccountId_FK` (`AccountId`),
+CONSTRAINT `BookingAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
 CREATE TABLE `Invoice` (
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
+`TransactionId` int(6) UNIQUE NOT NULL,
+`Date` date NOT NULL,
+`CreditCardNumber` varchar(16) NOT NULL,
+`Subtotal` decimal(10,2) NOT NULL,
+`Tax` decimal(10,2) NOT NULL,
+`RefundAmount` decimal(10,2) DEFAULT NULL,
+PRIMARY KEY (`TransactionId`, `Date`)
 );
 
 CREATE TABLE `Packages`(
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
+  `PackageId` int(6) UNIQUE NOT NULL,
+  `LocationCode` char(3) NOT NULL,
+  `AccountId` int(6) NOT NULL,
+  `Accomodation` char(30) NOT NULL,
+  `AccomodationCost` decimal(10,2) NOT NULL,
+  `FlightCodeList` varchar(55) DEFAULT NULL,
+  PRIMARY KEY (`PackageId`, `AccountId`),
+  KEY `PackagesLocationCode_FK` (`LocationCode`),
+  KEY `PackagesAccountId_FK` (`AccountId`),
+  CONSTRAINT `PackagesLocationCode_FK` FOREIGN KEY (`LocationCode`) REFERENCES `Location` (`LocationCode`),
+  CONSTRAINT `PackagesAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
-CREATE TABLE `HolidayPackage` (
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
-);
-
-CREATE TABLE `TravelPackage` (
-  CONSTRAINT `` FOREIGN KEY (``) REFERENCES `` (``),
+CREATE TABLE `PackageDescription` ( 
+  `DescriptorId` int(6) NOT NULL,
+  `PackageId` int(6) UNIQUE NOT NULL,
+  PRIMARY KEY (`DescriptorId`, `PackageId`),
+  KEY `PackageDescriptionDescriptorId_FK` (`DescriptorId`),
+  KEY `PackageDescriptionPackageId_FK` (`PackageId`),
+  CONSTRAINT `PackageDescriptionDescriptorId_FK` FOREIGN KEY (`DescriptorId`) REFERENCES `Descriptor` (`DescriptorId`),
+  CONSTRAINT `PackageDescriptionPackageId_FK` FOREIGN KEY (`PackageId`) REFERENCES `Packages` (`PackageId`)
 );
