@@ -26,3 +26,4 @@ class LocationDescriptor{
         this.locationId = locationId;
     }
 }
+export default LocationDescriptor;

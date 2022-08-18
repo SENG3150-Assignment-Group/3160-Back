@@ -44,3 +44,4 @@ class Payment{
         this.creditCardSecurity = creditCardSecurity;
     }
 }
+export default Payment;

@@ -62,3 +62,4 @@ class Location{
         this.restrictionEnd = restrictionEnd;
     }
 }
+export default Location;

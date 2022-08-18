@@ -26,3 +26,4 @@ class PackageDescriptor{
         this.packageId = packageId;
     }
 }
+export default PackageDescriptor;

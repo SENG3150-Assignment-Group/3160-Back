@@ -35,3 +35,4 @@ class WishlistedLocation{
         this.dateAdded = dateAdded;
     }
 }
+export default WishlistedLocation;

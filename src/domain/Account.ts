@@ -54,3 +54,4 @@ class Account{
         this.password = password;
     }
 }
+export default Account;

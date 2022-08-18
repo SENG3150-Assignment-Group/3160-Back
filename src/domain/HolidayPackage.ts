@@ -53,3 +53,4 @@ class HolidayPackage{
         this.accomodationCost = accomodationCost;
     }
 }
+export default HolidayPackage;

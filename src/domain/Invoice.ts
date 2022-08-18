@@ -22,3 +22,4 @@ class Invoice{
         this.refundAmount = refundAmount;
     }
 }
+export default Invoice;

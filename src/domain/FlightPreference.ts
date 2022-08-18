@@ -1,3 +1,5 @@
+import Flight from "./Flight";
+
 class FlightPreference{  
 
     preferenceId: number;
@@ -99,3 +101,4 @@ class FlightPreference{
         this.checkedBaggage = checkedBaggage;
     }
 }
+export default FlightPreference;

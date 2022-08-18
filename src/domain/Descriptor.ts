@@ -36,3 +36,4 @@ class Descriptor{
         this.descriptorName = descriptorName;
     }
 }
+export default Descriptor;

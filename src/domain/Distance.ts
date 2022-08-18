@@ -35,3 +35,4 @@ class Distance{
         this.distanceInKms = distanceInKms;
     }
 }
+export default Distance;

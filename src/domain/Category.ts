@@ -25,5 +25,5 @@ class Category{
     public setCategoryName = (categoryName: string) => {
         this.categoryName = categoryName;
     }
-
 }
+export default Category;

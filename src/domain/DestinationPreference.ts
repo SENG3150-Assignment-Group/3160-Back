@@ -71,3 +71,4 @@ class DestinationPreference{
         this.budget = budget;
     }
 }
+export default DestinationPreference;

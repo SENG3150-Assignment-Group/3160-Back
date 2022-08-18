@@ -26,3 +26,4 @@ class WatchlistedFlight{
         this.flightCode = flightCode;
     }
 }
+export default WatchlistedFlight;
