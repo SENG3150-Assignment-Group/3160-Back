@@ -9,8 +9,6 @@ interface CountryAttributes {
   CountryName: string;
   AlternativeName1: string;
   AlternativeName2: string;
-  MotherCountryCode3: string;
-  MotherCountryComment: string;
 }
 
 export default (sequelize: any) => {
@@ -20,8 +18,6 @@ export default (sequelize: any) => {
     CountryName!: string;
     AlternativeName1!: string;
     AlternativeName2!: string;
-    MotherCountryCode3!: string;
-    MotherCountryComment!: string;
   }
   Country.init(
     {
@@ -45,16 +41,6 @@ export default (sequelize: any) => {
         defaultValue: "",
       },
       AlternativeName2: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "",
-      },
-      MotherCountryCode3: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: "",
-      },
-      MotherCountryComment: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "",

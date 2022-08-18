@@ -9,7 +9,6 @@ class Flight {
   private airlineCode: string;
   private planeCode: string;
   private duration: Date;
-  private numSeats: number;
 
   constructor(
     flightId: number,
@@ -21,8 +20,7 @@ class Flight {
     stopOverId: number,
     airlineCode: string,
     planeCode: string,
-    duration: Date,
-    numSeats: number
+    duration: Date
   ) {
     this.flightId = flightId;
     this.flightCode = flightCode;
@@ -34,7 +32,6 @@ class Flight {
     this.airlineCode = airlineCode;
     this.planeCode = planeCode;
     this.duration = duration;
-    this.numSeats = numSeats;
   }
 
   // Getters
@@ -68,9 +65,6 @@ class Flight {
   public getDuration = (): Date => {
     return this.duration;
   };
-  public getNumSeats = (): number => {
-    return this.numSeats;
-  };
 
   // Setters
   public setFlightId = (flightId: number) => {
@@ -102,9 +96,6 @@ class Flight {
   };
   public setDuration = (duration: Date) => {
     this.duration = duration;
-  };
-  public setNumSeats = (numSeats: number) => {
-    this.numSeats = numSeats;
   };
 }
 

@@ -28,6 +28,12 @@ class FlightDAO {
   public readAll = async () => {
     return await this.model.findAll();
   };
+
+  public readFlight = async (
+    id: number
+  ): Promise<Model<FlightAttributes, FlightAttributes> | null> => {
+    return await this.model.findByPk(id);
+  };
 }
 
 export default FlightDAO;

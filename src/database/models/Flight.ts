@@ -14,7 +14,6 @@ interface FlightAttributes {
   AirlineCode: string;
   PlaneCode: string;
   Duration: Date;
-  NumSeats: number;
 }
 
 export default (sequelize: Sequelize) => {
@@ -29,7 +28,6 @@ export default (sequelize: Sequelize) => {
     AirlineCode!: string;
     PlaneCode!: string;
     Duration!: Date;
-    NumSeats!: number;
   }
   Flight.init(
     {
@@ -73,10 +71,6 @@ export default (sequelize: Sequelize) => {
       },
       Duration: {
         type: DataTypes.TIME, //TODO in database as time datatype, but number in domain level
-        allowNull: false,
-      },
-      NumSeats: {
-        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },
