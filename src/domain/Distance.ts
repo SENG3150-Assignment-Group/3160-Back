@@ -34,4 +34,4 @@ class Distance{
     public setDistanceInKms = (distanceInKms: number) => {
         this.distanceInKms = distanceInKms;
     }
-}
+} export default;

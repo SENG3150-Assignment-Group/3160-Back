@@ -21,4 +21,4 @@ class Invoice{
         this.tax = tax;
         this.refundAmount = refundAmount;
     }
-}
+} export default;

@@ -98,4 +98,4 @@ class FlightPreference{
     public setCheckedBaggage = (checkedBaggage: boolean) => {
         this.checkedBaggage = checkedBaggage;
     }
-}
+} export default;

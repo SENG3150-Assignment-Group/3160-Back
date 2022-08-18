@@ -25,4 +25,4 @@ class WatchlistedFlight{
     public setFlightCode = (flightCode: string) => {
         this.flightCode = flightCode;
     }
-}
+} export default;

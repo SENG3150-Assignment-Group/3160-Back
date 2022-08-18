@@ -43,4 +43,4 @@ class Payment{
     public setCreditCardSecurity = (creditCardSecurity: string) => {
         this.creditCardSecurity = creditCardSecurity;
     }
-}
+} export default;

@@ -61,4 +61,4 @@ class TravelPackage{
     public setAccomodationCost = (accomodationCost: number) => {
         this.accomodationCost = accomodationCost;
     }
-}
+} export default;

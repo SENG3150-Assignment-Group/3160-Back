@@ -70,4 +70,4 @@ class DestinationPreference{
     public setBudget = (budget: number) => {
         this.budget = budget;
     }
-}
+} export default;

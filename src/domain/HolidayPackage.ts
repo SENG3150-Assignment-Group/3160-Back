@@ -52,4 +52,4 @@ class HolidayPackage{
     public setAccomodationCost = (accomodationCost: number) => {
         this.accomodationCost = accomodationCost;
     }
-}
+} export default;

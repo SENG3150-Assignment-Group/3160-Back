@@ -34,4 +34,4 @@ class WishlistedLocation{
     public setDateAdded = (dateAdded: Date) => {
         this.dateAdded = dateAdded;
     }
-}
+} export default;

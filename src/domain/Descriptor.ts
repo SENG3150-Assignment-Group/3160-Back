@@ -35,4 +35,4 @@ class Descriptor{
     public setDescriptorName = (descriptorName: string) => {
         this.descriptorName = descriptorName;
     }
-}
+} export default;

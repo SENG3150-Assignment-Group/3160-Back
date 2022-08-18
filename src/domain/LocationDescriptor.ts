@@ -25,4 +25,4 @@ class LocationDescriptor{
     public setLocationId = (locationId: number) => {
         this.locationId = locationId;
     }
-}
+} export default;

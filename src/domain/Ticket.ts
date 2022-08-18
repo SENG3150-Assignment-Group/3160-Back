@@ -126,6 +126,6 @@ class Ticket{
     public setCheckedBaggage = (checkedBaggage: boolean) => {
         this.checkedBaggage = checkedBaggage;
     }
-}
+} export default;
 
 export default Ticket;

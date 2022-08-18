@@ -25,4 +25,4 @@ class PackageDescriptor{
     public setPackageId = (packageId: number) => {
         this.packageId = packageId;
     }
-}
+} export default;
