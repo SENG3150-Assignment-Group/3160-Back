@@ -59,7 +59,7 @@ export default (sequelize: Sequelize) => {
       },
       StopOverId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       AirlineCode: {
         type: DataTypes.STRING,

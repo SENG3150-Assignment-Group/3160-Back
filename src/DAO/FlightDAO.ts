@@ -31,7 +31,7 @@ class FlightDAO {
 
   public readFlight = async (
     id: number
-  ): Promise<Model<FlightAttributes, FlightAttributes> | null> => {
+  ): Promise<Model<FlightAttributes> | null> => {
     return await this.model.findByPk(id);
   };
 }

@@ -4,7 +4,7 @@ import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
 interface PlaneTypeAttributes {
   PlaneCode: string;
-  Type: string;
+  PlaneType: string;
   NumFirstClass: number;
   NumBusiness: number;
   NumPremiumEconomy: number;
@@ -17,7 +17,7 @@ export default (sequelize: any) => {
     implements PlaneTypeAttributes
   {
     PlaneCode!: string;
-    Type!: string;
+    PlaneType!: string;
     NumFirstClass!: number;
     NumBusiness!: number;
     NumPremiumEconomy!: number;
@@ -30,7 +30,7 @@ export default (sequelize: any) => {
         allowNull: false,
         primaryKey: true,
       },
-      Type: {
+      PlaneType: {
         type: DataTypes.STRING,
         allowNull: false,
       },
