@@ -2,7 +2,7 @@
 
 import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
-interface LocationDescriptorAttributes {
+interface LocationAttributes {
   LocationName: string;
   LocationId: number;
   AirportCode: string;
@@ -14,8 +14,8 @@ interface LocationDescriptorAttributes {
 
 export default (sequelize: any) => {
   class Location
-    extends Model<LocationDescriptorAttributes>
-    implements LocationDescriptorAttributes
+    extends Model<LocationAttributes>
+    implements LocationAttributes
   {
     LocationName!: string;
     LocationId!: number;
