@@ -1,25 +1,38 @@
-class FlightPreference{
+class FlightPreference{  
+
     preferenceId: number;
     preferenceName: string;
-    weather: string;
-    environment: string;
-    interestAreas: string;
-    budget: number;
+    accountId: number;
+    seatClass: string;
+    priceMax: number;
+    departureTime: string;
+    arrivalTime: string;
+    numberOfStops: number;
+    carryOnBaggage: boolean;
+    checkedBaggage: boolean;
 
     constructor(
         preferenceId: number,
         preferenceName: string,
-        weather: string,
-        environment: string,
-        interestAreas: string,
-        budget: number
+        accountId: number,
+        seatClass: string,
+        priceMax: number,
+        departureTime: string,
+        arrivalTime: string,
+        numberOfStops: number,
+        carryOnBaggage: boolean,
+        checkedBaggage: boolean
     ) {
         this.preferenceId = preferenceId;
         this.preferenceName = preferenceName;
-        this.weather = weather;
-        this.environment = environment;
-        this.interestAreas = interestAreas;
-        this.budget = budget;    
+        this.accountId = accountId;
+        this.seatClass = seatClass;
+        this.priceMax = priceMax;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.numberOfStops = numberOfStops;
+        this.carryOnBaggage = carryOnBaggage;
+        this.checkedBaggage = checkedBaggage;
     }
 
     // Getters
@@ -29,17 +42,29 @@ class FlightPreference{
     public getPreferenceName = (): string => {
         return this.preferenceName;
     }
-    public getWeather = (): string => {
-        return this.weather;
+    public getAccountId = (): number => {
+        return this.accountId;
     }
-    public getEnvironment = (): string => {
-        return this.environment;
+    public getSeatClass = (): string => {
+        return this.seatClass;
     }
-    public getInterestAreas = (): string => {
-        return this.interestAreas;
+    public getPriceMax = (): number => {
+        return this.priceMax;
     }
-    public getBudget = (): number => {
-        return this.budget;
+    public getDepartureTime = (): string => {
+        return this.departureTime;
+    }
+    public getArrivalTime = (): string => {
+        return this.arrivalTime;
+    }
+    public getNumberOfStops = (): number => {
+        return this.numberOfStops;
+    }
+    public getCarryOnBaggage = (): boolean => {
+        return this.carryOnBaggage;
+    }
+    public getCheckedBaggage = (): boolean => {
+        return this.checkedBaggage;
     }
 
     // Setters    
@@ -49,17 +74,28 @@ class FlightPreference{
     public setPreferenceName = (preferenceName: string) => {
         this.preferenceName = preferenceName;
     }
-    public setWeather = (weather: string) => {
-        this.weather = weather;
+    public setAccountId = (accountId: number) => {
+        this.accountId = accountId;
     }
-    public setEnvironment = (environment: string) => {
-        this.environment = environment;
+    public setSeatClass = (seatClass: string) => {
+        this.seatClass = seatClass;
     }
-    public setInterestAreas = (interestAreas: string) => {
-        this.interestAreas = interestAreas;
+    public setPriceMax = (priceMax: number) => {
+        this.priceMax = priceMax;
     }
-    public setBudget = (budget: number) => {
-        this.budget = budget;
+    public setDepartureTime = (departureTime: string) => {
+        this.departureTime = departureTime;
     }
-
+    public setArrivalTime = (arrivalTime: string) => {
+        this.arrivalTime = arrivalTime;
+    }
+    public setNumberOfStops = (numberOfStops: number) => {
+        this.numberOfStops = numberOfStops;
+    }
+    public setCarryOnBaggage = (carryOnBaggage: boolean) => {
+        this.carryOnBaggage = carryOnBaggage;
+    }
+    public setCheckedBaggage = (checkedBaggage: boolean) => {
+        this.checkedBaggage = checkedBaggage;
+    }
 }
