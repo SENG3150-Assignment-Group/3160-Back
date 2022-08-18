@@ -40,8 +40,8 @@ CREATE TABLE `Location` (
   `Airport` varchar(30) NOT NULL,
   `Restricted` boolean NOT NULL,
   `CountryCode3` char(3) NOT NULL,
-  `RestricationStart` datetime NOT NULL,
-  `RestricationEnd` datetime NOT NULL,
+  `RestricationStart` datetime,
+  `RestricationEnd` datetime,
   PRIMARY KEY (`LocationCode`, `LocationId`, `CountryCode3`),
   KEY `LocationCountryCode_FK` (`CountryCode3`),
   CONSTRAINT `LocationCountryCode_FK` FOREIGN KEY (`CountryCode3`) REFERENCES `Country` (`CountryCode3`)
@@ -224,4 +224,16 @@ CREATE TABLE `PackageDescription` (
   KEY `PackageDescriptionPackageId_FK` (`PackageId`),
   CONSTRAINT `PackageDescriptionDescriptorId_FK` FOREIGN KEY (`DescriptorId`) REFERENCES `Descriptor` (`DescriptorId`),
   CONSTRAINT `PackageDescriptionPackageId_FK` FOREIGN KEY (`PackageId`) REFERENCES `Packages` (`PackageId`)
+);
+
+CREATE TABLE `BookingHistory` (
+  `BookingId` int(6) UNIQUE NOT NULL,
+  `AccountId` int(6) NOT NULL,
+  `Email` nvarchar(255) NOT NULL,
+  `DateCreated` datetime NOT NULL,
+  `DateFinished` datetime NOT NULL,
+  `State` int(1) DEFAULT '3',
+  PRIMARY KEY (`BookingId`, `AccountId`),
+  KEY `BookingAccountHistoryId_FK` (`AccountId`),
+  CONSTRAINT `BookingAccountHistoryId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
