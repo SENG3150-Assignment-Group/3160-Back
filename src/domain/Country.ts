@@ -42,3 +42,5 @@ class Country {
     this.alternativeName = alternativeName;
   };
 }
+
+export default Country;

@@ -53,4 +53,5 @@ class Booking {
     this.state = state;
   };
 }
+
 export default Booking;
