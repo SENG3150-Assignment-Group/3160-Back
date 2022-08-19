@@ -359,7 +359,7 @@ VALUES
 	('1','Admin','Admin','admin@flightpub.net','admin'),
 	('2','John','Doe','johndoe@gmail.com','1234');
 
-	INSERT INTO `distances` (`LocationId1`, `LocationId2`, `DistancesInKms`)
+	INSERT INTO `distances` (`LocationId1`, `LocationId2`, `DistanceInKms`)
 VALUES
 	('1','6',957),
 	('1','10',2616),

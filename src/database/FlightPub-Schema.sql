@@ -34,15 +34,15 @@ CREATE TABLE `planetypes` (
 );
 
 CREATE TABLE `locations` (
+  `LocationId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
   `LocationName` char(30) NOT NULL,
   `LocationCode` char(3) NOT NULL,
-  `LocationId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
   `Airport` varchar(30) NOT NULL,
   `Restricted` boolean NOT NULL,
   `CountryCode3` char(3) NOT NULL,
   `RestricationStart` datetime,
   `RestricationEnd` datetime,
-  PRIMARY KEY (`LocationCode`, `LocationId`),
+  PRIMARY KEY (`LocationId`, `LocationCode`),
 );
 
 CREATE TABLE `accounts` (
@@ -76,7 +76,7 @@ CREATE TABLE `tickets` (
 CREATE TABLE `distances` (
   `LocationId1` int(6) UNIQUE NOT NULL,
   `LocationId2` int(6) UNIQUE NOT NULL,
-  `DistanceInKM` int(11) NOT NULL,
+  `DistanceInKms` int(11) NOT NULL,
   PRIMARY KEY (`LocationId1`, `LocationId2`),
   KEY `DistancesLocationId1_FK` (`LocationId1`),
   KEY `DistancesLocationId2_FK` (`LocationId2`),
@@ -159,7 +159,7 @@ CREATE TABLE `destinationpreferences` (
 );
 
 CREATE TABLE `descriptors` (
-  `DescriptorId` int(6) NOT NULL,
+  `DescriptorId` int(6) NOT NULL AUTO_INCREMENT,
   `CategoryId` int(6) NOT NULL,
   `Name` varchar(30) NOT NULL,
   PRIMARY KEY (`DescriptorId`)
