@@ -2,7 +2,7 @@ DROP SCHEMA FlightPub;
 CREATE SCHEMA FlightPub;
 USE FlightPub;
 
-CREATE TABLE `Country` (
+CREATE TABLE `countries` (
   `CountryCode2` char(2) NOT NULL,
   `CountryCode3` char(3) NOT NULL,
   `CountryName` varchar(80) NOT NULL DEFAULT '',
@@ -13,7 +13,7 @@ CREATE TABLE `Country` (
   PRIMARY KEY (`CountryCode3`)
 );
 
-CREATE TABLE `Airline`(
+CREATE TABLE `airlines`(
   `AirlineCode` char(2) NOT NULL,
   `AirlineName` varchar(30) NOT NULL,
   `CountryCode3` char(3) NOT NULL,
@@ -23,9 +23,9 @@ CREATE TABLE `Airline`(
   CONSTRAINT `AirlinesCountryCode3_FK` FOREIGN KEY (`CountryCode3`) REFERENCES `Country` (`CountryCode3`)
 );
 
-CREATE TABLE `PlaneType` (
+CREATE TABLE `planetypes` (
   `PlaneCode` varchar(20) NOT NULL,
-  `Type` varchar(50) NOT NULL,
+  `PlaneType` varchar(50) NOT NULL,
   `NumFirstClass` int(11) NOT NULL,
   `NumBusiness` int(11) NOT NULL,
   `NumPremiumEconomy` int(11) NOT NULL,
@@ -33,10 +33,10 @@ CREATE TABLE `PlaneType` (
   PRIMARY KEY (`PlaneCode`)
 );
 
-CREATE TABLE `Location` (
+CREATE TABLE `locations` (
   `LocationName` char(30) NOT NULL,
   `LocationCode` char(3) NOT NULL,
-  `LocationId` int(6) UNIQUE NOT NULL,
+  `LocationId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
   `Airport` varchar(30) NOT NULL,
   `Restricted` boolean NOT NULL,
   `CountryCode3` char(3) NOT NULL,
@@ -45,8 +45,8 @@ CREATE TABLE `Location` (
   PRIMARY KEY (`LocationCode`, `LocationId`),
 );
 
-CREATE TABLE `Account` (
-  `AccountId` int(6) NOT NULL,
+CREATE TABLE `accounts` (
+  `AccountId` int(6) NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(30) NOT NULL,
   `LastName` varchar(30) NOT NULL,
   `Email` nvarchar(255) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE `Account` (
   PRIMARY KEY (`AccountId`)
 );
 
-CREATE TABLE `Ticket` (
+CREATE TABLE `tickets` (
   `TicketCode` char(1) NOT NULL,
   `TicketClass` char(3) NOT NULL,
   `Price` decimal(10,2) NOT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `Ticket` (
   CONSTRAINT `TicketAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
-CREATE TABLE `Distances` (
+CREATE TABLE `distances` (
   `LocationId1` int(6) UNIQUE NOT NULL,
   `LocationId2` int(6) UNIQUE NOT NULL,
   `DistanceInKM` int(11) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE `Distances` (
   CONSTRAINT `DistancesLocationId2_FK` FOREIGN KEY (`LocationId2`) REFERENCES `Location` (`LocationId`)
 );
 
-CREATE TABLE `Flight` (
+CREATE TABLE `flights` (
   `FlightCode` varchar(6) NOT NULL,
   `DepartureId` int(6) UNIQUE NOT NULL,
   `DestinationId` int(6) UNIQUE NOT NULL,
@@ -94,7 +94,6 @@ CREATE TABLE `Flight` (
   `AirlineCode` char(2) NOT NULL,
   `PlaneCode` varchar(20) NOT NULL,
   `Duration` time NOT NULL,
-  `NumSeats` int(3) NOT NULL,
   PRIMARY KEY (`FlightCode`, `DepartureDateTime`, `AirlineCode`),
   KEY `FlightDepartureCode_FK` (`DepartureCode`),
   KEY `FlightDestinationCode_FK` (`DestinationCode`),
@@ -108,7 +107,7 @@ CREATE TABLE `Flight` (
   CONSTRAINT `FlightAirlineCode_FK` FOREIGN KEY (`AirlineCode`) REFERENCES `Airline` (`AirlineCode`)
 );
 
-CREATE TABLE `WatchListedFlight` (
+CREATE TABLE `watchlistedflights` (
   `AccountId` int(6) NOT NULL,
   `FlightCode` varchar(6) NOT NULL,
   PRIMARY KEY (`AccountId`, `FlightCode`),
@@ -118,7 +117,7 @@ CREATE TABLE `WatchListedFlight` (
   CONSTRAINT `WatchListedFlightFlightCode_FK` FOREIGN KEY (`FlightCode`) REFERENCES `Flight` (`FlightCode`)
 );
 
-CREATE TABLE `WishListedLocation` (
+CREATE TABLE `wishlistedlocations` (
   `AccountId` int(6) NOT NULL,
   `LocationId` int(6) UNIQUE NOT NULL,
   `DateAdded` date NOT NULL,
@@ -129,8 +128,8 @@ CREATE TABLE `WishListedLocation` (
   CONSTRAINT `WishListedLocationLocationId_FK` FOREIGN KEY (`LocationId`) REFERENCES `Location` (`LocationId`)
 );
 
-CREATE TABLE `FlightPreference` (
-  `PreferenceId` int(6) UNIQUE NOT NULL,
+CREATE TABLE `flightpreferences` (
+  `PreferenceId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
   `PreferenceName` varchar(30) NOT NULL,
   `AccountId` int(6) NOT NULL,
   `SeatClass` char(3) NOT NULL,
@@ -146,8 +145,8 @@ CREATE TABLE `FlightPreference` (
   CONSTRAINT `FlightPreferenceAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
-CREATE TABLE `DestinationPreference` (
-  `PreferenceId` int(6) UNIQUE NOT NULL,
+CREATE TABLE `destinationpreferences` (
+  `PreferenceId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
   `PreferenceName` varchar(30) NOT NULL,
   `AccountId` int(6) NOT NULL,
   `Weather` varchar(30) DEFAULT NULL,
@@ -159,14 +158,14 @@ CREATE TABLE `DestinationPreference` (
   CONSTRAINT `DestinationPreferenceAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
-CREATE TABLE `Descriptor` (
+CREATE TABLE `descriptors` (
   `DescriptorId` int(6) NOT NULL,
   `CategoryId` int(6) NOT NULL,
   `Name` varchar(30) NOT NULL,
   PRIMARY KEY (`DescriptorId`)
 );
 
-CREATE TABLE `LocationDescriptor` (
+CREATE TABLE `locationdescriptors` (
 `DescriptorId` int(6) NOT NULL,
 `LocationId` int(6) NOT NULL,
 PRIMARY KEY (`DescriptorId`, `LocationId`),
@@ -176,8 +175,8 @@ CONSTRAINT `LocationDescriptorDescriptorId_FK` FOREIGN KEY (`DescriptorId`) REFE
 CONSTRAINT `LocationDescriptorLocationId_FK` FOREIGN KEY (`LocationId`) REFERENCES `Location` (`LocationId`)
 );
 
-CREATE TABLE `Booking` (
-`BookingId` int(6) UNIQUE NOT NULL,
+CREATE TABLE `bookings` (
+`BookingId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
 `AccountId` int(6) NOT NULL,
 `Email` nvarchar(255) NOT NULL,
 `DateCreated` datetime NOT NULL,
@@ -187,8 +186,8 @@ KEY `BookingAccountId_FK` (`AccountId`),
 CONSTRAINT `BookingAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
-CREATE TABLE `Invoice` (
-`TransactionId` int(6) UNIQUE NOT NULL,
+CREATE TABLE `invoices` (
+`TransactionId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
 `Date` date NOT NULL,
 `CreditCardNumber` varchar(16) NOT NULL,
 `Subtotal` decimal(10,2) NOT NULL,
@@ -197,8 +196,8 @@ CREATE TABLE `Invoice` (
 PRIMARY KEY (`TransactionId`, `Date`)
 );
 
-CREATE TABLE `Packages`(
-  `PackageId` int(6) UNIQUE NOT NULL,
+CREATE TABLE `packages`(
+  `PackageId` int(6) UNIQUE NOT NULL AUTO_INCREMENT,
   `LocationCode` char(3) NOT NULL,
   `AccountId` int(6) NOT NULL,
   `Accomodation` char(30) NOT NULL,
@@ -211,7 +210,7 @@ CREATE TABLE `Packages`(
   CONSTRAINT `PackagesAccountId_FK` FOREIGN KEY (`AccountId`) REFERENCES `Account` (`AccountId`)
 );
 
-CREATE TABLE `PackageDescription` ( 
+CREATE TABLE `packagedescriptions` ( 
   `DescriptorId` int(6) NOT NULL,
   `PackageId` int(6) UNIQUE NOT NULL,
   PRIMARY KEY (`DescriptorId`, `PackageId`),
@@ -221,7 +220,7 @@ CREATE TABLE `PackageDescription` (
   CONSTRAINT `PackageDescriptionPackageId_FK` FOREIGN KEY (`PackageId`) REFERENCES `Packages` (`PackageId`)
 );
 
-CREATE TABLE `BookingHistory` (
+CREATE TABLE `bookinghistories` (
   `BookingId` int(6) UNIQUE NOT NULL,
   `AccountId` int(6) NOT NULL,
   `Email` nvarchar(255) NOT NULL,
