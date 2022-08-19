@@ -1,7 +1,8 @@
+import FlightAggregate from "domain/Aggregates/FlightAggregate";
 import Flight from "../../domain/Flight";
 
 interface FlightService {
-  getFlight: (flightID: string) => Flight | null;
+  getFlight: (flightID: string) => Promise<FlightAggregate | null>;
   searchFlights: (
     departure: number,
     destination: number,

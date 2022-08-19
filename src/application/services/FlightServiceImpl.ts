@@ -1,11 +1,16 @@
+import FlightAggregate from "domain/Aggregates/FlightAggregate";
+import FlightRepository from "../../repositories/FlightRepository";
 import Flight from "../../domain/Flight";
-import FlightRepository from "../../infrastructure/repositories/FlightRepository";
 import FlightService from "./FlightService";
 
 class FlightServiceImpl implements FlightService {
-  getFlight = (flightID: string): Flight | null => {
+  getFlight = async (id: string): Promise<FlightAggregate | null> => {
+    console.log(typeof id);
+    const flightID = Number(id);
+
     const flightRepository = new FlightRepository();
-    const flight = null; /*flightRepository.getFlight(flightID)*/
+
+    const flight = await flightRepository.getFlight(flightID);
 
     return flight;
   };

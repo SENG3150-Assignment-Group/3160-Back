@@ -16,27 +16,34 @@ class FlightController extends Controller {
     super();
     this.path = "/flights";
     this.router = express.Router();
+    this.initializeRoutes();
   }
 
   public initializeRoutes = (): void => {
-    this.router.get("/id", checkSchema(GetFlightSchema), this.getFlight);
     this.router.get(
-      "/id",
+      this.path + "/getFlight",
+      checkSchema(GetFlightSchema),
+      this.getFlight
+    );
+    this.router.get(
+      this.path + "/search",
       checkSchema(SearchFlightsSchema),
       this.searchFlights
     );
   };
 
-  private getFlight = (req: express.Request, res: express.Response) => {
+  private getFlight = async (req: express.Request, res: express.Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
+    console.log(typeof req.query.id);
     const flightID: string = <string>req.query.id;
     const flightSearchService: FlightService = new FlightServiceImpl();
 
-    res.status(200).json(flightSearchService.getFlight(flightID));
+    const flight = await flightSearchService.getFlight(flightID);
+    res.status(200).json(flight);
   };
 
   private searchFlights = (req: express.Request, res: express.Response) => {
