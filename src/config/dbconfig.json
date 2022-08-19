@@ -1,7 +1,7 @@
 {
   "database": "flightpub",
   "username": "root",
-  "password": "password",
+  "password": "admin",
   "options": {
     "host": "localhost",
     "dialect": "mysql",
