@@ -30,6 +30,7 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.INTEGER, 
         allowNull: false,       
         primaryKey: true,
+        autoIncrement: true
       },
       FirstName: {
         type: DataTypes.STRING,

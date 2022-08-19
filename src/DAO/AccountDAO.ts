@@ -1,15 +1,14 @@
 import { ModelStatic, Model } from "sequelize";
 import sequelize from "../database/";
 
-interface AccountAttributes {
-    accountId: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;    
-    creditCardNumber: string;
-    creditCardDate: Date;
-    creditCardSecurity: string;
+interface AccountAttributes {    
+    FirstName: string;
+    LastName: string;
+    Email: string;
+    Password: string;    
+    CreditCardNumber: string;
+    CreditCardDate: Date;
+    CreditCardSecurity: string;
   }
 
 class AccountDAO {
@@ -29,8 +28,7 @@ class AccountDAO {
     return await this.model.findByPk(id);
   };
 
-  public createAccount = async (
-    accountId: number,
+  public createAccount = async (    
     firstName: string,
     lastName: string,
     email: string,
@@ -40,17 +38,16 @@ class AccountDAO {
     creditCardSecurity: string
   ) => {
       console.log("Dao Start")
-      console.log(accountId + " " + firstName + " " + lastName + " " + email+ " " + password + " " + creditCardNumber + " " + creditCardDate + " " + creditCardSecurity)
+      console.log(firstName + " " + lastName + " " + email+ " " + password + " " + creditCardNumber + " " + creditCardDate + " " + creditCardSecurity)
       await this.model.create({
-      //TODO Test model creation (causing notNull Validation issue)
-      accountId: accountId,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,      
-      creditCardNumber: creditCardNumber,
-      creditCardDate: creditCardDate,
-      creditCardSecurity: creditCardSecurity
+      //TODO Test model creation (causing notNull Validation issue)     
+      FirstName: firstName,
+      LastName: lastName,
+      Email: email,
+      Password: password,      
+      CreditCardNumber: creditCardNumber,
+      CreditCardDate: creditCardDate,
+      CreditCardSecurity: creditCardSecurity
     });
   };
 }

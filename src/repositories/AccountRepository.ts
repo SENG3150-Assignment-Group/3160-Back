@@ -44,7 +44,7 @@ class AccountRepository{
     };
 
     public createAccount = async (
-          accountId: number, 
+          
           firstName: string,
           lastName: string,
           email: string,
@@ -55,7 +55,7 @@ class AccountRepository{
     ) =>{
         const accountDao = new AccountDAO();
         console.log("Repo Start")
-        accountDao.createAccount(accountId, firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
+        accountDao.createAccount(firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
     }
 }
 export default AccountRepository;
