@@ -19,7 +19,7 @@ const assertDatabaseConnectionOk = async () => {
 
 const init = async () => {
   await assertDatabaseConnectionOk();
-  const app = new App([new FlightController()], 3000);
+  const app = new App([new FlightController()], 3306);
 
   app.listen();
 };

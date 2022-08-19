@@ -42,6 +42,18 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      CreditCardNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      CreditCardDate: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      CreditCardSecurity: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
     },
     {
       sequelize,
