@@ -3,7 +3,15 @@ import { Sequelize } from "sequelize";
 import Location from "./models/Location";
 
 const applyAssociations = (sequelize: Sequelize) => {
-  const { Flight, Location, Distance, Airline, PlaneType } = sequelize.models;
+  const {
+    Flight,
+    Location,
+    Distance,
+    Airline,
+    PlaneType,
+    Descriptor,
+    LocationDescriptor,
+  } = sequelize.models;
 
   // many locations have distances between many other locations
   Location.belongsToMany(Location, {
@@ -62,6 +70,19 @@ const applyAssociations = (sequelize: Sequelize) => {
   Flight.belongsTo(PlaneType, {
     as: "Plane",
     foreignKey: "PlaneCode",
+  });
+
+  // locations have many descriptors and descriptors belong to many locations
+  Descriptor.belongsToMany(Location, {
+    through: LocationDescriptor,
+    as: "Descriptor",
+    foreignKey: "DescriptorId",
+  });
+
+  Location.belongsToMany(Descriptor, {
+    through: LocationDescriptor,
+    as: "Location",
+    foreignKey: "LocationId",
   });
 };
 

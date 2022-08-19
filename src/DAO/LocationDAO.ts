@@ -23,6 +23,10 @@ class LocationDAO {
   ): Promise<Model<LocationAttributes> | null> => {
     return await this.model.findByPk(locationId);
   };
+
+  public readAllLocations = async (): Promise<Model<LocationAttributes>[]> => {
+    return await this.model.findAll();
+  };
 }
 
 export default LocationDAO;
