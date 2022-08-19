@@ -632,7 +632,7 @@ VALUES
 	('JQ158','5','36','2022-12-06 18:35:00','2022-12-06 20:40:00',NULL,'JQ','A380','02:05:00'),
 	('JQ956','36','26','2014-11-23 18:35:00','2022-11-24 09:35:00',NULL,'JQ','A330-200','15:00:00');
 
-	INSERT INTO `descriptors` (`DescriptorId`, `CategoryId`, `Name`)
+	INSERT INTO `descriptors` (`CategoryId`, `Name`)
 VALUES
 	('1','Hot'),
 	('1','Cold'),
