@@ -21,12 +21,13 @@ export default (sequelize: any) => {
   Descriptor.init(
     {
       DescriptorId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
+        autoIncrement: true,
       },
       CategoryId: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       Name: {

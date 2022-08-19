@@ -7,7 +7,10 @@ interface CountryAttributes {
   CountryCode2: string;
   CountryCode3: string;
   CountryName: string;
-  AlternativeName: string;
+  AlternateName1: string;
+  AlternateName2: string;
+  MotherCountryCode3: string;
+  MotherCountryComment: string;
 }
 
 export default (sequelize: any) => {
@@ -15,7 +18,10 @@ export default (sequelize: any) => {
     CountryCode2!: string;
     CountryCode3!: string;
     CountryName!: string;
-    AlternativeName!: string;
+    AlternateName1!: string;
+    AlternateName2!: string;
+    MotherCountryCode3!: string;
+    MotherCountryComment!: string;
   }
   Country.init(
     {
@@ -33,9 +39,20 @@ export default (sequelize: any) => {
         allowNull: false,
         defaultValue: "",
       },
-      AlternativeName: {
+      AlternateName1: {
         type: DataTypes.STRING,
-        allowNull: false,
+        defaultValue: "",
+      },
+      AlternateName2: {
+        type: DataTypes.STRING,
+        defaultValue: "",
+      },
+      MotherCountryCode3: {
+        type: DataTypes.STRING,
+        defaultValue: "",
+      },
+      MotherCountryComment: {
+        type: DataTypes.STRING,
         defaultValue: "",
       },
     },

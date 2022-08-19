@@ -4,8 +4,9 @@ import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
 interface LocationAttributes {
   LocationName: string;
+  LocationCode: string;
   LocationId: number;
-  AirportCode: string;
+  Airport: string;
   Restricted: boolean;
   CountryCode3: string;
   RestricationStart: Date;
@@ -18,8 +19,9 @@ export default (sequelize: any) => {
     implements LocationAttributes
   {
     LocationName!: string;
+    LocationCode!: string;
     LocationId!: number;
-    AirportCode!: string;
+    Airport!: string;
     Restricted!: boolean;
     CountryCode3!: string;
     RestricationStart!: Date;
@@ -27,21 +29,26 @@ export default (sequelize: any) => {
   }
   Location.init(
     {
-      LocationName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-      },
       LocationId: {
         type: DataTypes.INTEGER,
         allowNull: false,
         primaryKey: true,
         autoIncrement: true,
+        unique: true,
       },
-      AirportCode: {
+      LocationName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      LocationCode: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        primaryKey: true,
+      },
+      Airport: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       Restricted: {
         type: DataTypes.BOOLEAN,
