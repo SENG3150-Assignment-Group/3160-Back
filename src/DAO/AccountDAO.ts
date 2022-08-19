@@ -6,8 +6,7 @@ interface AccountAttributes {
     firstName: string;
     lastName: string;
     email: string;
-    password: string;
-    accountType: AccountType;
+    password: string;    
     creditCardNumber: string;
     creditCardDate: Date;
     creditCardSecurity: string;
@@ -28,6 +27,31 @@ class AccountDAO {
     id: number
   ): Promise<Model<AccountAttributes> | null> => {
     return await this.model.findByPk(id);
+  };
+
+  public createAccount = async (
+    accountId: number,
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    creditCardNumber: string,
+    creditCardDate: Date,
+    creditCardSecurity: string
+  ) => {
+      console.log("Dao Start")
+      console.log(accountId + " " + firstName + " " + lastName + " " + email+ " " + password + " " + creditCardNumber + " " + creditCardDate + " " + creditCardSecurity)
+      await this.model.create({
+      //TODO Test model creation (causing notNull Validation issue)
+      accountId: accountId,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,      
+      creditCardNumber: creditCardNumber,
+      creditCardDate: creditCardDate,
+      creditCardSecurity: creditCardSecurity
+    });
   };
 }
 

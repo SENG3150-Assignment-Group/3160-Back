@@ -3,8 +3,7 @@ class Account {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
-  accountType: AccountType;
+  password: string;  
   creditCardNumber: string;
   creditCardDate: Date;
   creditCardSecurity: string;
@@ -14,8 +13,7 @@ class Account {
     firstName: string,
     lastName: string,
     email: string,
-    password: string,
-    accountType: AccountType,
+    password: string,    
     creditCardNumber: string,
     creditCardDate: Date,
     creditCardSecurity: string
@@ -24,8 +22,7 @@ class Account {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
-    this.password = password;
-    this.accountType = accountType;
+    this.password = password;    
     this.creditCardNumber = creditCardNumber;
     this.creditCardDate = creditCardDate;
     this.creditCardSecurity = creditCardSecurity;
@@ -46,9 +43,6 @@ class Account {
   };
   public getPassword = (): string => {
     return this.password;
-  };
-  public getAccountType = (): AccountType => {
-    return this.accountType;
   };
   public getCreditCardNumber = (): string => {
     return this.creditCardNumber;
@@ -75,10 +69,7 @@ class Account {
   };
   public setPassword = (password: string) => {
     this.password = password;
-  };
-  public setAccountType = (accountType: AccountType) => {
-    this.accountType = accountType;
-  };
+  };  
   public setCreditCardNumber = (creditCardNumber: string) => {
     this.creditCardNumber = creditCardNumber;
   };

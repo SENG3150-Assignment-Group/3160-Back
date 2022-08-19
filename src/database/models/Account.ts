@@ -27,8 +27,8 @@ export default (sequelize: Sequelize) => {
   Account.init(
     {
       AccountId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+        type: DataTypes.INTEGER, 
+        allowNull: false,       
         primaryKey: true,
       },
       FirstName: {

@@ -3,15 +3,15 @@ import sequelize from "database";
 import AccountAggregate from "../domain/Aggregates/AccountAggregate";
 
 interface AccountAttributes {
-  accountId: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  accountType: AccountType;
-  creditCardNumber: string;
-  creditCardDate: Date;
-  creditCardSecurity: string;
+  AccountId: number;
+  FirstName: string;
+  LastName: string;
+  Email: string;
+  Password: string;
+  AccountType: AccountType;
+  CreditCardNumber: string;
+  CreditCardDate: Date;
+  CreditCardSecurity: string;
 }
 
 class AccountRepository{
@@ -42,5 +42,20 @@ class AccountRepository{
             return accountAggregate;
         
     };
+
+    public createAccount = async (
+          accountId: number, 
+          firstName: string,
+          lastName: string,
+          email: string,
+          password: string,
+          creditCardNumber: string,
+          creditCardDate: Date,
+          creditCardSecurity: string
+    ) =>{
+        const accountDao = new AccountDAO();
+        console.log("Repo Start")
+        accountDao.createAccount(accountId, firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
+    }
 }
 export default AccountRepository;
