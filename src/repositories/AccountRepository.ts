@@ -1,6 +1,6 @@
-import AccountDAO from "DAO/AccountDAO";
+import AccountDAO from "../DAO/AccountDAO";
 import sequelize from "database";
-import AccountAggregate from "domain/Aggregates/AccountAggregate";
+import AccountAggregate from "../domain/Aggregates/AccountAggregate";
 
 interface AccountAttributes {
   accountId: number;
@@ -28,16 +28,16 @@ class AccountRepository{
         console.log(accountObj);
 
         //create account Aggregate
-        let accountAggregate = new AccountAggregate(
-            accountObj.accountId,
-            accountObj.firstName,
-            accountObj.lastName,
-            accountObj.email,
-            accountObj.password,
-            accountObj.accountType,
-            accountObj.creditCardNumber,
-            accountObj.creditCardDate,
-            accountObj.creditCardSecurity
+        const accountAggregate = new AccountAggregate(
+            accountObj.AccountId,
+            accountObj.FirstName,
+            accountObj.LastName,
+            accountObj.Email,
+            accountObj.Password,
+            accountObj.AccountType,
+            accountObj.CreditCardNumber,
+            accountObj.CreditCardDate,
+            accountObj.CreditCardSecurity
         );
             return accountAggregate;
         

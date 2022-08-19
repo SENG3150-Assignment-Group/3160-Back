@@ -8,6 +8,9 @@ interface AccountAttributes {
   LastName: string;
   Email: string;
   Password: string;
+  CreditCardNumber: string;
+  CreditCardDate: Date;
+  CreditCardSecurity: string;
 }
 
 export default (sequelize: Sequelize) => {
@@ -17,6 +20,9 @@ export default (sequelize: Sequelize) => {
     LastName!: string;
     Email!: string;
     Password!: string;
+    CreditCardNumber!: string;
+    CreditCardDate!: Date;
+    CreditCardSecurity!: string;
   }
   Account.init(
     {

@@ -1,5 +1,5 @@
-import AccountAggregate from "domain/Aggregates/AccountAggregate";
-import AccountRepository from "repositories/AccountRepository";
+import AccountAggregate from "../../domain/Aggregates/AccountAggregate";
+import AccountRepository from "../../repositories/AccountRepository";
 import AccountService from "./AccountService";
 
 class AccountServiceImpl implements AccountService {
