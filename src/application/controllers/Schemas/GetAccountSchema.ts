@@ -6,6 +6,6 @@ const GetAccountSchema: Schema = {
         errorMessage: "id not a number",
         isInt: true,
         toInt: true,
-  },
+  }
 };
 export default GetAccountSchema;

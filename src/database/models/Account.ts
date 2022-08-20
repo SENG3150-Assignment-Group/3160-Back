@@ -9,7 +9,7 @@ interface AccountAttributes {
   Email: string;
   Password: string;
   CreditCardNumber: string;
-  CreditCardDate: Date;
+  CreditCardDate: string;
   CreditCardSecurity: string;
 }
 
@@ -21,7 +21,7 @@ export default (sequelize: Sequelize) => {
     Email!: string;
     Password!: string;
     CreditCardNumber!: string;
-    CreditCardDate!: Date;
+    CreditCardDate!: string;
     CreditCardSecurity!: string;
   }
   Account.init(
@@ -54,7 +54,7 @@ export default (sequelize: Sequelize) => {
         allowNull: false,
       },
       CreditCardDate: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       CreditCardSecurity: {

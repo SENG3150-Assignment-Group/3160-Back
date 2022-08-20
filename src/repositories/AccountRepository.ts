@@ -10,7 +10,7 @@ interface AccountAttributes {
   Password: string;
   AccountType: AccountType;
   CreditCardNumber: string;
-  CreditCardDate: Date;
+  CreditCardDate: string;
   CreditCardSecurity: string;
 }
 
@@ -44,18 +44,19 @@ class AccountRepository{
     };
 
     public createAccount = async (
-          
           firstName: string,
           lastName: string,
           email: string,
           password: string,
           creditCardNumber: string,
-          creditCardDate: Date,
+          creditCardDate: string,
           creditCardSecurity: string
     ) =>{
         const accountDao = new AccountDAO();
         console.log("Repo Start")
-        accountDao.createAccount(firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
+        console.log(typeof creditCardDate)
+        //const dateToString = new Date(creditCardDate).toISOString().slice(0, 19).replace('T', ' ');
+        accountDao.createAccount(id, firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
     }
 }
 export default AccountRepository;

@@ -54,7 +54,7 @@ CREATE TABLE `Account` (
   `Email` nvarchar(255) NOT NULL,
   `Password` varchar(35) NOT NULL,
   `CreditCardNumber` varchar(12) NOT NULL,
-  `CreditCardDate` datetime NOT NULL,
+  `CreditCardDate` varchar(5) NOT NULL,
   `CreditCardSecurity` char(3) NOT NULL
   PRIMARY KEY (`AccountId`)
 );

@@ -12,20 +12,19 @@ class AccountServiceImpl implements AccountService {
         return account;
     };
     createAccount = async (
-          id: string, 
+      
           firstName: string,
           lastName: string,
           email: string,
           password: string,
           creditCardNumber: string,
-          creditCardDate: Date,
+          creditCardDate: string,
           creditCardSecurity: string
     ) =>{
         console.log("AccountServiceImpl Start")
-        const accountId = Number(id);
+   
         const accountRepository = new AccountRepository();
         accountRepository.createAccount(
-            accountId, 
             firstName,
             lastName,
             email,

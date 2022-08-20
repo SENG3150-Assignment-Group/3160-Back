@@ -5,7 +5,7 @@ class Account {
   email: string;
   password: string;  
   creditCardNumber: string;
-  creditCardDate: Date;
+  creditCardDate: string;
   creditCardSecurity: string;
 
   constructor(
@@ -15,7 +15,7 @@ class Account {
     email: string,
     password: string,    
     creditCardNumber: string,
-    creditCardDate: Date,
+    creditCardDate: string,
     creditCardSecurity: string
   ) {
     this.accountId = accountId;
@@ -47,7 +47,7 @@ class Account {
   public getCreditCardNumber = (): string => {
     return this.creditCardNumber;
   };
-  public getCreditCardDate = (): Date => {
+  public getCreditCardDate = (): string => {
     return this.creditCardDate;
   };
   public getCreditCardSecurity = (): string => {
@@ -73,7 +73,7 @@ class Account {
   public setCreditCardNumber = (creditCardNumber: string) => {
     this.creditCardNumber = creditCardNumber;
   };
-  public setCreditCardDate = (creditCardDate: Date) => {
+  public setCreditCardDate = (creditCardDate: string) => {
     this.creditCardDate = creditCardDate;
   };
   public setCreditCardSecurity = (creditCardSecurity: string) => {

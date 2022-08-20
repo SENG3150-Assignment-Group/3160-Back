@@ -2,8 +2,8 @@ import express from "express";
 import { checkSchema, validationResult } from "express-validator";
 
 import Controller from "./Controller";
-import GetAccountSchema from "./Schemas/GetFlightSchema";
-import SearchAccountSchema from "./Schemas/SearchFlightsSchema";
+import GetAccountSchema from "./Schemas/GetAccountSchema";
+import CreateAccountSchema from "./Schemas/CreateAccountSchema";
 
 import AccountService from "../services/AccountService";
 import AccountServiceImpl from "../services/AccountServiceImpl";
@@ -27,7 +27,7 @@ class AccountController extends Controller {
     );
     this.router.get(
       this.path + "/createAccount",
-      // checkSchema(CreateAccountSchema),
+      checkSchema(CreateAccountSchema),
       this.createAccount
     )
   };
@@ -59,7 +59,7 @@ class AccountController extends Controller {
     const email: string = <string>req.query.email; 
     const password: string = <string>req.query.password; 
     const creditCardNumber: string = <string>req.query.creditCardNumber;
-    const creditCardDate: Date = new Date(<string>req.query.creditCardDate); 
+    const creditCardDate: string = <string>req.query.creditCardDate; 
     const creditCardSecurity: string = <string> req.query.creditCardSecurity;
 
     const accountService: AccountService = new AccountServiceImpl();

@@ -6,7 +6,7 @@ class AccountAggregate {
     password: string;
     accountType: AccountType;
     creditCardNumber: string;
-    creditCardDate: Date;
+    creditCardDate: string;
     creditCardSecurity: string;
   
     constructor(
@@ -17,7 +17,7 @@ class AccountAggregate {
       password: string,
       accountType: AccountType,
       creditCardNumber: string,
-      creditCardDate: Date,
+      creditCardDate: string,
       creditCardSecurity: string
     ) {
       this.accountId = accountId;
@@ -53,7 +53,7 @@ class AccountAggregate {
     public getCreditCardNumber = (): string => {
         return this.creditCardNumber;
     };
-    public getCreditCardDate = (): Date => {
+    public getCreditCardDate = (): string => {
         return this.creditCardDate;
     };
     public getCreditCardSecurity = (): string => {
@@ -82,7 +82,7 @@ class AccountAggregate {
     public setCreditCardNumber = (creditCardNumber: string) => {
         this.creditCardNumber = creditCardNumber;
     };
-    public setCreditCardDate = (creditCardDate: Date) => {
+    public setCreditCardDate = (creditCardDate: string) => {
         this.creditCardDate = creditCardDate;
     };
     public setCreditCardSecurity = (creditCardSecurity: string) => {
