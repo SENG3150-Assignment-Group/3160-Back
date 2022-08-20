@@ -52,7 +52,15 @@ class FlightController extends Controller {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const [departure, destination, startDate, endDate, returnTrip, seats] = [
+    const [
+      departure,
+      destination,
+      startDate,
+      endDate,
+      isOneWay,
+      seats,
+      airline,
+    ] = [
       <number>(<unknown>req.query.departure),
       <number>(<unknown>req.query.destination),
       <Date>(<unknown>req.query.startDate),
