@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e3c133f-fc8c-4dfe-acdd-aa46eec37bd6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/database/FlightPub-Data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/FlightPub-Data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/database/FlightPub-Schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/database/FlightPub-Schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +38,7 @@
       <updated>1660873272673</updated>
       <workItem from="1660873275224" duration="1885000" />
       <workItem from="1660879442348" duration="5000" />
-      <workItem from="1660879459079" duration="1415000" />
+      <workItem from="1660879459079" duration="2648000" />
     </task>
     <servers />
   </component>

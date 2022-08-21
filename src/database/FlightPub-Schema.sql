@@ -51,6 +51,9 @@ CREATE TABLE `accounts` (
   `LastName` varchar(30) NOT NULL,
   `Email` nvarchar(255) NOT NULL,
   `Password` varchar(35) NOT NULL,
+  `CreditCardNumber` varchar(16),
+  `CreditCardDate` date,
+  `CreditCardSecurity` char(3),
   PRIMARY KEY (`AccountId`)
 );
 
