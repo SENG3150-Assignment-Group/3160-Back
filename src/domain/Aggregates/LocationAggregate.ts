@@ -1,16 +1,7 @@
-import { Model } from "sequelize/types";
+import Descriptor from "../Descriptor";
+import Location from "../Location";
 
-interface LocationAttributes {
-  LocationName: string;
-  LocationId: number;
-  AirportCode: string;
-  Restricted: boolean;
-  CountryCode3: string;
-  RestricationStart: Date;
-  RestricationEnd: Date;
-}
-
-class Location {
+class LocationAggregate {
   locationId: number;
   locationName: string;
   airportCode: string;
@@ -18,39 +9,18 @@ class Location {
   restricted: boolean;
   restrictionStart: Date;
   restrictionEnd: Date;
+  descriptors: Descriptor[];
 
-  constructor(
-    locationId: number,
-    locationName: string,
-    airportCode: string,
-    countryCode3: string,
-    restricted: boolean,
-    restrictionStart: Date,
-    restrictionEnd: Date
-  ) {
-    this.locationId = locationId;
-    this.locationName = locationName;
-    this.airportCode = airportCode;
-    this.countryCode3 = countryCode3;
-    this.restricted = restricted;
-    this.restrictionStart = restrictionStart;
-    this.restrictionEnd = restrictionEnd;
+  constructor(location: Location, descriptors: Descriptor[]) {
+    this.locationId = location.getLocationId();
+    this.locationName = location.getLocationName();
+    this.airportCode = location.getAirportCode();
+    this.countryCode3 = location.getCountryCode3();
+    this.restricted = location.isRestricted();
+    this.restrictionStart = location.getRestrictionStart();
+    this.restrictionEnd = location.getRestrictionEnd();
+    this.descriptors = descriptors;
   }
-
-  // static
-  public static modelToDomain = (
-    locationModel: Model<LocationAttributes>
-  ): Location => {
-    return new Location(
-      locationModel.LocationId,
-      locationModel.LocationName,
-      locationModel.AirportCode,
-      locationModel.CountryCode3,
-      locationModel.Restricted,
-      locationModel.RestrictionStart,
-      locationModel.RestrictionEnd
-    );
-  };
 
   // Getters
   public getLocationId = (): number => {
@@ -73,6 +43,9 @@ class Location {
   };
   public getRestrictionEnd = (): Date => {
     return this.restrictionEnd;
+  };
+  public getDescriptors = (): Descriptor[] => {
+    return this.descriptors;
   };
 
   // Setters
@@ -97,6 +70,9 @@ class Location {
   public setRestrictionEnd = (restrictionEnd: Date) => {
     this.restrictionEnd = restrictionEnd;
   };
+  public setDescriptor = (descriptor: Descriptor) => {
+    this.descriptors.push(descriptor);
+  };
 }
 
-export default Location;
+export default LocationAggregate;
