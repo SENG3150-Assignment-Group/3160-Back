@@ -58,9 +58,11 @@ class AccountController extends Controller {
     const lastName: string = <string>req.query.lastName; 
     const email: string = <string>req.query.email; 
     const password: string = <string>req.query.password; 
+    const accountType: string = <string>req.query.accountType;
     const creditCardNumber: string = <string>req.query.creditCardNumber;
     const creditCardDate: string = <string>req.query.creditCardDate; 
     const creditCardSecurity: string = <string> req.query.creditCardSecurity;
+    
 
     const accountService: AccountService = new AccountServiceImpl();
     console.log("Controller Start")
@@ -73,6 +75,7 @@ class AccountController extends Controller {
           lastName,
           email,
           password,
+          accountType,
           creditCardNumber,
           creditCardDate,
           creditCardSecurity

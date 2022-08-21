@@ -5,7 +5,8 @@ interface AccountAttributes {
     FirstName: string;
     LastName: string;
     Email: string;
-    Password: string;    
+    Password: string; 
+    AccountType: string;   
     CreditCardNumber: string;
     CreditCardDate: string;
     CreditCardSecurity: string;
@@ -33,19 +34,21 @@ class AccountDAO {
     lastName: string,
     email: string,
     password: string,
+    accountType: string,
     creditCardNumber: string,
     creditCardDate: string,
     creditCardSecurity: string
   ) => {
       console.log("Dao Start")
       console.log(typeof firstName)
-      console.log(firstName + " " + lastName + " " + email+ " " + password + " " + creditCardNumber + " " + creditCardDate + " " + creditCardSecurity)
+      console.log(firstName + " " + lastName + " " + email+ " " + password + " " + accountType + " " + creditCardNumber + " " + creditCardDate + " " + creditCardSecurity)
       await this.model.create({
       //TODO Test model creation (causing notNull Validation issue)     
       FirstName: firstName,
       LastName: lastName,
       Email: email,
-      Password: password,      
+      Password: password,   
+      AccountType: accountType,   
       CreditCardNumber: creditCardNumber,
       CreditCardDate: creditCardDate,
       CreditCardSecurity: creditCardSecurity

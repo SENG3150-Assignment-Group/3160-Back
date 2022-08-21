@@ -8,6 +8,7 @@ interface AccountService {
           lastName: string,
           email: string,
           password: string,
+          accountType: string,
           creditCardNumber: string,
           creditCardDate: string,
           creditCardSecurity: string

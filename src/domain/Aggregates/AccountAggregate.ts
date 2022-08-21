@@ -4,7 +4,7 @@ class AccountAggregate {
     lastName: string;
     email: string;
     password: string;
-    accountType: AccountType;
+    accountType: string;
     creditCardNumber: string;
     creditCardDate: string;
     creditCardSecurity: string;
@@ -15,7 +15,7 @@ class AccountAggregate {
       lastName: string,
       email: string,
       password: string,
-      accountType: AccountType,
+      accountType: string,
       creditCardNumber: string,
       creditCardDate: string,
       creditCardSecurity: string
@@ -47,7 +47,7 @@ class AccountAggregate {
     public getPassword = (): string => {
       return this.password;
     };
-    public getAccountType = (): AccountType => {
+    public getAccountType = (): string => {
       return this.accountType;
     };
     public getCreditCardNumber = (): string => {
@@ -76,7 +76,7 @@ class AccountAggregate {
     public setPassword = (password: string) => {
       this.password = password;
     };
-    public setAccountType = (accountType: AccountType) => {
+    public setAccountType = (accountType: string) => {
       this.accountType = accountType;
     };
     public setCreditCardNumber = (creditCardNumber: string) => {

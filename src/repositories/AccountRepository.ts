@@ -8,7 +8,7 @@ interface AccountAttributes {
   LastName: string;
   Email: string;
   Password: string;
-  AccountType: AccountType;
+  AccountType: string;
   CreditCardNumber: string;
   CreditCardDate: string;
   CreditCardSecurity: string;
@@ -48,6 +48,7 @@ class AccountRepository{
           lastName: string,
           email: string,
           password: string,
+          accountType: string,
           creditCardNumber: string,
           creditCardDate: string,
           creditCardSecurity: string
@@ -56,7 +57,7 @@ class AccountRepository{
         console.log("Repo Start")
         console.log(typeof creditCardDate)
         //const dateToString = new Date(creditCardDate).toISOString().slice(0, 19).replace('T', ' ');
-        accountDao.createAccount(firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
+        accountDao.createAccount(firstName, lastName, email, password, accountType, creditCardNumber, creditCardDate, creditCardSecurity);
     }
 }
 export default AccountRepository;

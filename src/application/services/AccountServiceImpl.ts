@@ -17,6 +17,7 @@ class AccountServiceImpl implements AccountService {
           lastName: string,
           email: string,
           password: string,
+          accountType: string,
           creditCardNumber: string,
           creditCardDate: string,
           creditCardSecurity: string
@@ -29,6 +30,7 @@ class AccountServiceImpl implements AccountService {
             lastName,
             email,
             password,
+            accountType,
             creditCardNumber,
             creditCardDate,
             creditCardSecurity
