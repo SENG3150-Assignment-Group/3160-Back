@@ -53,7 +53,7 @@ class AccountController extends Controller {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const id: string = <string>req.query.accountId;
+    //const id: string = <string>req.query.accountId;
     const firstName: string = <string>req.query.firstName;
     const lastName: string = <string>req.query.lastName; 
     const email: string = <string>req.query.email; 
@@ -68,7 +68,7 @@ class AccountController extends Controller {
       .status(200)
       .send(
         accountService.createAccount(
-          id, 
+          //id, 
           firstName,
           lastName,
           email,

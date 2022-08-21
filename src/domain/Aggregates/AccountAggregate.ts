@@ -1,5 +1,5 @@
 class AccountAggregate {
-    accountId: number;
+    // accountId: number;
     firstName: string;
     lastName: string;
     email: string;
@@ -10,7 +10,7 @@ class AccountAggregate {
     creditCardSecurity: string;
   
     constructor(
-      accountId: number,
+      //accountId: number,
       firstName: string,
       lastName: string,
       email: string,
@@ -20,7 +20,7 @@ class AccountAggregate {
       creditCardDate: string,
       creditCardSecurity: string
     ) {
-      this.accountId = accountId;
+      //this.accountId = accountId;
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
@@ -32,9 +32,9 @@ class AccountAggregate {
     }
   
     // Getters
-    public getAccountId = (): number => {
-      return this.accountId;
-    };
+    // public getAccountId = (): number => {
+    //   return this.accountId;
+    // };
     public getFirstName = (): string => {
       return this.firstName;
     };
@@ -61,9 +61,9 @@ class AccountAggregate {
     };
   
     // Setters
-    public setAccountId = (accountId: number) => {
-      this.accountId = accountId;
-    };
+    // public setAccountId = (accountId: number) => {
+    //  this.accountId = accountId;
+    // };
     public setFirstName = (firstName: string) => {
       this.firstName = firstName;
     };

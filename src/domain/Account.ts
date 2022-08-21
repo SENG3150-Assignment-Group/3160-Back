@@ -55,9 +55,9 @@ class Account {
   };
 
   // Setters
-  public setAccountId = (accountId: number) => {
-    this.accountId = accountId;
-  };
+  // public setAccountId = (accountId: number) => {
+  //   this.accountId = accountId;
+  // };
   public setFirstName = (firstName: string) => {
     this.firstName = firstName;
   };

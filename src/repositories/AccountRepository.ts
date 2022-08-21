@@ -3,7 +3,7 @@ import sequelize from "database";
 import AccountAggregate from "../domain/Aggregates/AccountAggregate";
 
 interface AccountAttributes {
-  AccountId: number;
+ // AccountId: number;
   FirstName: string;
   LastName: string;
   Email: string;
@@ -29,7 +29,7 @@ class AccountRepository{
 
         //create account Aggregate
         const accountAggregate = new AccountAggregate(
-            accountObj.AccountId,
+            //accountObj.AccountId,
             accountObj.FirstName,
             accountObj.LastName,
             accountObj.Email,
@@ -56,7 +56,7 @@ class AccountRepository{
         console.log("Repo Start")
         console.log(typeof creditCardDate)
         //const dateToString = new Date(creditCardDate).toISOString().slice(0, 19).replace('T', ' ');
-        accountDao.createAccount(id, firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
+        accountDao.createAccount(firstName, lastName, email, password, creditCardNumber, creditCardDate, creditCardSecurity);
     }
 }
 export default AccountRepository;
