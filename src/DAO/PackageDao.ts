@@ -17,11 +17,14 @@ class PackageDao {
     }
 
     public readAll = async (accountId: number) => {
-        return await this.model.findAll({
+        const allPackages = await this.model.findAll({
             where: {
                 AccountId: accountId
             }
         });
+        console.log(allPackages.every(travelPackage => travelPackage instanceof this.model));
+        console.log("All packages:", JSON.stringify(allPackages, null, 2));
+        return allPackages
       };
 
     public readPackage = async (

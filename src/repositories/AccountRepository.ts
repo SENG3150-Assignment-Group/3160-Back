@@ -59,5 +59,22 @@ class AccountRepository{
         //const dateToString = new Date(creditCardDate).toISOString().slice(0, 19).replace('T', ' ');
         accountDao.createAccount(firstName, lastName, email, password, accountType, creditCardNumber, creditCardDate, creditCardSecurity);
     };
+
+    public setCreditCardDetails = async(
+        email: string,
+        creditCardNumber: string,
+        creditCardDate: string,
+        creditCardSecurity: string
+    )=>{
+        const accountDao = new AccountDAO();
+        accountDao.setCreditCardDetails(email, creditCardNumber, creditCardDate, creditCardSecurity);
+    }
+
+    public deleteAccount = async (
+        email: string
+    )=>{
+        const accountDao = new AccountDAO();
+        accountDao.deleteAccount(email);
+    }
 }
 export default AccountRepository;

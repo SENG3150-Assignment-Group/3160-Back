@@ -30,15 +30,21 @@ class AccountController extends Controller {
       checkSchema(CreateAccountSchema),
       this.createAccount
     )
-  };
-
+    this.router.get(
+      this.path + "/setCreditCardDetails",
+      this.setCreditCardDetails
+    )
+    this.router.get(
+      this.path + "/deleteAccount",
+      this.deleteAccount
+    )
+    }
   private getAccount = async (req: express.Request, res: express.Response) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    console.log(typeof req.query.id); 
     const accountID: string = <string>req.query.id;
     const accountService: AccountService = new AccountServiceImpl();
 
@@ -84,6 +90,35 @@ class AccountController extends Controller {
 
   };
 
+  //sets the creditCardDetails of account based on the unique email given
+  private setCreditCardDetails = async (req: express.Request, res: express.Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const accountEmail: string = <string>req.query.accountEmail;
+    const creditCardNumber: string = <string>req.query.creditCardNumber;
+    const creditCardDate: string = <string>req.query.creditCardDate;
+    const creditCardSecurity: string = <string>req.query.creditCardSecurity;
+    const accountService: AccountService = new AccountServiceImpl();
+
+    const account = await accountService.setCreditCardDetails(accountEmail, creditCardNumber, creditCardDate, creditCardSecurity);
+    res.status(200).json(account);
+    
+  };
+
+  //deletes account connected to given Email
+  private deleteAccount = async (req: express.Request, res: express.Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const accountEmail: string = <string>req.query.accountEmail;
+    const accountService: AccountService = new AccountServiceImpl();
+    const account = await accountService.deleteAccount(accountEmail);
+    res.status(200).json(account);
+  };
   
 }
 

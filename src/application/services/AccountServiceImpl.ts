@@ -36,5 +36,27 @@ class AccountServiceImpl implements AccountService {
             creditCardSecurity
         )
     };
+
+    setCreditCardDetails = async(
+        email: string,
+        creditCardNumber: string,
+        creditCardDate: string,
+        creditCardSecurity: string
+    )=>{
+        const accountRepository = new AccountRepository();
+        accountRepository.setCreditCardDetails(
+            email,
+            creditCardNumber,
+            creditCardDate,
+            creditCardSecurity
+        )
+    };
+
+    deleteAccount = async(
+        email: string
+    )=>{
+        const accountRepository = new AccountRepository();
+        accountRepository.deleteAccount(email);
+    }
 }
 export default AccountServiceImpl;

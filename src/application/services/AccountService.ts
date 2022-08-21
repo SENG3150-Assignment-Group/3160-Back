@@ -13,6 +13,15 @@ interface AccountService {
           creditCardDate: string,
           creditCardSecurity: string
     ):void ;
+    setCreditCardDetails(
+        email: string,
+        creditCardNumber: string,
+        creditCardDate: string,
+        creditCardSecurity: string
+    ):void;
+    deleteAccount(
+        email: string
+    ):void;
 }
 
 export default AccountService;

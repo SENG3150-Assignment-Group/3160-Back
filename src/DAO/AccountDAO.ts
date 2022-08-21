@@ -1,7 +1,8 @@
-import { ModelStatic, Model } from "sequelize";
+import { ModelStatic, Model, where } from "sequelize";
 import sequelize from "../database/";
 
 interface AccountAttributes {    
+    //AccountId: number;
     FirstName: string;
     LastName: string;
     Email: string;
@@ -54,6 +55,34 @@ class AccountDAO {
       CreditCardSecurity: creditCardSecurity
     });
   };
+
+  public setCreditCardDetails = async (
+    email: string,
+    creditCardNumber: string,
+    creditCardDate: string,
+    creditCardSecurity: string
+  ) => {
+    await this.model.update({
+      CreditCardNumber: creditCardNumber,
+      CreditCardDate: creditCardDate,
+      CreditCardSecurity: creditCardSecurity      
+    }, {
+      where: {
+        Email: email
+      }
+    })
+  
+  }
+
+  public deleteAccount = async (
+    email: string
+  ) =>{
+    await this.model.destroy({
+      where: {
+        Email: email
+      }
+    });
+  }
 }
 
 export default AccountDAO;
