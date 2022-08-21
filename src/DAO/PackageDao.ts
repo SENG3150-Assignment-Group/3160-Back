@@ -16,12 +16,35 @@ class PackageDao {
         this.model = sequelize.models.Package;
     }
 
+    public readAll = async (accountId: number) => {
+        return await this.model.findAll({
+            where: {
+                AccountId: accountId
+            }
+        });
+      };
+
     public readPackage = async (
         id: number
     ): Promise<Model<PackageAttributes> | null> => {
         return await this.model.findByPk(id);
     };
 
+    public createPackage = async(
+        locationCode: string,
+        flightCode: string,
+        accountId: number,
+        accomodation: string,
+        accomodationCost: number
+    )=>{
+        await this.model.create({
+            LocationCode: locationCode,
+            FlightCode: flightCode,
+            AccountId: accountId,
+            Accomodation: accomodation,
+            AccomodationCost: accomodationCost
+        });
+    };
 
 }
 

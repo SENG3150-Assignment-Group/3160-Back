@@ -1,18 +1,39 @@
 import PackageService from "./PackageService";
 import PackageAggregate from "../../domain/Aggregates/PackageAggregate";
+import PackageRepository from "../../repositories/PackageRepository";
 
 class PackageServiceImpl implements PackageService{
-    public getPackage = async (id: string): Promise<PackageAggregate | null> => {
+    getPackage = async (id: string): Promise<PackageAggregate | null> => {
         const packageId = Number(id);
 
         const packageRepository = new PackageRepository();
 
-        const package = await packageRepository.getpackage(packageId);
-        return package;
+        const travelPackage = await packageRepository.getPackage(packageId);
+        return travelPackage;
     };
-    // public createPackage{
+    
+    createPackage = async(
+        locationCode: string,
+        flightCode: string,
+        accountId: number,
+        accomodation: string,
+        accomodationCost: number
+    ) =>{
+        const packageRepository = new PackageRepository();
+        packageRepository.createPackage(
+            locationCode,
+            flightCode,
+            accountId,
+            accomodation,
+            accomodationCost
+        )
+    };
 
-    // };
+    getAllPackages = async (accountId: number): Promise<PackageAggregate | null> =>{
+        const packageRepository = new PackageRepository();
+        const travelPackages = await packageRepository.getAllPackages(accountId);
+        return travelPackages;
+    };
 }
 
 export default PackageServiceImpl;

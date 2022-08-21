@@ -2,9 +2,11 @@ import express from "express";
 import { checkSchema, validationResult } from "express-validator";
 
 import Controller from "./Controller";
-import GetPackageSchema from "./Schemas/GetAccountSchema";
+import GetPackageSchema from "./Schemas/GetPackageSchema";
 import PackageService from "../services/PackageService";
 import PackageServiceImpl from "../services/PackageServiceImpl";
+import CreatePackageSchema from "./Schemas/CreatePackageSchema";
+
 
 class PackageController extends Controller {
     public path: string;
@@ -25,18 +27,35 @@ class PackageController extends Controller {
         );
         this.router.get(
           this.path + "/createPackage",
-          //checkSchema(CreatePackageSchema),
+          checkSchema(CreatePackageSchema),
           this.createPackage
         )
+        this.router.get(
+          this.path + "/getAllPackages",
+         // checkSchema(CreatePackageSchema),
+          this.getAllPackages
+        )
+      };
+
+      private getAllPackages = async (req: express.Request, res: express.Response) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+          return res.status(400).json({ errors: errors.array() });
+        }  
+
+        const packageService: PackageService = new PackageServiceImpl();
+
+        const accountId: number = parseInt(<string>req.query.accountId)
+        const travelPackage = await packageService.getAllPackages(accountId);
+        res.status(200).json(travelPackage);
       };
 
       private getPackage = async (req: express.Request, res: express.Response) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
           return res.status(400).json({ errors: errors.array() });
-        }
-    
-        console.log(typeof req.query.id); 
+        }    
+         
         const packageID: string = <string>req.query.id;
         const packageService: PackageService = new PackageServiceImpl();
     
@@ -61,7 +80,7 @@ class PackageController extends Controller {
         res 
           .status(200)
           .send(
-            packageService.createAccount(
+            packageService.createPackage(
               locationCode,
               flightCode,
               accountId,

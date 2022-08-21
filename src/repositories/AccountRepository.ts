@@ -58,6 +58,6 @@ class AccountRepository{
         console.log(typeof creditCardDate)
         //const dateToString = new Date(creditCardDate).toISOString().slice(0, 19).replace('T', ' ');
         accountDao.createAccount(firstName, lastName, email, password, accountType, creditCardNumber, creditCardDate, creditCardSecurity);
-    }
+    };
 }
 export default AccountRepository;
