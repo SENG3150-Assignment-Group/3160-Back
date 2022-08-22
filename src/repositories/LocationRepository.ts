@@ -11,8 +11,8 @@ interface LocationAttributes {
   AirportCode: string;
   Restricted: boolean;
   CountryCode3: string;
-  RestricationStart: Date;
-  RestricationEnd: Date;
+  RestrictionStart: Date;
+  RestrictionEnd: Date;
 }
 
 interface DescriptorAttributes {
