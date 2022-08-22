@@ -9,8 +9,9 @@ const assertDatabaseConnectionOk = async () => {
   try {
     await sequelize.authenticate();
     console.log("Database connection OK!");
+    console.log(sequelize);
     await sequelize.sync({ force: true });
-    console.log("Database in sync!");
+    // console.log("Database in sync!");
   } catch (error: unknown) {
     console.log("Unable to connect to the database:");
     console.log(error);
@@ -20,7 +21,7 @@ const assertDatabaseConnectionOk = async () => {
 
 const init = async () => {
   await assertDatabaseConnectionOk();
-  const app = new App([new FlightController(), new ExploreController()], 3000);
+  const app = new App([new FlightController()], 3000);
 
   app.listen();
 };

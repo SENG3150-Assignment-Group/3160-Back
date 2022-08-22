@@ -27,7 +27,7 @@ class App {
 
   private initializeControllers(controllers: Controller[]) {
     for (const controller of controllers) {
-      this.app.use("/api", controller.router);
+      this.app.use("/api" + controller.path, controller.router);
     }
   }
 

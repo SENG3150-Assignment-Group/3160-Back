@@ -20,13 +20,9 @@ class FlightController extends Controller {
   }
 
   public initializeRoutes = (): void => {
+    this.router.get("/getFlight", checkSchema(GetFlightSchema), this.getFlight);
     this.router.get(
-      this.path + "/getFlight",
-      checkSchema(GetFlightSchema),
-      this.getFlight
-    );
-    this.router.get(
-      this.path + "/search",
+      "/search",
       checkSchema(SearchFlightsSchema),
       this.searchFlights
     );
@@ -52,20 +48,12 @@ class FlightController extends Controller {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const [
-      departure,
-      destination,
-      startDate,
-      endDate,
-      isOneWay,
-      seats,
-      airline,
-    ] = [
+    const [departure, destination, startDate, endDate, isOneWay, seats] = [
       <number>(<unknown>req.query.departure),
       <number>(<unknown>req.query.destination),
       <Date>(<unknown>req.query.startDate),
       <Date>(<unknown>req.query.endDate),
-      <boolean>(<unknown>req.query.return),
+      <boolean>(<unknown>req.query.isOneWay),
       <number>(<unknown>req.query.seats),
     ];
 
@@ -78,7 +66,7 @@ class FlightController extends Controller {
           destination,
           startDate,
           endDate,
-          returnTrip,
+          isOneWay,
           seats
         )
       );

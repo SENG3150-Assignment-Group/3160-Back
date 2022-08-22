@@ -1,37 +1,24 @@
-import { ModelStatic, Model } from "sequelize";
+import {
+  ModelStatic,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+} from "sequelize";
 import sequelize from "../database/";
-
-interface FlightAttributes {
-  FlightId: number;
-  FlightCode: string;
-  DepartureId: number;
-  DepartureCode: string;
-  DepartureDateTime: Date;
-  DestinationCode: string;
-  DestinationId: number;
-  DestinationDateTime: Date;
-  StopOverCode: string;
-  StopOverId: number;
-  AirlineCode: string;
-  PlaneCode: string;
-  Duration: Date;
-  NumSeats: number;
-}
+import { FlightInput, FlightOutput, Flight } from "../database/models/Flight";
 
 class FlightDAO {
-  private model: ModelStatic<Model<FlightAttributes>>;
+  private model: typeof Flight;
 
   constructor() {
-    this.model = sequelize.models.Flight;
+    this.model = Flight;
   }
 
-  public readAll = async () => {
+  public readAll = async (): Promise<FlightOutput[]> => {
     return await this.model.findAll();
   };
 
-  public readFlight = async (
-    id: number
-  ): Promise<Model<FlightAttributes> | null> => {
+  public readFlight = async (id: number): Promise<FlightOutput | null> => {
     return await this.model.findByPk(id);
   };
 }

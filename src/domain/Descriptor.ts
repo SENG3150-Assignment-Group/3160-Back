@@ -22,15 +22,15 @@ class Descriptor {
     this.descriptorName = descriptorName;
   }
 
-  public static modelToDomain = (
-    descriptorModel: Model<DescriptorAttributes>
-  ): Descriptor => {
-    return new Descriptor(
-      descriptorModel.DescriptorId,
-      descriptorModel.CategoryId,
-      descriptorModel.Name
-    );
-  };
+  // public static modelToDomain = (
+  //   descriptorModel: Model<DescriptorAttributes>
+  // ): Descriptor => {
+  //   return new Descriptor(
+  //     descriptorModel.DescriptorId,
+  //     descriptorModel.CategoryId,
+  //     descriptorModel.Name
+  //   );
+  // };
 
   // Getters
   public getDescriptorId = (): number => {

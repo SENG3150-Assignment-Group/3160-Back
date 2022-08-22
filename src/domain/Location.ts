@@ -38,19 +38,19 @@ class Location {
   }
 
   // static
-  public static modelToDomain = (
-    locationModel: Model<LocationAttributes>
-  ): Location => {
-    return new Location(
-      locationModel.LocationId,
-      locationModel.LocationName,
-      locationModel.AirportCode,
-      locationModel.CountryCode3,
-      locationModel.Restricted,
-      locationModel.RestrictionStart,
-      locationModel.RestrictionEnd
-    );
-  };
+  // public static modelToDomain = (
+  //   locationModel: Model<LocationAttributes>
+  // ): Location => {
+  //   return new Location(
+  //     locationModel.LocationId,
+  //     locationModel.LocationName,
+  //     locationModel.AirportCode,
+  //     locationModel.CountryCode3,
+  //     locationModel.Restricted,
+  //     locationModel.RestrictionStart,
+  //     locationModel.RestrictionEnd
+  //   );
+  // };
 
   // Getters
   public getLocationId = (): number => {

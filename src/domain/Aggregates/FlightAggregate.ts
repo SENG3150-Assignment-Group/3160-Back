@@ -1,3 +1,7 @@
+import Flight from "../Flight";
+import PlaneType from "../PlaneType";
+import Location from "../Location";
+
 class FlightAggregate {
   private flightId: number;
   private flightCode: string;
@@ -11,6 +15,7 @@ class FlightAggregate {
   private destinationDateTime: Date;
   private stopOverId: number;
   private stopOverName: string;
+  private stopOverCode: string;
   private airlineCode: string;
   private planeCode: string;
   private duration: Date;
@@ -20,45 +25,36 @@ class FlightAggregate {
   private numEconomy: number;
 
   constructor(
-    flightId: number,
-    flightCode: string,
-    departureId: number,
-    departureName: string,
-    departureCode: string,
-    departureDateTime: Date,
-    destinationId: number,
-    destinationName: string,
-    destinationCode: string,
-    destinationDateTime: Date,
-    stopOverId: number,
-    stopOverName: string,
-    airlineCode: string,
-    planeCode: string,
-    duration: Date,
-    numFirstClass: number,
-    numBusiness: number,
-    numPremiumEconomy: number,
-    numEconomy: number
+    flight: Flight,
+    departure: Location,
+    destination: Location,
+    stopOver: Location,
+    planeType: PlaneType
   ) {
-    this.flightId = flightId;
-    this.flightCode = flightCode;
-    this.departureId = departureId;
-    this.departureName = departureName;
-    this.departureCode = departureCode;
-    this.departureDateTime = departureDateTime;
-    this.destinationId = destinationId;
-    this.destinationName = destinationName;
-    this.destinationCode = destinationCode;
-    this.destinationDateTime = destinationDateTime;
-    this.stopOverId = stopOverId;
-    this.stopOverName = stopOverName;
-    this.airlineCode = airlineCode;
-    this.planeCode = planeCode;
-    this.duration = duration;
-    this.numFirstClass = numFirstClass;
-    this.numBusiness = numBusiness;
-    this.numPremiumEconomy = numPremiumEconomy;
-    this.numEconomy = numEconomy;
+    this.flightId = flight.getFlightId();
+    this.flightCode = flight.getFlightCode();
+    this.departureId = flight.getDepartureId();
+    this.departureDateTime = flight.getDepartureDateTime();
+    this.destinationId = flight.getDestinationId();
+    this.destinationDateTime = flight.getDestinationDateTime();
+    this.stopOverId = flight.getStopOverId();
+    this.airlineCode = flight.getAirlineCode();
+    this.planeCode = flight.getPlaneCode();
+    this.duration = flight.getDuration();
+
+    this.departureName = departure.getLocationName();
+    this.departureCode = departure.getAirportCode();
+
+    this.destinationName = destination.getLocationName();
+    this.destinationCode = destination.getAirportCode();
+
+    this.stopOverName = stopOver == null ? "" : stopOver.getLocationName();
+    this.stopOverCode = stopOver == null ? "" : stopOver.getAirportCode();
+
+    this.numFirstClass = planeType.getNumFirstClass();
+    this.numBusiness = planeType.getNumBusiness();
+    this.numPremiumEconomy = planeType.getNumPremiumEconomy();
+    this.numEconomy = planeType.getNumEconomy();
   }
 
   // Getters
