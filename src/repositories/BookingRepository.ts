@@ -51,6 +51,9 @@ class BookingRepository {
         //Get all bookings and tickets of a user
         const bookingModels: Model<BookingAttributes>[] =
             await bookingDAO.readAccountsBooking(accountId);
+
+        if (bookingModels[0].AccountId == -1) return bookingAggregates;
+
         const ticketModels: Model<TicketAttributes>[]
             = await ticketDAO.readAccountsTickets(accountId);
 
@@ -67,6 +70,9 @@ class BookingRepository {
         for (let i = 0; i < ticketModels.length; i++) {
             // convert booking, ticket and invoice to domain objects
             booking = Booking.modelToDomain(bookingModels[i]);
+            ticket = Ticket.modelToDomain(ticketModels[i]);
+            invoice = Invoice.modelToDomain(invoiceModels[i]);
+            bookingAggregates.push(new BookingAggregate(booking, ticket, invoice));
         }
 
         return bookingAggregates;

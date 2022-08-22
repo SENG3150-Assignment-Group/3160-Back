@@ -1,5 +1,6 @@
 import { ModelStatic, Model } from "sequelize";
 import sequelize from "../database/";
+import Booking from "../domain/Booking";
 
 interface BookingAttributes {
     BookingId: number;
@@ -24,8 +25,13 @@ class BookingDAO {
 
     public readAccountsBooking = async(
         accountId: number
-    ): Promise<Model<BookingAttributes> | null> => {
-        return await this.model.findByPk(accountId);
+    ): Promise<Model<BookingAttributes>> => {
+        let booking = await this.model.findByPk(accountId);
+        if (booking == null) {
+            let date = new Date('2000-01-01');
+            booking = new Booking(-1," ",date,0);
+        }
+        return booking;
     };
 
     public readAllBookings = async(): Promise<Model<BookingAttributes>[]> => {

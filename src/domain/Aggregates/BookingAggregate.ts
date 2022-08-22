@@ -7,7 +7,7 @@ class BookingAggregate {
     accountId: number;
     email: string;
     dateCreated: Date;
-    state: State;
+    state: number;
     ticketCode: string;
     ticketClass: string;
     price: number;
@@ -66,7 +66,7 @@ class BookingAggregate {
     public getDateCreated = (): Date => {
         return this.dateCreated;
     };
-    public getState = (): State => {
+    public getState = (): number => {
         return this.state;
     };
     public getTicketCode = (): string => {
@@ -137,7 +137,7 @@ class BookingAggregate {
     public setDateCreated = (dateCreated: Date) => {
         this.dateCreated = dateCreated;
     };
-    public setState = (state: State) => {
+    public setState = (state: number) => {
         this.state = state;
     };
     public setTicketCode = (ticketCode: string) => {

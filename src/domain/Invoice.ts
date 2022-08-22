@@ -1,5 +1,5 @@
 class Invoice {
-  transactionId: number;
+  //transactionId: number;
   date: Date;
   creditCardNumber: string;
   subTotal: number;
@@ -7,14 +7,14 @@ class Invoice {
   refundAmount: number;
 
   constructor(
-    transactionId: number,
+    //transactionId: number,
     date: Date,
     creditCardNumber: string,
     subTotal: number,
     tax: number,
     refundAmount: number
   ) {
-    this.transactionId = transactionId;
+    //this.transactionId = transactionId;
     this.date = date;
     this.creditCardNumber = creditCardNumber;
     this.subTotal = subTotal;
@@ -23,9 +23,9 @@ class Invoice {
   }
 
   // Getters
-  public getTansactionId = (): number => {
+  /*public getTansactionId = (): number => {
     return this.transactionId;
-  };
+  };*/
   public getDate = (): Date => {
     return this.date;
   };
@@ -43,9 +43,9 @@ class Invoice {
   };
 
   // Setters
-  public setTransactionId = (transactionId: number) => {
+  /*public setTransactionId = (transactionId: number) => {
     this.transactionId = transactionId;
-  };
+  };*/
   public setDate = (date: Date) => {
     this.date = date;
   };
