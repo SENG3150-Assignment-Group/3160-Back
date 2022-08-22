@@ -32,14 +32,43 @@ class TicketDAO {
 
     public readAccountsTickets = async(
         accountId: number
-    ): Promise<Model<TicketAttributes> | null> => {
-        return await this.model.findByPk(accountId);
+    ): Promise<Model<TicketAttributes>[] | null> => {
+        return await this.model.findAll({
+            where: {AccountId: accountId}
+        });
     };
 
-
-    public readAllTickets = async(): Promise<Model<TicketAttributes>[]> => {
-        return await this.model.findAll();
-    };
+    public createTicket = async(
+        ticketCode: string,
+        ticketClass: string,
+        price: number,
+        booked: boolean,
+        transferrable: boolean,
+        exchangeable: boolean,
+        refundable: boolean,
+        accountId: number,
+        personType: string,
+        specialRequests: string,
+        dietaryPreferences: string,
+        carryOnBaggage: boolean,
+        checkedBaggage: boolean
+    ) => {
+        await this.model.create({
+            TicketCode: ticketCode,
+            TicketClass: ticketClass,
+            Price: price,
+            Booked: booked,
+            Transferable: transferrable,
+            Exchangable: exchangeable,
+            Refundable: refundable,
+            AccountId: accountId,
+            PersonType: personType,
+            SpecialRequests: specialRequests,
+            DietaryPreferences: dietaryPreferences,
+            CarryOnBaggage: carryOnBaggage,
+            CheckedBaggage: checkedBaggage
+        })
+    }
 }
 
 export default TicketDAO;

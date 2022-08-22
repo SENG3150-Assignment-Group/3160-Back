@@ -41,7 +41,7 @@ interface InvoiceAttributes {
 }
 
 class BookingRepository {
-    public getBookings = async(accountId: number): Promise<BookingAggregate[]> => {
+    public getBookings = async(accountId: number): Promise<BookingAggregate[] | null> => {
         const bookingDAO = new BookingDAO();
         const invocieDAO = new InvoiceDAO();
         const ticketDAO = new TicketDAO();
@@ -49,36 +49,112 @@ class BookingRepository {
             new Array<BookingAggregate>();
 
         //Get all bookings and tickets of a user
-        const bookingModels: Model<BookingAttributes>[] =
+        const bookingModels: Model<any>[] | null =
             await bookingDAO.readAccountsBooking(accountId);
 
-        if (bookingModels[0].AccountId == -1) return bookingAggregates;
-
-        const ticketModels: Model<TicketAttributes>[]
+        const ticketModels: Model<any>[] | null
             = await ticketDAO.readAccountsTickets(accountId);
 
-        let invoiceModels: Model<InvoiceAttributes>[];
+        let invoiceModelSingle: Model<any> | null;
+        let invoiceModels: Model<any>[];
         let booking: Booking;
         let ticket: Ticket;
         let invoice: Invoice;
 
-        for (const bookingModel of bookingModels) {
-            //For every booking get the invoice associated with it
-            invoiceModels = await invocieDAO.readInvoice(bookingModel.BookingId);
+        if (bookingModels != null) {
+            for (const bookingModel of bookingModels) {
+                //For every booking get the invoice associated with it
+                invoiceModelSingle = await invocieDAO.readInvoice(bookingModel.BookingId);
+                if (invoiceModelSingle != null) {
+                    invoiceModels.push(invoiceModelSingle);
+                }
+            }
         }
+        else return null;
 
-        for (let i = 0; i < ticketModels.length; i++) {
-            // convert booking, ticket and invoice to domain objects
-            booking = Booking.modelToDomain(bookingModels[i]);
-            ticket = Ticket.modelToDomain(ticketModels[i]);
-            invoice = Invoice.modelToDomain(invoiceModels[i]);
-            bookingAggregates.push(new BookingAggregate(booking, ticket, invoice));
+        if (ticketModels != null) {
+            for (let i = 0; i < ticketModels.length; i++) {
+                // convert booking, ticket and invoice to domain objects
+                booking = Booking.modelToDomain(bookingModels[i]);
+                ticket = Ticket.modelToDomain(ticketModels[i]);
+                invoice = Invoice.modelToDomain(invoiceModels[i]);
+                bookingAggregates.push(new BookingAggregate(booking, ticket, invoice));
+            }
         }
+        else return null;
 
         return bookingAggregates;
     }
 
-    public addBooking = async(): Promise<BookingAggregate> => {
+    public addBooking = async(
+        accountId: number,
+        email: string,
+        dateCreated: Date,
+        state: number,
+        ticketCode: string,
+        ticketClass: string,
+        price: number,
+        booked: boolean,
+        transferrable: boolean,
+        exchangeable: boolean,
+        refundable: boolean,
+        personType: string,
+        specialRequests: string,
+        dietaryPreferences: string,
+        carryOnBaggage: boolean,
+        checkedBaggage: boolean,
+        date: Date,
+        creditCardNumber: string,
+        subTotal: number,
+        tax: number,
+        refundAmount: number
+    ) => {
+
+        const bookingDAO = new BookingDAO();
+        bookingDAO.createBooking(
+            accountId,
+            email,
+            dateCreated,
+            state
+        );
+
+        const ticketDAO = new TicketDAO();
+        ticketDAO.createTicket(
+            ticketCode,
+            ticketClass,
+            price,
+            booked,
+            transferrable,
+            exchangeable,
+            refundable,
+            accountId,
+            personType,
+            specialRequests,
+            dietaryPreferences,
+            carryOnBaggage,
+            checkedBaggage
+        );
+
+        const invoiceDAO = new InvoiceDAO();
+        invoiceDAO.createInvoice(
+            date,
+            creditCardNumber,
+            subTotal,
+            tax,
+            refundAmount
+        );
 
     }
+
+    public updateBooking = async(
+        accountId: number,
+        bookingId: number,
+        state: number
+    ) => {
+        const  bookingDAO = new BookingDAO();
+        bookingDAO.updateBooking(accountId, bookingId, state);
+    }
+
 }
+
+export default BookingRepository;

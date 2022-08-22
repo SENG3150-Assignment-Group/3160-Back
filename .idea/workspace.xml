@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e3c133f-fc8c-4dfe-acdd-aa46eec37bd6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/application/controllers/BookingController.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/services/BookingService.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/application/services/BookingServiceImpl.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/BookingDAO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/BookingDAO.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/Aggregates/BookingAggregate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Aggregates/BookingAggregate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/Booking.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Booking.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domain/Invoice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/domain/Invoice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/InvoiceDAO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/InvoiceDAO.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/TicketDAO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TicketDAO.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/repositories/BookingRepository.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/repositories/BookingRepository.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -1,17 +1,17 @@
-import { ModelStatic, Model } from "sequelize";
+import { ModelStatic, Model, Op } from "sequelize";
 import sequelize from "../database/";
 import Booking from "../domain/Booking";
 
-interface BookingAttributes {
-    BookingId: number;
+/*interface BookingAttributes {
+    //BookingId: number;
     AccountId: number;
     Email: string;
     DateCreated: Date;
     State: number;
-}
+}*/
 
 class BookingDAO {
-    private model: ModelStatic<Model<BookingAttributes>>;
+    private model: ModelStatic<Model<any>>;
 
     constructor() {
         this.model = sequelize.models.Booking;
@@ -19,23 +19,43 @@ class BookingDAO {
 
     public readBooking = async(
         bookingId: number, accountId: number
-    ): Promise<Model<BookingAttributes> | null> => {
+    ): Promise<Model<any> | null> => {
         return await this.model.findByPk(bookingId && accountId);
     };
 
     public readAccountsBooking = async(
         accountId: number
-    ): Promise<Model<BookingAttributes>> => {
-        let booking = await this.model.findByPk(accountId);
-        if (booking == null) {
-            let date = new Date('2000-01-01');
-            booking = new Booking(-1," ",date,0);
+    ): Promise<Model<any>[] | null> => {
+        return await this.model.findAll({
+            where: {AccountId: accountId}
         }
-        return booking;
+    );
     };
 
-    public readAllBookings = async(): Promise<Model<BookingAttributes>[]> => {
-        return await this.model.findAll();
+    public createBooking = async(
+        accountId: number,
+        email: string,
+        dateCreated: Date,
+        state: number
+    ) => {
+        await this.model.create({
+            AccountId: accountId,
+            Email: email,
+            DateCreated: dateCreated,
+            State: state
+        });
+    };
+
+    public updateBooking = async (bookingId: number, accountId: number, state: number) => {
+        await this.model.update({State: state},
+            {
+            where: {
+                [Op.and]: [
+                    {BookingId: bookingId},
+                    {AccountId: accountId}
+                ]
+            }
+        })
     };
 }
 
