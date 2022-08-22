@@ -2,6 +2,7 @@ import App from "./App";
 import sequelize from "./database/";
 
 import FlightController from "./application/controllers/FlightController";
+import ExploreController from "./application/controllers/ExploreController";
 
 const assertDatabaseConnectionOk = async () => {
   console.log(`Checking database connection...`);
@@ -19,7 +20,7 @@ const assertDatabaseConnectionOk = async () => {
 
 const init = async () => {
   await assertDatabaseConnectionOk();
-  const app = new App([new FlightController()], 3000);
+  const app = new App([new FlightController(), new ExploreController()], 3000);
 
   app.listen();
 };

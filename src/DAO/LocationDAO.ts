@@ -7,8 +7,8 @@ interface LocationAttributes {
   AirportCode: string;
   Restricted: boolean;
   CountryCode3: string;
-  RestricationStart: Date;
-  RestricationEnd: Date;
+  RestrictionStart: Date;
+  RestrictionEnd: Date;
 }
 
 class LocationDAO {
@@ -22,6 +22,10 @@ class LocationDAO {
     locationId: number
   ): Promise<Model<LocationAttributes> | null> => {
     return await this.model.findByPk(locationId);
+  };
+
+  public readAllLocations = async (): Promise<Model<LocationAttributes>[]> => {
+    return await this.model.findAll();
   };
 }
 

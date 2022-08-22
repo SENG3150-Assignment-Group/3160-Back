@@ -25,6 +25,7 @@ export default (sequelize: any) => {
       TransactionId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        autoIncrement: true,
       },
       Date: {
         type: DataTypes.DATEONLY,

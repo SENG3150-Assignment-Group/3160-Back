@@ -9,8 +9,8 @@ interface LocationAttributes {
   Airport: string;
   Restricted: boolean;
   CountryCode3: string;
-  RestricationStart: Date;
-  RestricationEnd: Date;
+  RestrictionStart: Date;
+  RestrictionEnd: Date;
 }
 
 export default (sequelize: any) => {
@@ -24,8 +24,8 @@ export default (sequelize: any) => {
     Airport!: string;
     Restricted!: boolean;
     CountryCode3!: string;
-    RestricationStart!: Date;
-    RestricationEnd!: Date;
+    RestrictionStart!: Date;
+    RestrictionEnd!: Date;
   }
   Location.init(
     {
@@ -58,11 +58,11 @@ export default (sequelize: any) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      RestricationStart: {
+      RestrictionStart: {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      RestricationEnd: {
+      RestrictionEnd: {
         type: DataTypes.DATE,
         allowNull: true,
       },

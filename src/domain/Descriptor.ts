@@ -1,3 +1,12 @@
+import { Model } from "sequelize/types";
+
+interface DescriptorAttributes {
+  DescriptorId: number;
+  CategoryId: number;
+  Name: string;
+  //TODO Name in database is descriptorName in domain
+}
+
 class Descriptor {
   descriptorId: number;
   categoryId: number;
@@ -12,6 +21,16 @@ class Descriptor {
     this.categoryId = categoryId;
     this.descriptorName = descriptorName;
   }
+
+  public static modelToDomain = (
+    descriptorModel: Model<DescriptorAttributes>
+  ): Descriptor => {
+    return new Descriptor(
+      descriptorModel.DescriptorId,
+      descriptorModel.CategoryId,
+      descriptorModel.Name
+    );
+  };
 
   // Getters
   public getDescriptorId = (): number => {
