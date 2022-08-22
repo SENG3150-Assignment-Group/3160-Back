@@ -9,6 +9,7 @@ interface InvoiceAttributes {
   Subtotal: number;
   Tax: number;
   RefundAmount: number;
+  BookingId: number;
 }
 
 export default (sequelize: any) => {
@@ -19,6 +20,7 @@ export default (sequelize: any) => {
     Subtotal!: number;
     Tax!: number;
     RefundAmount!: number;
+    BookingId!: number;
   }
   Invoice.init(
     {
@@ -26,6 +28,8 @@ export default (sequelize: any) => {
         type: DataTypes.INTEGER,
         allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        unique: true,
       },
       Date: {
         type: DataTypes.DATEONLY,
@@ -46,6 +50,11 @@ export default (sequelize: any) => {
       RefundAmount: {
         type: DataTypes.DECIMAL,
         allowNull: false,
+      },
+      BookingId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        unique: true,
       },
     },
     {
