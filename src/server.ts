@@ -1,5 +1,6 @@
 import App from "./App";
 import sequelize from "./database/";
+import sync from "./database/sync";
 
 import FlightController from "./application/controllers/FlightController";
 import ExploreController from "./application/controllers/ExploreController";
@@ -9,9 +10,6 @@ const assertDatabaseConnectionOk = async () => {
   try {
     await sequelize.authenticate();
     console.log("Database connection OK!");
-    console.log(sequelize);
-    await sequelize.sync({ force: true });
-    // console.log("Database in sync!");
   } catch (error: unknown) {
     console.log("Unable to connect to the database:");
     console.log(error);
@@ -21,6 +19,7 @@ const assertDatabaseConnectionOk = async () => {
 
 const init = async () => {
   await assertDatabaseConnectionOk();
+  await sync();
   const app = new App([new FlightController()], 3000);
 
   app.listen();

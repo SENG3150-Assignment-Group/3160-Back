@@ -1,7 +1,15 @@
-"use strict";
-
-import { Sequelize, DataTypes, Model, Optional } from "sequelize";
+import {
+  DataTypes,
+  Model,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from "sequelize";
 import sequelize from "../";
+import { Airline } from "./Airline";
+import { Location } from "./Location";
+import { PlaneType } from "./PlaneType";
 
 //TODO StopOverId has been added to database, either implement throught other levels or remove
 interface FlightAttributes {
@@ -11,29 +19,25 @@ interface FlightAttributes {
   DepartureDateTime: Date;
   DestinationId: number;
   DestinationDateTime: Date;
-  StopOverId?: number;
+  StopOverId: number;
   AirlineCode: string;
   PlaneCode: string;
   Duration: Date;
 }
 
-interface FlightInput
-  extends Optional<FlightAttributes, "FlightId" | "StopOverId"> {}
-interface FlightOutput extends Required<FlightAttributes> {}
+interface FlightInput extends InferCreationAttributes<Flight> {}
+interface FlightOutput extends InferAttributes<Flight> {}
 
-class Flight
-  extends Model<FlightAttributes, FlightInput>
-  implements FlightAttributes
-{
-  public FlightId!: number;
+class Flight extends Model<FlightOutput, FlightInput> {
+  public FlightId!: CreationOptional<number>;
   public FlightCode!: string;
-  public DepartureId!: number;
+  public DepartureId!: ForeignKey<number>;
   public DepartureDateTime!: Date;
-  public DestinationId!: number;
+  public DestinationId!: ForeignKey<number>;
   public DestinationDateTime!: Date;
-  public StopOverId!: number;
-  public AirlineCode!: string;
-  public PlaneCode!: string;
+  public StopOverId!: CreationOptional<ForeignKey<number>>;
+  public AirlineCode!: ForeignKey<string>;
+  public PlaneCode!: ForeignKey<string>;
   public Duration!: Date;
 }
 
@@ -49,32 +53,12 @@ Flight.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    DepartureId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     DepartureDateTime: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    DestinationId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     DestinationDateTime: {
       type: DataTypes.DATE,
-      allowNull: false,
-    },
-    StopOverId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    AirlineCode: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    PlaneCode: {
-      type: DataTypes.STRING,
       allowNull: false,
     },
     Duration: {
@@ -88,5 +72,95 @@ Flight.init(
     modelName: "Flight",
   }
 );
+
+// Flights have a departure location
+Flight.belongsTo(Location, {
+  as: "Departure",
+  foreignKey: {
+    name: "DepartureId",
+    allowNull: false,
+  },
+});
+
+// Locations have many departing flights
+Location.hasMany(Flight, {
+  as: "Departures",
+  foreignKey: {
+    name: "DepartureId",
+    allowNull: false,
+  },
+});
+
+// Flights have a destination location
+Flight.belongsTo(Location, {
+  as: "Destination",
+  foreignKey: {
+    name: "DestinationId",
+    allowNull: false,
+  },
+});
+
+// Locations have many incoming flights
+Location.hasMany(Flight, {
+  as: "Destinations",
+  foreignKey: {
+    name: "DestinationId",
+    allowNull: false,
+  },
+});
+
+// Flights may have a stopover location
+Flight.belongsTo(Location, {
+  as: "StopOver",
+  foreignKey: {
+    name: "StopOverId",
+    allowNull: true,
+  },
+});
+
+// Locations can have many stopover flights
+Location.hasMany(Flight, {
+  as: "StopOvers",
+  foreignKey: {
+    name: "StopOverId",
+    allowNull: true,
+  },
+});
+
+// Flights are scheduled by an Airline
+Flight.belongsTo(Airline, {
+  as: "Airline",
+  foreignKey: {
+    name: "AirlineCode",
+    allowNull: false,
+  },
+});
+
+// Airlines schedule many flights
+Airline.hasMany(Flight, {
+  as: "Flights",
+  foreignKey: {
+    name: "AirlineCode",
+    allowNull: false,
+  },
+});
+
+// Flights are conducted by a plane of a certain PlaneType
+Flight.belongsTo(PlaneType, {
+  as: "PlaneType",
+  foreignKey: {
+    name: "PlaneCode",
+    allowNull: false,
+  },
+});
+
+// planes of a PlaneTypes conduct many flights
+PlaneType.hasMany(Flight, {
+  as: "Flights",
+  foreignKey: {
+    name: "PlaneCode",
+    allowNull: false,
+  },
+});
 
 export { FlightInput, FlightOutput, Flight };

@@ -4,7 +4,7 @@ import Location from "../Location";
 class LocationAggregate {
   locationId: number;
   locationName: string;
-  airportCode: string;
+  airport: string;
   countryCode3: string;
   restricted: boolean;
   restrictionStart: Date;
@@ -14,7 +14,7 @@ class LocationAggregate {
   constructor(location: Location, descriptors: Descriptor[]) {
     this.locationId = location.getLocationId();
     this.locationName = location.getLocationName();
-    this.airportCode = location.getAirportCode();
+    this.airport = location.getAirport();
     this.countryCode3 = location.getCountryCode3();
     this.restricted = location.isRestricted();
     this.restrictionStart = location.getRestrictionStart();
@@ -29,8 +29,8 @@ class LocationAggregate {
   public getLocationName = (): string => {
     return this.locationName;
   };
-  public getAirportCode = (): string => {
-    return this.airportCode;
+  public getAirport = (): string => {
+    return this.airport;
   };
   public getCountryCode3 = (): string => {
     return this.countryCode3;
@@ -55,8 +55,8 @@ class LocationAggregate {
   public setLocationName = (locationName: string) => {
     this.locationName = locationName;
   };
-  public setAirportCode = (airportCode: string) => {
-    this.airportCode = airportCode;
+  public setAirport = (airport: string) => {
+    this.airport = airport;
   };
   public setCountryCode3 = (countryCode3: string) => {
     this.countryCode3 = countryCode3;

@@ -1,30 +1,21 @@
-import { ModelStatic, Model } from "sequelize";
-import sequelize from "../database/";
-
-interface LocationAttributes {
-  LocationName: string;
-  LocationId: number;
-  AirportCode: string;
-  Restricted: boolean;
-  CountryCode3: string;
-  RestricationStart: Date;
-  RestricationEnd: Date;
-}
+import {
+  LocationInput,
+  LocationOutput,
+  Location,
+} from "../database/models/Location";
 
 class LocationDAO {
-  private model: ModelStatic<Model<LocationAttributes>>;
+  private model: typeof Location;
 
   constructor() {
-    this.model = sequelize.models.Location;
+    this.model = Location;
   }
 
-  public readLocation = async (
-    locationId: number
-  ): Promise<Model<LocationAttributes> | null> => {
-    return await this.model.findByPk(locationId);
+  public read = async (id: number): Promise<LocationOutput | null> => {
+    return await this.model.findByPk(id);
   };
 
-  public readAllLocations = async (): Promise<Model<LocationAttributes>[]> => {
+  public readAll = async (): Promise<LocationOutput[]> => {
     return await this.model.findAll();
   };
 }

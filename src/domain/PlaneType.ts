@@ -1,6 +1,8 @@
+import { PlaneTypeOutput } from "../database/models/PlaneType";
+
 class PlaneType {
   planeCode: string;
-  type: string;
+  planeType: string;
   numFirstClass: number;
   numBusiness: number;
   numPremiumEconomy: number;
@@ -8,26 +10,37 @@ class PlaneType {
 
   constructor(
     planeCode: string,
-    type: string,
+    planeType: string,
     numFirstClass: number,
     numBusiness: number,
     numPremiumEconomy: number,
     numEconomy: number
   ) {
     this.planeCode = planeCode;
-    this.type = type;
+    this.planeType = planeType;
     this.numFirstClass = numFirstClass;
     this.numBusiness = numBusiness;
     this.numPremiumEconomy = numPremiumEconomy;
     this.numEconomy = numEconomy;
   }
 
+  public static modelToDomain = (model: PlaneTypeOutput): PlaneType => {
+    return new PlaneType(
+      model.PlaneCode,
+      model.PlaneType,
+      model.NumFirstClass,
+      model.NumBusiness,
+      model.NumPremiumEconomy,
+      model.NumEconomy
+    );
+  };
+
   // Getters
   public getPlaneCode = (): string => {
     return this.planeCode;
   };
   public getPlaneType = (): string => {
-    return this.type;
+    return this.planeType;
   };
   public getNumFirstClass = (): number => {
     return this.numFirstClass;
@@ -46,8 +59,8 @@ class PlaneType {
   public setPlaneCode = (planeCode: string) => {
     this.planeCode = planeCode;
   };
-  public setType = (type: string) => {
-    this.type = type;
+  public setPlaneType = (planeType: string) => {
+    this.planeType = planeType;
   };
   public setNumFirstClass = (numFirstClass: number) => {
     this.numFirstClass = numFirstClass;

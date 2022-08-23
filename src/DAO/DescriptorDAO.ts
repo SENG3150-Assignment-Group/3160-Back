@@ -1,22 +1,17 @@
-import { ModelStatic, Model, Op, QueryTypes } from "sequelize";
-import sequelize from "../database/";
-
-interface DescriptorAttributes {
-  DescriptorId: number;
-  CategoryId: number;
-  Name: string;
-}
+import { Op } from "sequelize/types";
+import sequelize from "sequelize/types/sequelize";
+import { Descriptor, DescriptorOutput } from "database/models/Descriptor";
 
 class DescriptorDAO {
-  private model: ModelStatic<Model<DescriptorAttributes>>;
+  private model: typeof Descriptor;
 
   constructor() {
-    this.model = sequelize.models.Descriptor;
+    this.model = Descriptor;
   }
 
   readDescriptorsForLocation = (
     locationId: number
-  ): Promise<Model<DescriptorAttributes>[]> => {
+  ): Promise<DescriptorOutput[]> => {
     /*
       SELECT * FROM Descriptor
       WHERE Descriptor.descriptorId IN

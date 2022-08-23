@@ -28,7 +28,7 @@ class FlightAggregate {
     flight: Flight,
     departure: Location,
     destination: Location,
-    stopOver: Location,
+    stopOver: Location | null,
     planeType: PlaneType
   ) {
     this.flightId = flight.getFlightId();
@@ -43,13 +43,13 @@ class FlightAggregate {
     this.duration = flight.getDuration();
 
     this.departureName = departure.getLocationName();
-    this.departureCode = departure.getAirportCode();
+    this.departureCode = departure.getLocationCode();
 
     this.destinationName = destination.getLocationName();
-    this.destinationCode = destination.getAirportCode();
+    this.destinationCode = destination.getLocationCode();
 
     this.stopOverName = stopOver == null ? "" : stopOver.getLocationName();
-    this.stopOverCode = stopOver == null ? "" : stopOver.getAirportCode();
+    this.stopOverCode = stopOver == null ? "" : stopOver.getLocationCode();
 
     this.numFirstClass = planeType.getNumFirstClass();
     this.numBusiness = planeType.getNumBusiness();

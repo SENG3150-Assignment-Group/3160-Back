@@ -1,10 +1,3 @@
-import {
-  ModelStatic,
-  Model,
-  InferAttributes,
-  InferCreationAttributes,
-} from "sequelize";
-import sequelize from "../database/";
 import { FlightInput, FlightOutput, Flight } from "../database/models/Flight";
 
 class FlightDAO {
@@ -18,7 +11,7 @@ class FlightDAO {
     return await this.model.findAll();
   };
 
-  public readFlight = async (id: number): Promise<FlightOutput | null> => {
+  public read = async (id: number): Promise<FlightOutput | null> => {
     return await this.model.findByPk(id);
   };
 }

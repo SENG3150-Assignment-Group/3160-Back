@@ -1,6 +1,13 @@
-"use strict";
 import sequelize from "../";
-import { DataTypes, Model, Optional } from "sequelize";
+import {
+  CreationOptional,
+  DataTypes,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
+import { Country } from "./Country";
 
 interface LocationAttributes {
   LocationName: string;
@@ -13,25 +20,18 @@ interface LocationAttributes {
   RestrictionEnd?: Date;
 }
 
-interface LocationInput
-  extends Optional<
-    LocationAttributes,
-    "LocationId" | "RestrictionStart" | "RestrictionEnd"
-  > {}
-interface LocationOutput extends Required<LocationAttributes> {}
+interface LocationInput extends InferCreationAttributes<Location> {}
+interface LocationOutput extends InferAttributes<Location> {}
 
-class Location
-  extends Model<LocationAttributes, LocationInput>
-  implements LocationAttributes
-{
+class Location extends Model<LocationOutput, LocationInput> {
   LocationName!: string;
   LocationCode!: string;
-  LocationId!: number;
+  LocationId!: CreationOptional<number>;
   Airport!: string;
   Restricted!: boolean;
-  CountryCode3!: string;
-  RestricationStart!: Date;
-  RestricationEnd!: Date;
+  CountryCode3!: ForeignKey<string>;
+  RestrictionStart!: CreationOptional<Date>;
+  RestrictionEnd!: CreationOptional<Date>;
 }
 
 Location.init(
@@ -41,7 +41,6 @@ Location.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
-      unique: true,
     },
     LocationName: {
       type: DataTypes.STRING,
@@ -51,7 +50,6 @@ Location.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      primaryKey: true,
     },
     Airport: {
       type: DataTypes.STRING,
@@ -61,17 +59,15 @@ Location.init(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    CountryCode3: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     RestrictionStart: {
       type: DataTypes.DATE,
       allowNull: true,
+      defaultValue: null,
     },
     RestrictionEnd: {
       type: DataTypes.DATE,
       allowNull: true,
+      defaultValue: null,
     },
   },
   {
@@ -80,5 +76,23 @@ Location.init(
     modelName: "Location",
   }
 );
+
+/*
+ * Locations are part of a country
+ */
+Location.belongsTo(Country, {
+  foreignKey: {
+    name: "CountryCode3",
+    allowNull: false,
+  },
+});
+
+// Countries have many locations
+Country.hasMany(Location, {
+  foreignKey: {
+    name: "CountryCode3",
+    allowNull: false,
+  },
+});
 
 export { LocationInput, LocationOutput, Location };

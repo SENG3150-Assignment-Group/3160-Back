@@ -1,3 +1,5 @@
+import { FlightOutput } from "../database/models/Flight";
+
 class Flight {
   private flightId: number;
   private flightCode: string;
@@ -33,6 +35,21 @@ class Flight {
     this.planeCode = planeCode;
     this.duration = duration;
   }
+
+  public static modelToDomain = (model: FlightOutput): Flight => {
+    return new Flight(
+      model.FlightId,
+      model.FlightCode,
+      model.DepartureId,
+      model.DepartureDateTime,
+      model.DestinationId,
+      model.DestinationDateTime,
+      model.StopOverId,
+      model.AirlineCode,
+      model.PlaneCode,
+      model.Duration
+    );
+  };
 
   // Getters
   public getFlightId = (): number => {

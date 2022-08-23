@@ -1,26 +1,14 @@
-import { ModelStatic, Model } from "sequelize";
-import sequelize from "../database/";
-
-interface PlaneTypeAttributes {
-  PlaneCode: string;
-  Type: string;
-  NumFirstClass: number;
-  NumBusiness: number;
-  NumPremiumEconomy: number;
-  NumEconomy: number;
-}
+import { PlaneType, PlaneTypeOutput } from "../database/models/PlaneType";
 
 class PlaneTypeDAO {
-  private model: ModelStatic<Model<PlaneTypeAttributes>>;
+  private model: typeof PlaneType;
 
   constructor() {
-    this.model = sequelize.models.PlaneType;
+    this.model = PlaneType;
   }
 
-  public readPlaneType = async (
-    locationId: number
-  ): Promise<Model<PlaneTypeAttributes> | null> => {
-    return await this.model.findByPk(locationId);
+  public read = async (code: string): Promise<PlaneTypeOutput | null> => {
+    return await this.model.findByPk(code);
   };
 }
 
