@@ -10,14 +10,14 @@ import {
 } from "./models";
 
 const sync = async () => {
-  await Country.sync({ force: true });
-  await Airline.sync({ force: true });
-  await PlaneType.sync({ force: true });
-  await Location.sync({ force: true });
-  await Distance.sync({ force: true });
-  await Descriptor.sync({ force: true });
-  await LocationDescriptor.sync({ force: true });
-  await Flight.sync({ force: true });
+  await Country.sync({ alter: false });
+  await Airline.sync({ force: false });
+  await PlaneType.sync({ force: false });
+  await Location.sync({ force: false });
+  await Distance.sync({ force: false });
+  await Descriptor.sync({ force: false });
+  await LocationDescriptor.sync({ force: false });
+  await Flight.sync({ force: false });
 };
 
 export default sync;

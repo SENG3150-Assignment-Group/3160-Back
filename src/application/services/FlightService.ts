@@ -10,7 +10,7 @@ interface FlightService {
     endDate: Date,
     returnFlag: boolean,
     seats: number
-  ) => Flight[];
+  ) => Promise<Flight[]>;
 }
 
 export default FlightService;

@@ -1,6 +1,6 @@
-import { Op } from "sequelize/types";
-import sequelize from "sequelize/types/sequelize";
-import { Descriptor, DescriptorOutput } from "database/models/Descriptor";
+import { Op } from "sequelize";
+import { Descriptor, DescriptorOutput } from "../database/models/Descriptor";
+import sequelize from "../database/";
 
 class DescriptorDAO {
   private model: typeof Descriptor;

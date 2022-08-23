@@ -18,6 +18,10 @@ class LocationDAO {
   public readAll = async (): Promise<LocationOutput[]> => {
     return await this.model.findAll();
   };
+
+  public getCount = async (): Promise<number> => {
+    return await this.model.count();
+  };
 }
 
 export default LocationDAO;

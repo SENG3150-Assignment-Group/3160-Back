@@ -50,6 +50,15 @@ class FlightRepository {
       plane
     );
 
+    console.log(
+      `type: ${typeof flightModel.DepartureDateTime}, value: ${
+        flightModel.DepartureDateTime
+      }`
+    );
+    console.log(
+      `type: ${typeof flight.getDepartureDateTime()}, value: ${flight.getDepartureDateTime()}`
+    );
+
     return flightAggregate;
   };
 }

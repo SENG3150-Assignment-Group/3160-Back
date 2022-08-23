@@ -24,8 +24,9 @@ const SearchFlightsSchema: Schema = {
     errorMessage: "endDate is not a date",
     isDate: true,
     toDate: true,
+    optional: true,
   },
-  returnTrip: {
+  isOneWay: {
     in: ["query"],
     errorMessage: "returnTrip is not a boolean",
     isBoolean: true,

@@ -17,7 +17,9 @@ class LocationController extends Controller {
   }
 
   public initializeRoutes = (): void => {
-    this.router.get(this.path + "/getLocations", this.getLocations);
+    this.router.get("/getLocations", this.getLocations);
+    this.router.get("/getLocationCount", this.getLocationCount);
+    this.router.get("/getDistances", this.getDistances);
   };
 
   private getLocations = async (
@@ -27,6 +29,26 @@ class LocationController extends Controller {
     const locationService: LocationService = new LocationServiceImpl();
     const locations = await locationService.getLocations();
     res.status(200).json(locations);
+  };
+
+  private getLocationCount = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    const locationService: LocationService = new LocationServiceImpl();
+    const count = await locationService.getLocationCount();
+
+    res.status(200).json({ count: count });
+  };
+
+  private getDistances = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
+    const locationService: LocationService = new LocationServiceImpl();
+    const distances = await locationService.getDistances();
+
+    res.status(200).json(distances);
   };
 }
 
