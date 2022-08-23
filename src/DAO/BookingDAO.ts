@@ -20,7 +20,14 @@ class BookingDAO {
     public readBooking = async(
         bookingId: number, accountId: number
     ): Promise<Model<any> | null> => {
-        return await this.model.findByPk(bookingId && accountId);
+        return await this.model.findOne({
+            where: {
+                [Op.and]: [
+                    {BookingId: bookingId},
+                    {AccountId: accountId}
+                ]
+            }
+        });
     };
 
     public readAccountsBooking = async(
@@ -36,14 +43,25 @@ class BookingDAO {
         accountId: number,
         email: string,
         dateCreated: Date,
-        state: number
-    ) => {
+        state: State
+    ): Promise<Model<any> | null> => {
         await this.model.create({
             AccountId: accountId,
             Email: email,
             DateCreated: dateCreated,
             State: state
         });
+
+        return await this.model.findOne({
+            where: {
+                [Op.and]: [
+                        {AccountId: accountId},
+                        {Email: email},
+                        {DateCreated: dateCreated},
+                        {State: state}
+                    ]
+                }
+            });
     };
 
     public updateBooking = async (bookingId: number, accountId: number, state: number) => {
