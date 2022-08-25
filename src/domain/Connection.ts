@@ -16,15 +16,32 @@ class Connection {
   /*
    * Return a flight that has not been visited yet
    */
-  public getFlight = (visited: number[]): Flight | null => {
+  public getFlight = (visited: Map<number, boolean>): Flight | null => {
     const flight = this.flights.find(
-      (flight) => !visited.includes(flight.getFlightId())
+      (flight) => visited.get(flight.getFlightId()) == undefined
     );
-    return flight === undefined ? null : flight;
+    if (flight === undefined) return null;
+
+    return new Flight(
+      flight.getFlightId(),
+      flight.getFlightCode(),
+      flight.getDepartureId(),
+      flight.getDepartureDateTime(),
+      flight.getDestinationId(),
+      flight.getDestinationDateTime(),
+      flight.getStopOverId(),
+      flight.getAirlineCode(),
+      flight.getPlaneCode(),
+      flight.getDuration()
+    );
   };
 
   public getDuration = (): number => {
     return this.duration;
+  };
+
+  public getFlights = (): Flight[] => {
+    return this.flights;
   };
 }
 

@@ -9,15 +9,17 @@ import {
   Flight,
 } from "./models";
 
+const mode = false;
+
 const sync = async () => {
-  await Country.sync({ alter: false });
-  await Airline.sync({ force: false });
-  await PlaneType.sync({ force: false });
-  await Location.sync({ force: false });
-  await Distance.sync({ force: false });
-  await Descriptor.sync({ force: false });
-  await LocationDescriptor.sync({ force: false });
-  await Flight.sync({ force: false });
+  await Country.sync({ alter: mode });
+  await Airline.sync({ force: mode });
+  await PlaneType.sync({ force: mode });
+  await Location.sync({ force: mode });
+  await Distance.sync({ force: mode });
+  await Descriptor.sync({ force: mode });
+  await LocationDescriptor.sync({ force: mode });
+  await Flight.sync({ force: mode });
 };
 
 export default sync;

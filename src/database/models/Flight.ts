@@ -11,20 +11,6 @@ import { Airline } from "./Airline";
 import { Location } from "./Location";
 import { PlaneType } from "./PlaneType";
 
-//TODO StopOverId has been added to database, either implement throught other levels or remove
-interface FlightAttributes {
-  FlightId: number;
-  FlightCode: string;
-  DepartureId: number;
-  DepartureDateTime: Date;
-  DestinationId: number;
-  DestinationDateTime: Date;
-  StopOverId: number;
-  AirlineCode: string;
-  PlaneCode: string;
-  Duration: Date;
-}
-
 interface FlightInput extends InferCreationAttributes<Flight> {}
 interface FlightOutput extends InferAttributes<Flight> {}
 
@@ -38,7 +24,7 @@ class Flight extends Model<FlightOutput, FlightInput> {
   public StopOverId!: CreationOptional<ForeignKey<number>>;
   public AirlineCode!: ForeignKey<string>;
   public PlaneCode!: ForeignKey<string>;
-  public Duration!: Date;
+  public Duration!: string;
 }
 
 Flight.init(
@@ -62,7 +48,7 @@ Flight.init(
       allowNull: false,
     },
     Duration: {
-      type: DataTypes.TIME, //TODO in database as time datatype, but number in domain level
+      type: DataTypes.STRING, //TODO in database as time datatype, but number in domain level
       allowNull: false,
     },
   },

@@ -6,9 +6,11 @@ import LocationServiceImpl from "./LocationServiceImpl";
 import LocationService from "./LocationService";
 import FlightSearchAlgorithm from "../../domain/services/FlightSearchAlgorithm";
 import Distance from "../../domain/Distance";
+import FlightDAO from "../../DAO/FlightDAO";
+import { Op } from "sequelize";
 
 class FlightServiceImpl implements FlightService {
-  getFlight = async (id: string): Promise<FlightAggregate | null> => {
+  public getFlight = async (id: string): Promise<FlightAggregate | null> => {
     console.log(typeof id);
     const flightID = Number(id);
 
@@ -19,14 +21,14 @@ class FlightServiceImpl implements FlightService {
     return flight;
   };
 
-  searchFlights = async (
+  public searchFlights = async (
     departure: number,
     destination: number,
     startDate: Date,
     endDate: Date,
     returnFlag: boolean,
     seats: number
-  ): Promise<Flight[]> => {
+  ): Promise<Flight[][]> => {
     console.log(
       `${departure} ${destination} ${startDate} ${endDate} ${returnFlag} ${seats}`
     );
@@ -40,6 +42,45 @@ class FlightServiceImpl implements FlightService {
 
     const zeroIndexLocation = (location: number) => {
       return location - 1;
+    };
+
+    const zeroIndexFlights = (flights: Flight[]) => {
+      for (const flight of flights) {
+        flight.setFlightId(flight.getFlightId() - 1);
+      }
+    };
+
+    const oneIndexPaths = (paths: number[][]) => {
+      for (const path of paths) {
+        for (let i = 0; i < path.length; i++) {
+          path[i] = path[i] + 1;
+        }
+      }
+    };
+
+    const convertLegsToQuery = (legs: number[][]): any[] => {
+      const query = new Array<any>();
+
+      for (const leg of legs) {
+        query.push({
+          [Op.and]: [{ DepartureId: leg[0] }, { DestinationId: leg[1] }],
+        });
+      }
+      return query;
+    };
+
+    const oneIndexJourneys = (journeys: Flight[][]) => {
+      const visited = new Array<Flight>();
+      let id: number;
+      for (const journey of journeys) {
+        for (const flight of journey) {
+          if (!visited.find((v) => v === flight)) {
+            flight.setDepartureId(flight.getDepartureId() + 1);
+            flight.setDestinationId(flight.getDestinationId() + 1);
+            visited.push(flight);
+          }
+        }
+      }
     };
 
     // get distances
@@ -65,13 +106,78 @@ class FlightServiceImpl implements FlightService {
     // calculate date range for flight query
     const flightWindow = algorithm.getFlightWindow(3);
     console.log(flightWindow);
+
+    // convert paths to 1 indexing for querying DB
+    oneIndexPaths(paths);
+
+    // turn paths into legs
+    const legs = algorithm.convertPathsToLegs(paths);
+
+    // convert legs into a query object
+    const queryObj = convertLegsToQuery(legs);
+
+    // determine upperbound for date range within which all flights can occur
+    const upperbound = new Date();
+    upperbound.setTime(startDate.getTime() + flightWindow * 60 * 60 * 1000);
+
+    console.log(`lowerbound: ${startDate.toUTCString()}`);
+    console.log(`upperbound: ${upperbound.toUTCString()}`);
+
     // query flights
+    const flightDAO = new FlightDAO();
+    const flightModels = await flightDAO.search(
+      queryObj,
+      startDate,
+      upperbound
+    );
+
+    // convert to flight domain classes using zero indexing
+    const flights = flightModels.map((model) => {
+      model.DepartureId -= 1;
+      model.DestinationId -= 1;
+      return Flight.modelToDomain(model);
+    });
 
     // fill flight matrix
+    algorithm.fillFlightsMatrix(flights);
 
-    // collect path Instances
+    console.log(algorithm.getMatrix().getConnection(4, 28));
 
-    return new Array<Flight>();
+    // collect journeys
+    const journeys = algorithm.findJourneys();
+    oneIndexJourneys(journeys);
+
+    return journeys;
+  };
+
+  public createFlight = async (
+    flightCode: string,
+    departureId: number,
+    departureDateTime: Date,
+    destinationId: number,
+    destinationDateTime: Date,
+    airlineCode: string,
+    planeCode: string,
+    duration: string
+  ): Promise<Flight | null> => {
+    const flightDAO = new FlightDAO();
+
+    const flightModel = await flightDAO.create(
+      flightCode,
+      departureId,
+      departureDateTime,
+      destinationId,
+      destinationDateTime,
+      airlineCode,
+      planeCode,
+      duration
+    );
+
+    if (flightModel == null) return null;
+
+    const flight = Flight.modelToDomain(flightModel);
+
+    return flight;
   };
 }
 

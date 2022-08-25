@@ -18,7 +18,7 @@ class FlightAggregate {
   private stopOverCode: string;
   private airlineCode: string;
   private planeCode: string;
-  private duration: Date;
+  private duration: string;
   private numFirstClass: number;
   private numBusiness: number;
   private numPremiumEconomy: number;
@@ -85,7 +85,7 @@ class FlightAggregate {
   public getPlaneCode = (): string => {
     return this.planeCode;
   };
-  public getDuration = (): Date => {
+  public getDuration = (): string => {
     return this.duration;
   };
   public getNumFirstClass = (): number => {
@@ -129,7 +129,7 @@ class FlightAggregate {
   public setPlaneCode = (planeCode: string) => {
     this.planeCode = planeCode;
   };
-  public setDuration = (duration: Date) => {
+  public setDuration = (duration: string) => {
     this.duration = duration;
   };
   public setNumFirstClass = (numFirstClass: number) => {

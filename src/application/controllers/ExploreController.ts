@@ -28,6 +28,7 @@ class LocationController extends Controller {
   ) => {
     const locationService: LocationService = new LocationServiceImpl();
     const locations = await locationService.getLocations();
+    console.log(locations);
     res.status(200).json(locations);
   };
 

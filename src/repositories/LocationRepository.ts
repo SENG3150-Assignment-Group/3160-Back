@@ -21,20 +21,20 @@ class LocationRepository {
     let descriptors: Descriptor[];
 
     // for every location
-    // for (const locationModel of locationModels) {
-    //   // get descriptors
-    //   descriptorModels = await descriptorDAO.readDescriptorsForLocation(
-    //     locationModel.getDataValue("LocationId")
-    //   );
-    //   // convert to domain objects
-    //   descriptors = new Array<Descriptor>();
-    //   for (const descriptorModel of descriptorModels) {
-    //     descriptors.push(Descriptor.modelToDomain(descriptorModel));
-    //   }
-    //   // convert location to domain object
-    //   location = Location.modelToDomain(locationModel);
-    //   locationAggregates.push(new LocationAggregate(location, descriptors));
-    // }
+    for (const locationModel of locationModels) {
+      // get descriptors
+      descriptorModels = await descriptorDAO.readDescriptorsForLocation(
+        locationModel.LocationId
+      );
+      // convert to domain objects
+      descriptors = new Array<Descriptor>();
+      for (const descriptorModel of descriptorModels) {
+        descriptors.push(Descriptor.modelToDomain(descriptorModel));
+      }
+      // convert location to domain object
+      location = Location.modelToDomain(locationModel);
+      locationAggregates.push(new LocationAggregate(location, descriptors));
+    }
 
     return locationAggregates;
   };
