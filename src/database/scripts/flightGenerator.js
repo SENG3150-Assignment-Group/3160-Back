@@ -1,5 +1,3 @@
-const { time } = require("console");
-
 // date range
 const startDate = new Date("2022-08-25");
 const endDate = new Date("2022-08-30");

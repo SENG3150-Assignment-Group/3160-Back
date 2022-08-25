@@ -3,6 +3,7 @@
 import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
 interface TicketAttributes {
+  TicketId: number;
   TicketCode: string;
   TicketClass: string;
   Price: number;
@@ -10,16 +11,19 @@ interface TicketAttributes {
   Transferable: boolean;
   Exchangable: boolean;
   Refundable: boolean;
-  AccountId: number;
-  PersonType: string;
-  SpecialRequests: string;
-  DietaryPreferences: string;
+  AccountId?: number;
+  PersonType?: string;
+  SpecialRequests?: string;
+  DietaryPreferences?: string;
   CarryOnBaggage: boolean;
   CheckedBaggage: boolean;
+  FlightId: number;
+  BookingId?: number;
 }
 
 export default (sequelize: any) => {
   class Ticket extends Model<TicketAttributes> implements TicketAttributes {
+    TicketId!: number;
     TicketCode!: string;
     TicketClass!: string;
     Price!: number;
@@ -33,9 +37,18 @@ export default (sequelize: any) => {
     DietaryPreferences!: string;
     CarryOnBaggage!: boolean;
     CheckedBaggage!: boolean;
+    FlightId!: number;
+    BookingId!: number;
   }
   Ticket.init(
     {
+      TicketId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        unique: true,
+      },
       TicketCode: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -66,19 +79,19 @@ export default (sequelize: any) => {
       },
       AccountId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       PersonType: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       SpecialRequests: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       DietaryPreferences: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       CarryOnBaggage: {
         type: DataTypes.BOOLEAN,
@@ -87,6 +100,14 @@ export default (sequelize: any) => {
       CheckedBaggage: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+      },
+      FlightId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      BookingId: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
       },
     },
     {

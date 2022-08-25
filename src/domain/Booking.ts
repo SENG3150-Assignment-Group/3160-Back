@@ -1,18 +1,18 @@
 class Booking {
-  bookingId: number;
+  //bookingId: number;
   accountId: number;
   email: string;
   dateCreated: Date;
-  state: State;
+  state: number;
 
   constructor(
-    bookingId: number,
+   // bookingId: number,
     accountId: number,
     email: string,
     dateCreated: Date,
-    state: State
+    state: number
   ) {
-    this.bookingId = bookingId;
+    //this.bookingId = bookingId;
     this.accountId = accountId;
     this.email = email;
     this.dateCreated = dateCreated;
@@ -20,9 +20,9 @@ class Booking {
   }
 
   // Getters
-  public getBookingId = (): number => {
+  /*public getBookingId = (): number => {
     return this.bookingId;
-  };
+  };*/
   public getAccountId = (): number => {
     return this.accountId;
   };
@@ -32,7 +32,7 @@ class Booking {
   public getDateCreated = (): Date => {
     return this.dateCreated;
   };
-  public getState = (): State => {
+  public getState = (): number => {
     return this.state;
   };
 
@@ -40,16 +40,16 @@ class Booking {
   public setAccountId = (accountId: number) => {
     this.accountId = accountId;
   };
-  public setBookingId = (bookingId: number) => {
+  /*public setBookingId = (bookingId: number) => {
     this.bookingId = bookingId;
-  };
+  };*/
   public setEmail = (email: string) => {
     this.email = email;
   };
   public setDateCreated = (dateCreated: Date) => {
     this.dateCreated = dateCreated;
   };
-  public setState = (state: State) => {
+  public setState = (state: number) => {
     this.state = state;
   };
 }
