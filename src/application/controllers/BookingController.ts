@@ -91,7 +91,7 @@ class BookingController extends Controller {
     const bookingService: BookingService = new BookingServiceImpl();
     res
       .status(200)
-      .send(bookingService.updateBookings(accountId, bookingId, state));
+      .send(bookingService.updateBooking(accountId, bookingId, state));
   };
 }
 

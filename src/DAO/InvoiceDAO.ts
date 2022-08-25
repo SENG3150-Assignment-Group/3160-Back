@@ -28,6 +28,7 @@ class InvoiceDAO {
     };
 
     public createInvoice = async(
+        bookingId: number,
         date: Date,
         creditCardNumber: string,
         subTotal: number,
@@ -35,6 +36,7 @@ class InvoiceDAO {
         refundAmount: number
     ) => {
         await this.model.create({
+            BookngId: bookingId,
             Date: date,
             CreditCardNumber: creditCardNumber,
             Subtotal: subTotal,

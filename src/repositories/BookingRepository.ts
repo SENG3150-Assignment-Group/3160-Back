@@ -99,33 +99,30 @@ class BookingRepository {
     tax: number,
     refundAmount: number
   ) => {
+    var date = new Date();
     const bookingDAO = new BookingDAO();
-    bookingDAO.createBooking(
+    var bookingId = bookingDAO.createBooking(
       accountId,
       email,
-      new Date().setTime(Date.now()),
+      date,
       State.Complete
     );
 
+
+
     const ticketDAO = new TicketDAO();
-    ticketDAO.createTicket(
-      ticketCode,
-      ticketClass,
-      price,
-      booked,
-      transferrable,
-      exchangeable,
-      refundable,
+    ticketDAO.updateTicket(
+      ticketId,
       accountId,
       personType,
       specialRequests,
       dietaryPreferences,
-      carryOnBaggage,
-      checkedBaggage
+      bookingId
     );
 
     const invoiceDAO = new InvoiceDAO();
     invoiceDAO.createInvoice(
+      bookingId,
       date,
       creditCardNumber,
       subTotal,
@@ -142,6 +139,14 @@ class BookingRepository {
     const bookingDAO = new BookingDAO();
     bookingDAO.updateBooking(accountId, bookingId, state);
   };
+
+  public fetchBooking = async (
+      accountId: number,
+      bookingId: number
+  ): Promise<any> =>
+  {
+    const bookingDAO = new BookingDAO();
+  }
 }
 
 export default BookingRepository;

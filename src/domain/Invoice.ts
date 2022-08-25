@@ -5,6 +5,7 @@ class Invoice {
   subTotal: number;
   tax: number;
   refundAmount: number;
+  bookingId: number;
 
   constructor(
     //transactionId: number,
@@ -12,7 +13,8 @@ class Invoice {
     creditCardNumber: string,
     subTotal: number,
     tax: number,
-    refundAmount: number
+    refundAmount: number,
+    bookingId: number
   ) {
     //this.transactionId = transactionId;
     this.date = date;
@@ -20,6 +22,7 @@ class Invoice {
     this.subTotal = subTotal;
     this.tax = tax;
     this.refundAmount = refundAmount;
+    this.bookingId = bookingId;
   }
 
   // Getters

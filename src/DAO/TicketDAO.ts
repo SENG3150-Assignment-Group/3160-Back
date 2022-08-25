@@ -1,7 +1,8 @@
 import { ModelStatic, Model } from "sequelize";
 import sequelize from "../database/";
 
-interface TicketAttributes {
+/*interface TicketAttributes {
+    TicketId: number,
     TicketCode: string;
     TicketClass: string;
     Price: number;
@@ -15,10 +16,12 @@ interface TicketAttributes {
     DietaryPreferences: string;
     CarryOnBaggage: boolean;
     CheckedBaggage: boolean;
-}
+    FlightId: number,
+    BookingId: number
+}*/
 
 class TicketDAO {
-    private model: ModelStatic<Model<TicketAttributes>>;
+    private model: ModelStatic<Model<any>>;
 
     constructor() {
         this.model = sequelize.models.Booking;
@@ -26,13 +29,13 @@ class TicketDAO {
 
     public readTicket = async(
         ticketCode: string, accountId: number
-    ): Promise<Model<TicketAttributes> | null> => {
+    ): Promise<Model<any> | null> => {
         return await this.model.findByPk(ticketCode && accountId);
     };
 
     public readAccountsTickets = async(
         accountId: number
-    ): Promise<Model<TicketAttributes>[] | null> => {
+    ): Promise<Model<any>[] | null> => {
         return await this.model.findAll({
             where: {AccountId: accountId}
         });
@@ -51,7 +54,8 @@ class TicketDAO {
         specialRequests: string,
         dietaryPreferences: string,
         carryOnBaggage: boolean,
-        checkedBaggage: boolean
+        checkedBaggage: boolean,
+        flightId: number
     ) => {
         await this.model.create({
             TicketCode: ticketCode,
@@ -66,8 +70,30 @@ class TicketDAO {
             SpecialRequests: specialRequests,
             DietaryPreferences: dietaryPreferences,
             CarryOnBaggage: carryOnBaggage,
-            CheckedBaggage: checkedBaggage
+            CheckedBaggage: checkedBaggage,
+            FlightId: flightId
         })
+    };
+
+    public updateTicket = async (
+
+        ticketId: number,
+        accountId: number,
+        personType: string,
+        specialRequests: string,
+        dietaryPreferences: string,
+        bookingId: number
+    ) => {
+        await this.model.update({
+                AccountId: accountId,
+                PersonType: personType,
+                SpecialRequests: specialRequests,
+                DietaryPreferences: dietaryPreferences,
+                BookingId: bookingId
+            },
+            {
+                where: {TicketId: ticketId}
+            })
     }
 }
 

@@ -38,14 +38,14 @@ class BookingServiceImpl implements BookingService {
     return null;
   };
 
-  public updateBookings = async (
+  public updateBooking = async (
     accountId: number,
     bookingId: number,
     state: number
   ) => {
     const bookingRepository = new BookingRepository();
     await bookingRepository.updateBooking(accountId, bookingId, state);
+    return await bookingRepository.fetchBooking(accountId, bookingId);
   };
 }
-
 export default BookingServiceImpl;
