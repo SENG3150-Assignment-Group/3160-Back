@@ -9,17 +9,6 @@ import {
 } from "sequelize";
 import { Country } from "./Country";
 
-interface LocationAttributes {
-  LocationName: string;
-  LocationCode: string;
-  LocationId: number;
-  Airport: string;
-  Restricted: boolean;
-  CountryCode3: string;
-  RestrictionStart?: Date;
-  RestrictionEnd?: Date;
-}
-
 interface LocationInput extends InferCreationAttributes<Location> {}
 interface LocationOutput extends InferAttributes<Location> {}
 
