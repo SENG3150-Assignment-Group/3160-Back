@@ -4,6 +4,7 @@ import sync from "./database/sync";
 
 import FlightController from "./application/controllers/FlightController";
 import ExploreController from "./application/controllers/ExploreController";
+import BookingController from "./application/controllers/BookingController";
 
 const assertDatabaseConnectionOk = async () => {
   console.log(`Checking database connection...`);
@@ -20,7 +21,10 @@ const assertDatabaseConnectionOk = async () => {
 const init = async () => {
   await assertDatabaseConnectionOk();
   await sync();
-  const app = new App([new FlightController(), new ExploreController()], 3000);
+  const app = new App(
+    [new FlightController(), new ExploreController(), new BookingController()],
+    3000
+  );
 
   app.listen();
 };

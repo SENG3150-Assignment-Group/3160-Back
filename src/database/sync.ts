@@ -7,6 +7,10 @@ import {
   Descriptor,
   LocationDescriptor,
   Flight,
+  Account,
+  Booking,
+  Invoice,
+  Ticket,
 } from "./models";
 
 const mode = false;
@@ -20,6 +24,10 @@ const sync = async () => {
   await Descriptor.sync({ force: mode });
   await LocationDescriptor.sync({ force: mode });
   await Flight.sync({ force: mode });
+  await Account.sync({ force: mode });
+  await Booking.sync({ force: mode });
+  await Invoice.sync({ force: mode });
+  await Ticket.sync({ force: mode });
 };
 
 export default sync;

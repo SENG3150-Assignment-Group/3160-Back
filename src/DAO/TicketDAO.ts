@@ -1,100 +1,83 @@
-import { ModelStatic, Model } from "sequelize";
+import {
+  ModelStatic,
+  Model,
+  ValidationError,
+  UniqueConstraintError,
+} from "sequelize";
 import sequelize from "../database/";
 
-/*interface TicketAttributes {
-    TicketId: number,
-    TicketCode: string;
-    TicketClass: string;
-    Price: number;
-    Booked: boolean;
-    Transferable: boolean;
-    Exchangable: boolean;
-    Refundable: boolean;
-    AccountId: number;
-    PersonType: string;
-    SpecialRequests: string;
-    DietaryPreferences: string;
-    CarryOnBaggage: boolean;
-    CheckedBaggage: boolean;
-    FlightId: number,
-    BookingId: number
-}*/
+import { TicketOutput, Ticket, TicketInput } from "../database/models/Ticket";
 
 class TicketDAO {
-    private model: ModelStatic<Model<any>>;
+  private model: typeof Ticket;
 
-    constructor() {
-        this.model = sequelize.models.Booking;
+  constructor() {
+    this.model = Ticket;
+  }
+
+  public read = async (ticketCode: string): Promise<TicketOutput | null> => {
+    return await this.model.findByPk(ticketCode);
+  };
+
+  public readAllForBooking = async (
+    bookingId: number
+  ): Promise<TicketOutput[] | null> => {
+    return await this.model.findAll({ where: { BookingId: bookingId } });
+  };
+
+  public create = async (
+    ticketCode: string,
+    ticketClass: string,
+    price: number,
+    transferrable: boolean,
+    exchangeable: boolean,
+    refundable: boolean,
+    carryOnBaggage: boolean,
+    checkedBaggage: boolean,
+    flightId: number
+  ): Promise<Ticket | null> => {
+    try {
+      return await this.model.create({
+        TicketCode: ticketCode,
+        TicketClass: ticketClass,
+        Price: price,
+        Transferable: transferrable,
+        Exchangable: exchangeable,
+        Refundable: refundable,
+        CarryOnBaggage: carryOnBaggage,
+        CheckedBaggage: checkedBaggage,
+        FlightId: flightId,
+      });
+    } catch (error: any) {
+      return null;
     }
+  };
 
-    public readTicket = async(
-        ticketCode: string, accountId: number
-    ): Promise<Model<any> | null> => {
-        return await this.model.findByPk(ticketCode && accountId);
-    };
-
-    public readAccountsTickets = async(
-        accountId: number
-    ): Promise<Model<any>[] | null> => {
-        return await this.model.findAll({
-            where: {AccountId: accountId}
-        });
-    };
-
-    public createTicket = async(
-        ticketCode: string,
-        ticketClass: string,
-        price: number,
-        booked: boolean,
-        transferrable: boolean,
-        exchangeable: boolean,
-        refundable: boolean,
-        accountId: number,
-        personType: string,
-        specialRequests: string,
-        dietaryPreferences: string,
-        carryOnBaggage: boolean,
-        checkedBaggage: boolean,
-        flightId: number
-    ) => {
-        await this.model.create({
-            TicketCode: ticketCode,
-            TicketClass: ticketClass,
-            Price: price,
-            Booked: booked,
-            Transferable: transferrable,
-            Exchangable: exchangeable,
-            Refundable: refundable,
-            AccountId: accountId,
-            PersonType: personType,
-            SpecialRequests: specialRequests,
-            DietaryPreferences: dietaryPreferences,
-            CarryOnBaggage: carryOnBaggage,
-            CheckedBaggage: checkedBaggage,
-            FlightId: flightId
-        })
-    };
-
-    public updateTicket = async (
-
-        ticketId: number,
-        accountId: number,
-        personType: string,
-        specialRequests: string,
-        dietaryPreferences: string,
-        bookingId: number
-    ) => {
-        await this.model.update({
-                AccountId: accountId,
-                PersonType: personType,
-                SpecialRequests: specialRequests,
-                DietaryPreferences: dietaryPreferences,
-                BookingId: bookingId
-            },
-            {
-                where: {TicketId: ticketId}
-            })
+  public update = async (
+    ticketCode: string,
+    personName: string,
+    personType: string,
+    specialRequests: string,
+    dietaryPreferences: string,
+    bookingId: number
+  ): Promise<number[]> => {
+    try {
+      return await this.model.update(
+        {
+          PersonName: personName,
+          PersonType: personType,
+          SpecialRequests: specialRequests,
+          DietaryPreferences: dietaryPreferences,
+          BookingId: bookingId,
+        },
+        {
+          where: { TicketCode: ticketCode },
+        }
+      );
+    } catch (error: any) {
+      return [0, -1];
     }
+  };
 }
 
 export default TicketDAO;

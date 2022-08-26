@@ -1,5 +1,7 @@
+import { InvoiceOutput } from "../database/models/Invoice";
+
 class Invoice {
-  //transactionId: number;
+  transactionId: number;
   date: Date;
   creditCardNumber: string;
   subTotal: number;
@@ -8,7 +10,7 @@ class Invoice {
   bookingId: number;
 
   constructor(
-    //transactionId: number,
+    transactionId: number,
     date: Date,
     creditCardNumber: string,
     subTotal: number,
@@ -16,7 +18,7 @@ class Invoice {
     refundAmount: number,
     bookingId: number
   ) {
-    //this.transactionId = transactionId;
+    this.transactionId = transactionId;
     this.date = date;
     this.creditCardNumber = creditCardNumber;
     this.subTotal = subTotal;
@@ -25,10 +27,22 @@ class Invoice {
     this.bookingId = bookingId;
   }
 
+  public static modelToDomain = (model: InvoiceOutput): Invoice => {
+    return new Invoice(
+      model.TransactionId,
+      model.Date,
+      model.CreditCardNumber,
+      model.Subtotal,
+      model.Tax,
+      model.RefundAmount,
+      model.BookingId
+    );
+  };
+
   // Getters
-  /*public getTansactionId = (): number => {
+  public getTansactionId = (): number => {
     return this.transactionId;
-  };*/
+  };
   public getDate = (): Date => {
     return this.date;
   };
@@ -46,9 +60,9 @@ class Invoice {
   };
 
   // Setters
-  /*public setTransactionId = (transactionId: number) => {
+  public setTransactionId = (transactionId: number) => {
     this.transactionId = transactionId;
-  };*/
+  };
   public setDate = (date: Date) => {
     this.date = date;
   };

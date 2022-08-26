@@ -1,4 +1,4 @@
-import { Op } from "sequelize";
+import { literal, Op } from "sequelize";
 import { FlightInput, FlightOutput, Flight } from "../database/models/Flight";
 
 class FlightDAO {
@@ -26,18 +26,20 @@ class FlightDAO {
     planeCode: string,
     duration: string
   ): Promise<FlightOutput | null> => {
-    const flight = await this.model.create({
-      FlightCode: flightCode,
-      DepartureId: departureId,
-      DepartureDateTime: departureDateTime,
-      DestinationId: destinationId,
-      DestinationDateTime: destinationDateTime,
-      AirlineCode: airlineCode,
-      PlaneCode: planeCode,
-      Duration: duration,
-    });
-
-    return flight;
+    try {
+      return await this.model.create({
+        FlightCode: flightCode,
+        DepartureId: departureId,
+        DepartureDateTime: departureDateTime,
+        DestinationId: destinationId,
+        DestinationDateTime: destinationDateTime,
+        AirlineCode: airlineCode,
+        PlaneCode: planeCode,
+        Duration: duration,
+      });
+    } catch (error: any) {
+      return null;
+    }
   };
 
   public search = async (

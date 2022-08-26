@@ -1,24 +1,20 @@
+import State from "../../domain/State";
 import BookingAggregate from "../../domain/Aggregates/BookingAggregate";
 
 interface BookingService {
-  getBookings: (accountId: number) => Promise<BookingAggregate[] | null>;
   createBooking: (
     accountId: number,
     email: string,
-    ticketId: number,
-    personType: string,
-    specialRequests: string,
-    dietaryPreferences: string,
     creditCardNumber: string,
     subTotal: number,
     tax: number,
-    refundAmount: number
-  ) => Promise<null>;
+    refundAmount: number,
+    ticketDetails: any[]
+  ) => Promise<BookingAggregate | null>;
   updateBooking: (
-    accountId: number,
     bookingId: number,
-    state: number
-  ) => Promise<BookingAggregate>;
+    state: string
+  ) => Promise<BookingAggregate | null>;
 }
 
 export default BookingService;

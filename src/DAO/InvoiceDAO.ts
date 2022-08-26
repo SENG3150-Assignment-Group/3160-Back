@@ -1,49 +1,47 @@
-import { ModelStatic, Model } from "sequelize";
-import sequelize from "../database/";
-
-/*interface InvoiceAttributes {
-    //TransactionId: number;
-    Date: Date;
-    CreditCardNumber: string;
-    Subtotal: number;
-    Tax: number;
-    RefundAmount: number;
-}*/
+import { InvoiceOutput, Invoice } from "../database/models/Invoice";
 
 class InvoiceDAO {
-    private model: ModelStatic<Model<any>>;
+  private model: typeof Invoice;
 
-    constructor() {
-        this.model = sequelize.models.Invoice;
+  constructor() {
+    this.model = Invoice;
+  }
+
+  public read = async (id: number): Promise<InvoiceOutput | null> => {
+    return await this.model.findByPk(id);
+  };
+
+  public readForBooking = async (
+    bookingId: number
+  ): Promise<InvoiceOutput | null> => {
+    return await this.model.findOne({ where: { BookingId: bookingId } });
+  };
+
+  public readAll = async (): Promise<InvoiceOutput[]> => {
+    return await this.model.findAll();
+  };
+
+  public create = async (
+    bookingId: number,
+    date: Date,
+    creditCardNumber: string,
+    subTotal: number,
+    tax: number,
+    refundAmount: number
+  ): Promise<InvoiceOutput | null> => {
+    try {
+      return await this.model.create({
+        BookingId: bookingId,
+        Date: date,
+        CreditCardNumber: creditCardNumber,
+        Subtotal: subTotal,
+        Tax: tax,
+        RefundAmount: refundAmount,
+      });
+    } catch (error: any) {
+      return null;
     }
-
-    public readInvoice = async(
-        transactionId: number
-    ): Promise<Model<any> | null> => {
-        return await this.model.findByPk(transactionId);
-    };
-
-    public readAllInvoices = async(): Promise<Model<any>[]> => {
-        return await this.model.findAll();
-    };
-
-    public createInvoice = async(
-        bookingId: number,
-        date: Date,
-        creditCardNumber: string,
-        subTotal: number,
-        tax: number,
-        refundAmount: number
-    ) => {
-        await this.model.create({
-            BookngId: bookingId,
-            Date: date,
-            CreditCardNumber: creditCardNumber,
-            Subtotal: subTotal,
-            Tax: tax,
-            RefundAmount: refundAmount
-        })
-    }
+  };
 }
 
 export default InvoiceDAO;

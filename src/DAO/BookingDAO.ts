@@ -1,80 +1,58 @@
-import { ModelStatic, Model, Op } from "sequelize";
-import sequelize from "../database/";
-import Booking from "../domain/Booking";
-
-/*interface BookingAttributes {
-    //BookingId: number;
-    AccountId: number;
-    Email: string;
-    DateCreated: Date;
-    State: number;
-}*/
+import { Op } from "sequelize";
+import {
+  BookingInput,
+  BookingOutput,
+  Booking,
+} from "../database/models/Booking";
+import State from "../domain/State";
 
 class BookingDAO {
-    private model: ModelStatic<Model<any>>;
+  private model: typeof Booking;
 
-    constructor() {
-        this.model = sequelize.models.Booking;
+  constructor() {
+    this.model = Booking;
+  }
+
+  public read = async (id: number): Promise<BookingOutput | null> => {
+    return await this.model.findByPk(id);
+  };
+
+  public readAccountsBooking = async (
+    accountId: number
+  ): Promise<BookingOutput[] | null> => {
+    return await this.model.findAll({
+      where: { AccountId: accountId },
+    });
+  };
+
+  public create = async (
+    accountId: number,
+    email: string,
+    dateCreated: Date,
+    state: State
+  ): Promise<BookingOutput | null> => {
+    try {
+      return await this.model.create({
+        AccountId: accountId,
+        Email: email,
+        DateCreated: dateCreated,
+        State: state,
+      });
+    } catch (error: any) {
+      return null;
     }
+  };
 
-    public readBooking = async(
-        bookingId: number, accountId: number
-    ): Promise<Model<any> | null> => {
-        return await this.model.findOne({
-            where: {
-                [Op.and]: [
-                    {BookingId: bookingId},
-                    {AccountId: accountId}
-                ]
-            }
-        });
-    };
-
-    public readAccountsBooking = async(
-        accountId: number
-    ): Promise<Model<any>[] | null> => {
-        return await this.model.findAll({
-            where: {AccountId: accountId}
-        }
-    );
-    };
-
-    public createBooking = async(
-        accountId: number,
-        email: string,
-        dateCreated: Date,
-        state: State
-    ): Promise<Model<any> | null> => {
-        await this.model.create({
-            AccountId: accountId,
-            Email: email,
-            DateCreated: dateCreated,
-            State: state
-        });
-
-        return await this.model.findOne({
-            where: {
-                [Op.and]: [
-                        {AccountId: accountId},
-                        {Email: email},
-                        {DateCreated: dateCreated},
-                        {State: state}
-                    ]
-                }
-            });
-    };
-
-    public updateBooking = async (bookingId: number, accountId: number, state: number) => {
-        await this.model.update({State: state},
-            {
-            where: {
-                [Op.and]: [
-                    {BookingId: bookingId},
-                    {AccountId: accountId}
-                ]
-            }
-        })
-    };
+  public update = async (id: number, state: State): Promise<number[]> => {
+    try {
+      return await this.model.update(
+        { State: state },
+        { where: { BookingId: id } }
+      );
+    } catch (error: any) {
+      return [0, -1];
+    }
+  };
 }
 
 export default BookingDAO;

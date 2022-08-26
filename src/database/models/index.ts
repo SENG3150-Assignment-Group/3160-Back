@@ -6,6 +6,10 @@ import { Distance } from "./Distance";
 import { Descriptor } from "./Descriptor";
 import { LocationDescriptor } from "./LocationDescriptor";
 import { Flight } from "./Flight";
+import { Account } from "./Account";
+import { Booking } from "./Booking";
+import { Invoice } from "./Invoice";
+import { Ticket } from "./Ticket";
 
 export {
   Country,
@@ -16,4 +20,8 @@ export {
   Descriptor,
   LocationDescriptor,
   Flight,
+  Account,
+  Booking,
+  Invoice,
+  Ticket,
 };

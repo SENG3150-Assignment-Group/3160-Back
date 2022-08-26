@@ -1,5 +1,6 @@
 enum State {
-  Pending = "pending",
-  Complete = "complete",
+  Confirmed = "confirmed",
+  Passed = "passed",
   Cancelled = "cancelled",
 }
+export default State;
