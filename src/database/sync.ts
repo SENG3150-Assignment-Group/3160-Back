@@ -14,7 +14,7 @@ import {
   Package,
 } from "./models";
 
-const mode = false;
+const mode = true;
 
 const sync = async () => {
   await Country.sync({ force: mode });
