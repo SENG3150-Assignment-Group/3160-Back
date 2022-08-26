@@ -1,5 +1,4 @@
-use flightpub;
-INSERT INTO `Countries` (`CountryCode2`, `CountryCode3`, `CountryName`, `AlternateName1`, `AlternateName2`, `MotherCountryCode3`, `MotherCountryComment`)
+INSERT INTO `countries` (`CountryCode2`, `CountryCode3`, `CountryName`, `AlternateName1`, `AlternateName2`, `MotherCountryCode3`, `MotherCountryComment`)
 VALUES
 	('AO','A','Anla','Republic of Anla','','',''),
 	('AW','ABW','Aruba','','','NLD','Self-verning country in the Kingdom of the Netherlands'),
@@ -250,9 +249,9 @@ VALUES
 	('ZM','ZMB','Zambia','Republic of Zambia','','',''),
 	('ZW','ZWE','Zimbabwe','Republic of Zimbabwe','','','');
 
-	INSERT INTO `Airlines` (`AirlineCode`, `AirlineName`, `CountryCode3`, `Sponsored`)
+	INSERT INTO `airlines` (`AirlineCode`, `AirlineName`, `CountryCode3`, `Sponsored`)
 VALUES
-	('AA','American Airlines','USA', false),
+	('AA','American Airlines','USA',false),
 	('AC','Air Canada','CAN',false),
 	('AF','Air France','FRA',false),
 	('AI','Air India','IND',false),
@@ -298,7 +297,7 @@ VALUES
 	('VS','Virgin Atlantic Airways','GBR',false);
 
 
-	INSERT INTO `PlaneTypes` (`PlaneCode`, `PlaneType`, `NumFirstClass`, `NumBusiness`, `NumPremiumEconomy`, `NumEconomy`)
+	INSERT INTO `planetypes` (`PlaneCode`, `PlaneType`, `NumFirstClass`, `NumBusiness`, `NumPremiumEconomy`, `NumEconomy`)
 VALUES
 	('747-100','Boeing 747-100',55,58,100,210),
 	('757-200','Boeing 757-200',44,26,106,197),
@@ -316,46 +315,51 @@ VALUES
 
 	INSERT INTO `Locations` (`LocationName`,`LocationCode`,`Airport`,`Restricted`,`CountryCode3`)
 VALUES
-	('Adelaide','ADL','Adelaide',false,'AUS'),
-	('Amsterdam','AMS','Amsterdam',false,'NLD'),
-	('Atlanta','ATL','Atlanta',false,'USA'),
-	('Bangkok','BKK','Bangkok',false,'THA'),
-	('Brisbane','BNE','Brisbane',false,'AUS'),
-	('Canberra','CBR','Canberra',false,'AUS'),
-	('Paris','CDG','Paris - Charles De Gaulle',false,'FRA'),
-	('Cairns','CNS','Cairns',false,'AUS'),
-	('Doha','DOH','Doha',false,'QAT'),
-	('Darwin','DRW','Darwin',false,'AUS'),
-	('Dubai','DXB','Dubai',false,'ARE'),
-	('Rome','FCO','Rome-Fiumicino',false,'ITA'),
-	('Rio De Janeiro','GIG','Rio De Janeiro',false,'BRA'),
-	('Hobart','HBA','Hobart',false,'AUS'),
-	('Helsinki','HEL','Helsinki',false,'FIN'),
-	('Hong Kong','HKG','Hong Kong',false,'CHN'),
-	('Honolulu','HNL','Honolulu',false,'USA'),
-	('New York','JFK','New York - JFK',false,'USA'),
-	('Johannesburg','JNB','Johannesburg',false,'ZAF'),
-	('Kuala Lumpur','KUL','Kuala Lumpur',false,'MYS'),
-	('Los Angeles','LAX','Los Angeles',false,'USA'),
-	('New York','LGA','New York - Laguardia',false,'USA'),
-	('London','LGW','London-Gatwick',false,'GBR'),
-	('London','LHR','London-Heathrow',false,'GBR'),
-	('Madrid','MAD','Madrid',false,'ESP'),
-	('Melbourne','MEL','Melbourne',false,'AUS'),
-	('Miami','MIA','Miami',false,'USA'),
-	('Munich','MUC','Munich',false,'DEU'),
-	('Tokyo','NRT','Tokyo - Narita',false,'JPN'),
-	('Gold Coast','OOL','Gold Coast',false,'AUS'),
-	('Chicago','ORD','Chicago - OHare Intl.',false,'USA'),
-	('Paris','ORY','Paris - Orly',false,'FRA'),
-	('Perth','PER','Perth',false,'AUS'),
-	('San Francisco','SFO','San Francisco',false,'USA'),
-	('Singapore','SIN','Singapore',false,'SGP'),
-	('Sydney','SYD','Sydney',false,'AUS'),
-	('Vienna','VIE','Vienna',false,'AUT'),
-	('Toronto','YYZ','Toronto',false,'CAN');
+    ('Adelaide','ADL','Adelaide',false,'AUS'),
+    ('Amsterdam','AMS','Amsterdam',false,'NLD'),
+    ('Atlanta','ATL','Atlanta',false,'USA'),
+    ('Bangkok','BKK','Bangkok',false,'THA'),
+    ('Brisbane','BNE','Brisbane',false,'AUS'),
+    ('Canberra','CBR','Canberra',false,'AUS'),
+    ('Paris','CDG','Paris - Charles De Gaulle',false,'FRA'),
+    ('Cairns','CNS','Cairns',false,'AUS'),
+    ('Doha','DOH','Doha',false,'QAT'),
+    ('Darwin','DRW','Darwin',false,'AUS'),
+    ('Dubai','DXB','Dubai',false,'ARE'),
+    ('Rome','FCO','Rome-Fiumicino',false,'ITA'),
+    ('Rio De Janeiro','GIG','Rio De Janeiro',false,'BRA'),
+    ('Hobart','HBA','Hobart',false,'AUS'),
+    ('Helsinki','HEL','Helsinki',false,'FIN'),
+    ('Hong Kong','HKG','Hong Kong',false,'CHN'),
+    ('Honolulu','HNL','Honolulu',false,'USA'),
+    ('New York','JFK','New York - JFK',false,'USA'),
+    ('Johannesburg','JNB','Johannesburg',false,'ZAF'),
+    ('Kuala Lumpur','KUL','Kuala Lumpur',false,'MYS'),
+    ('Los Angeles','LAX','Los Angeles',false,'USA'),
+    ('New York','LGA','New York - Laguardia',false,'USA'),
+    ('London','LGW','London-Gatwick',false,'GBR'),
+    ('London','LHR','London-Heathrow',false,'GBR'),
+    ('Madrid','MAD','Madrid',false,'ESP'),
+    ('Melbourne','MEL','Melbourne',false,'AUS'),
+    ('Miami','MIA','Miami',false,'USA'),
+    ('Munich','MUC','Munich',false,'DEU'),
+    ('Tokyo','NRT','Tokyo - Narita',false,'JPN'),
+    ('Gold Coast','OOL','Gold Coast',false,'AUS'),
+    ('Chicago','ORD','Chicago - OHare Intl.',false,'USA'),
+    ('Paris','ORY','Paris - Orly',false,'FRA'),
+    ('Perth','PER','Perth',false,'AUS'),
+    ('San Francisco','SFO','San Francisco',false,'USA'),
+    ('Singapore','SIN','Singapore',false,'SGP'),
+    ('Sydney','SYD','Sydney',false,'AUS'),
+    ('Vienna','VIE','Vienna',false,'AUT'),
+    ('Toronto','YYZ','Toronto',false,'CAN');
 
-	INSERT INTO `Distances` (`LocationId1`, `LocationId2`, `DistanceInKms`)
+	INSERT INTO `accounts` (`AccountId`,`FirstName`,`LastName`,`Email`,`Password`)
+VALUES
+	('1','Admin','Admin','admin@flightpub.net','admin'),
+	('2','John','Doe','johndoe@gmail.com','1234');
+
+	INSERT INTO `distances` (`LocationId1`, `LocationId2`, `DistanceInKms`)
 VALUES
 	('1','6',957),
 	('1','10',2616),
@@ -605,28 +609,28 @@ VALUES
 	('37','28',354),
 	('37','32',1032);
 
-INSERT INTO `Flights` (`FlightCode`,`DepartureId`,`DestinationId`,`DepartureDateTime`,`DestinationDateTime`,`StopOverId`,`AirlineCode`,`PlaneCode`,`Duration`)
+	INSERT INTO `flights` (`FlightCode`,`DepartureId`,`DestinationId`,`DepartureDateTime`,`DestinationDateTime`,`StopOverId`,`AirlineCode`,`PlaneCode`,`Duration`)
 VALUES
-	('AA724','22','21','2022-10-08 11:55:00','2022-10-08 19:35:00',null,'AA','747-100','07:40:00'),
-	('AA842','22','36','2022-11-12 11:55:00','2022-11-12 19:35:00',null,'AA','767-300','07:40:00'),
-	('AA168','18','21','2022-12-19 18:35:00','2022-12-19 20:40:00',null,'AA','A380','02:05:00'),
-	('AA354','18','23','2022-10-08 11:55:00','2022-10-08 19:35:00',null,'AA','A330-200','07:40:00'),
-	('AA422','22','6','2022-11-12 11:55:00','2022-11-12 19:35:00',null,'AA','747-100','07:40:00'),
-	('EK698','36','32','2022-12-19 18:35:00','2022-12-19 20:40:00',null,'EK','767-300','02:05:00'),
-	('EK715','23','30','2022-12-06 18:35:00','2022-12-06 20:40:00',null,'EK','A380','02:05:00'),
-	('EK458','7','23','2014-11-23 18:35:00','2022-11-24 09:35:00',null,'EK','A330-200','15:00:00'),
-	('EK623','29','18','2022-10-08 11:55:00','2022-10-08 19:35:00',null,'EK','747-100','07:40:00'),
-	('EK119','18','7','2022-11-12 11:55:00','2022-11-12 19:35:00',null,'EK','767-300','07:40:00'),
-	('QF902','36','29','2022-12-19 18:35:00','2022-12-19 20:40:00',null,'QF','A380','02:05:00'),
-	('QF940','26','36','2022-12-06 18:35:00','2022-12-06 20:40:00',null,'QF','A330-200','02:05:00'),
-	('QF420','6','1','2022-12-19 18:35:00','2022-12-19 20:40:00',null,'QF','747-100','02:05:00'),
-	('QF680','30','23','2014-11-23 18:35:00','2022-11-24 09:35:00',null,'QF','767-300','15:00:00'),
-	('QF337','5','26','2022-11-12 11:55:00','2022-11-12 19:35:00',null,'QF','A380','07:40:00'),
-	('JQ259','30','6','2022-10-08 11:55:00','2022-10-08 19:35:00',null,'JQ','A330-200','07:40:00'),
-	('JQ861','26','30','2022-11-12 11:55:00','2022-11-12 19:35:00',null,'JQ','747-100','07:40:00'),
-	('JQ267','14','1','2022-12-19 18:35:00','2022-12-19 20:40:00',null,'JQ','767-300','02:05:00'),
-	('JQ158','5','36','2022-12-06 18:35:00','2022-12-06 20:40:00',null,'JQ','A380','02:05:00'),
-	('JQ956','36','26','2014-11-23 18:35:00','2022-11-24 09:35:00',null,'JQ','A330-200','15:00:00');
+	('AA724','22','21','2022-10-08 11:55:00','2022-10-08 19:35:00',NULL,'AA','747-100','07:40:00'),
+	('AA842','22','36','2022-11-12 11:55:00','2022-11-12 19:35:00',NULL,'AA','767-300','07:40:00'),
+	('AA168','18','21','2022-12-19 18:35:00','2022-12-19 20:40:00',NULL,'AA','A380','02:05:00'),
+	('AA354','18','23','2022-10-08 11:55:00','2022-10-08 19:35:00',NULL,'AA','A330-200','07:40:00'),
+	('AA422','22','6','2022-11-12 11:55:00','2022-11-12 19:35:00',NULL,'AA','747-100','07:40:00'),
+	('EK698','36','32','2022-12-19 18:35:00','2022-12-19 20:40:00',NULL,'EK','767-300','02:05:00'),
+	('EK715','23','30','2022-12-06 18:35:00','2022-12-06 20:40:00',NULL,'EK','A380','02:05:00'),
+	('EK458','7','23','2014-11-23 18:35:00','2022-11-24 09:35:00',NULL,'EK','A330-200','15:00:00'),
+	('EK623','29','18','2022-10-08 11:55:00','2022-10-08 19:35:00',NULL,'EK','747-100','07:40:00'),
+	('EK119','18','7','2022-11-12 11:55:00','2022-11-12 19:35:00',NULL,'EK','767-300','07:40:00'),
+	('QF902','36','29','2022-12-19 18:35:00','2022-12-19 20:40:00',NULL,'QF','A380','02:05:00'),
+	('QF940','26','36','2022-12-06 18:35:00','2022-12-06 20:40:00',NULL,'QF','A330-200','02:05:00'),
+	('QF420','6','1','2022-12-19 18:35:00','2022-12-19 20:40:00',NULL,'QF','747-100','02:05:00'),
+	('QF680','30','23','2014-11-23 18:35:00','2022-11-24 09:35:00',NULL,'QF','767-300','15:00:00'),
+	('QF337','5','26','2022-11-12 11:55:00','2022-11-12 19:35:00',NULL,'QF','A380','07:40:00'),
+	('JQ259','30','6','2022-10-08 11:55:00','2022-10-08 19:35:00',NULL,'JQ','A330-200','07:40:00'),
+	('JQ861','26','30','2022-11-12 11:55:00','2022-11-12 19:35:00',NULL,'JQ','747-100','07:40:00'),
+	('JQ267','14','1','2022-12-19 18:35:00','2022-12-19 20:40:00',NULL,'JQ','767-300','02:05:00'),
+	('JQ158','5','36','2022-12-06 18:35:00','2022-12-06 20:40:00',NULL,'JQ','A380','02:05:00'),
+	('JQ956','36','26','2014-11-23 18:35:00','2022-11-24 09:35:00',NULL,'JQ','A330-200','15:00:00');
 
 	INSERT INTO `descriptors` (`CategoryId`, `Name`)
 VALUES
@@ -649,7 +653,7 @@ VALUES
 	('3','Tourism'),
 	('3','Romance');
 
-	INSERT INTO `LocationDescriptors` (`DescriptorId`,`LocationId`)
+	INSERT INTO `locationdescriptors` (`DescriptorId`,`LocationId`)
 VALUES
 	('1','1'),
 	('5','1'),
@@ -704,5 +708,3 @@ VALUES
 	('15','36'),
 	('16','36'),
 	('17','36');
-
-    
