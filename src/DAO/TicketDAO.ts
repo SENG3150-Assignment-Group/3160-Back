@@ -82,3 +82,7 @@ class TicketDAO {
 }
 
 export default TicketDAO;
+
+// mysql://:@/?reconnect=true
+
+// mysql --host=us-cdbr-east-06.cleardb.net --user=b2bf6142530c07 --password=89afe496 --reconnect heroku_812f20d25f8d1ee

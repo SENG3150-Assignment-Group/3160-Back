@@ -1,6 +1,4 @@
 import { Package, PackageOutput } from "../database/models/Package";
-import { ModelStatic, Model } from "sequelize";
-import sequelize from "../database";
 
 class PackageDAO {
   private model: typeof Package;
