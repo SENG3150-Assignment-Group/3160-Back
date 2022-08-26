@@ -33,7 +33,7 @@ class App {
   }
 
   public listen() {
-    this.app.listen(this.port, () => {
+    this.app.listen(process.env.PORT || this.port, () => {
       console.log(`App listening on the port ${this.port}`);
     });
   }
