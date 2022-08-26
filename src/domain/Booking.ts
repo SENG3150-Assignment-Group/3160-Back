@@ -1,3 +1,6 @@
+import { BookingOutput } from "../database/models/Booking";
+import State from "./State";
+
 class Booking {
   bookingId: number;
   accountId: number;
@@ -19,6 +22,16 @@ class Booking {
     this.state = state;
   }
 
+  public static modelToDomain = (model: BookingOutput): Booking => {
+    return new Booking(
+      model.BookingId,
+      model.AccountId,
+      model.Email,
+      model.DateCreated,
+      model.State
+    );
+  };
+
   // Getters
   public getBookingId = (): number => {
     return this.bookingId;
@@ -37,11 +50,11 @@ class Booking {
   };
 
   // Setters
-  public setAccountId = (accountId: number) => {
-    this.accountId = accountId;
-  };
   public setBookingId = (bookingId: number) => {
     this.bookingId = bookingId;
+  };
+  public setAccountId = (accountId: number) => {
+    this.accountId = accountId;
   };
   public setEmail = (email: string) => {
     this.email = email;

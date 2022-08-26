@@ -1,26 +1,10 @@
 import DescriptorDAO from "../DAO/DescriptorDAO";
 import LocationDAO from "../DAO/LocationDAO";
-import { Model } from "sequelize/types";
 import LocationAggregate from "../domain/Aggregates/LocationAggregate";
 import Descriptor from "../domain/Descriptor";
 import Location from "../domain/Location";
-
-interface LocationAttributes {
-  LocationName: string;
-  LocationId: number;
-  AirportCode: string;
-  Restricted: boolean;
-  CountryCode3: string;
-  RestricationStart: Date;
-  RestricationEnd: Date;
-}
-
-interface DescriptorAttributes {
-  DescriptorId: number;
-  CategoryId: number;
-  Name: string;
-  //TODO Name in database is descriptorName in domain
-}
+import { LocationOutput } from "../database/models/Location";
+import { DescriptorOutput } from "../database/models/Descriptor";
 
 class LocationRepository {
   public getLocations = async (): Promise<LocationAggregate[]> => {
@@ -30,10 +14,9 @@ class LocationRepository {
       new Array<LocationAggregate>();
 
     // get all locations
-    const locationModels: Model<LocationAttributes>[] =
-      await locationDAO.readAllLocations();
+    const locationModels: LocationOutput[] = await locationDAO.readAll();
 
-    let descriptorModels: Model<DescriptorAttributes>[];
+    let descriptorModels: DescriptorOutput[];
     let location: Location;
     let descriptors: Descriptor[];
 

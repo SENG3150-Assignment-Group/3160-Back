@@ -1,3 +1,5 @@
+import { InvoiceOutput } from "../database/models/Invoice";
+
 class Invoice {
   transactionId: number;
   date: Date;
@@ -5,6 +7,7 @@ class Invoice {
   subTotal: number;
   tax: number;
   refundAmount: number;
+  bookingId: number;
 
   constructor(
     transactionId: number,
@@ -12,7 +15,8 @@ class Invoice {
     creditCardNumber: string,
     subTotal: number,
     tax: number,
-    refundAmount: number
+    refundAmount: number,
+    bookingId: number
   ) {
     this.transactionId = transactionId;
     this.date = date;
@@ -20,7 +24,60 @@ class Invoice {
     this.subTotal = subTotal;
     this.tax = tax;
     this.refundAmount = refundAmount;
+    this.bookingId = bookingId;
   }
+
+  public static modelToDomain = (model: InvoiceOutput): Invoice => {
+    return new Invoice(
+      model.TransactionId,
+      model.Date,
+      model.CreditCardNumber,
+      model.Subtotal,
+      model.Tax,
+      model.RefundAmount,
+      model.BookingId
+    );
+  };
+
+  // Getters
+  public getTansactionId = (): number => {
+    return this.transactionId;
+  };
+  public getDate = (): Date => {
+    return this.date;
+  };
+  public getCreditCardNumber = (): string => {
+    return this.creditCardNumber;
+  };
+  public getSubTotal = (): number => {
+    return this.subTotal;
+  };
+  public getTax = (): number => {
+    return this.tax;
+  };
+  public getRefundAmount = (): number => {
+    return this.refundAmount;
+  };
+
+  // Setters
+  public setTransactionId = (transactionId: number) => {
+    this.transactionId = transactionId;
+  };
+  public setDate = (date: Date) => {
+    this.date = date;
+  };
+  public setCreditCardNumber = (creditCardNumber: string) => {
+    this.creditCardNumber = creditCardNumber;
+  };
+  public setSubTotal = (subTotal: number) => {
+    this.subTotal = subTotal;
+  };
+  public setTax = (tax: number) => {
+    this.tax = tax;
+  };
+  public setRefundAmount = (refundAmount: number) => {
+    this.refundAmount = refundAmount;
+  };
 }
 
 export default Invoice;

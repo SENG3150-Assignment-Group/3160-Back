@@ -18,7 +18,8 @@ class App {
 
   private initializeMiddlewares() {
     this.app.use(cors());
-    this.app.use(express.urlencoded({ extended: true }));
+    //this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(express.json());
   }
 
   private setProperties() {
@@ -27,7 +28,7 @@ class App {
 
   private initializeControllers(controllers: Controller[]) {
     for (const controller of controllers) {
-      this.app.use("/api", controller.router);
+      this.app.use("/api" + controller.path, controller.router);
     }
   }
 

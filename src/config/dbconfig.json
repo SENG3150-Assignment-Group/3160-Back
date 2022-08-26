@@ -1,15 +1,26 @@
 {
-  "database": "flightpub",
-  "username": "root",
-  "password": "password",
-  "options": {
-    "host": "localhost",
-    "dialect": "mysql",
-    "pool": {
-      "max": 5,
-      "min": 0,
-      "acquire": 30000,
-      "idle": 10000
+  "dev": {
+    "database": "flightpub",
+    "username": "root",
+    "password": "password",
+    "options": {
+      "host": "localhost",
+      "dialect": "mysql",
+      "pool": {
+        "max": 5,
+        "min": 0,
+        "acquire": 30000,
+        "idle": 10000
+      }
+    }
+  },
+  "dep": {
+    "database": "heroku_812f20d25f8d1ee",
+    "username": "b2bf6142530c07",
+    "password": "89afe496",
+    "options": {
+      "host": "us-cdbr-east-06.cleardb.net",
+      "dialect": "mysql"
     }
   }
 }

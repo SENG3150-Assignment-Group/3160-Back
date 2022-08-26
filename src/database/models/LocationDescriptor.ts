@@ -1,36 +1,60 @@
-"use strict";
-
-import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
+import sequelize from "../";
+import {
+  DataTypes,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
+import { Location } from "./Location";
+import { Descriptor } from "./Descriptor";
 
 interface LocationDescriptorAttributes {
   DescriptorId: number;
   LocationId: number;
 }
 
-export default (sequelize: any) => {
-  class LocationDescriptor
-    extends Model<LocationDescriptorAttributes>
-    implements LocationDescriptorAttributes
+interface LocationDescriptorInput
+  extends InferCreationAttributes<LocationDescriptor> {}
+interface LocationDescriptorOutput
+  extends InferAttributes<LocationDescriptor> {}
+
+class LocationDescriptor extends Model<
+  LocationDescriptorOutput,
+  LocationDescriptorInput
+> {
+  DescriptorId!: ForeignKey<number>;
+  LocationId!: ForeignKey<number>;
+}
+LocationDescriptor.init(
+  {},
   {
-    DescriptorId!: number;
-    LocationId!: number;
+    sequelize: sequelize,
+    timestamps: false,
+    modelName: "LocationDescriptor",
   }
-  LocationDescriptor.init(
-    {
-      DescriptorId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      LocationId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-    },
-    {
-      sequelize,
-      timestamps: false,
-      modelName: "LocationDescriptor",
-    }
-  );
-  return LocationDescriptor;
+);
+
+// A location can have many descriptors
+Location.belongsToMany(Descriptor, {
+  through: LocationDescriptor,
+  foreignKey: {
+    name: "LocationId",
+    allowNull: false,
+  },
+});
+
+// The same descriptor exists on many locations
+Descriptor.belongsToMany(Location, {
+  through: LocationDescriptor,
+  foreignKey: {
+    name: "DescriptorId",
+    allowNull: false,
+  },
+});
+
+export {
+  LocationDescriptorInput,
+  LocationDescriptorOutput,
+  LocationDescriptor,
 };

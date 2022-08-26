@@ -1,54 +1,45 @@
-import { Model } from "sequelize/types";
-
-interface LocationAttributes {
-  LocationName: string;
-  LocationId: number;
-  AirportCode: string;
-  Restricted: boolean;
-  CountryCode3: string;
-  RestricationStart: Date;
-  RestricationEnd: Date;
-}
+import { LocationOutput } from "../database/models/Location";
 
 class Location {
-  locationId: number;
   locationName: string;
-  airportCode: string;
-  countryCode3: string;
+  locationCode: string;
+  locationId: number;
+  airport: string;
   restricted: boolean;
+  countryCode3: string;
   restrictionStart: Date;
   restrictionEnd: Date;
 
   constructor(
-    locationId: number,
     locationName: string,
-    airportCode: string,
-    countryCode3: string,
+    locationCode: string,
+    locationId: number,
+    airport: string,
     restricted: boolean,
+    countryCode3: string,
     restrictionStart: Date,
     restrictionEnd: Date
   ) {
     this.locationId = locationId;
     this.locationName = locationName;
-    this.airportCode = airportCode;
+    this.locationCode = locationCode;
+    this.airport = airport;
     this.countryCode3 = countryCode3;
     this.restricted = restricted;
     this.restrictionStart = restrictionStart;
     this.restrictionEnd = restrictionEnd;
   }
 
-  // static
-  public static modelToDomain = (
-    locationModel: Model<LocationAttributes>
-  ): Location => {
+  public static modelToDomain = (model: LocationOutput): Location => {
     return new Location(
-      locationModel.LocationId,
-      locationModel.LocationName,
-      locationModel.AirportCode,
-      locationModel.CountryCode3,
-      locationModel.Restricted,
-      locationModel.RestrictionStart,
-      locationModel.RestrictionEnd
+      model.LocationName,
+      model.LocationCode,
+      model.LocationId,
+      model.Airport,
+      model.Restricted,
+      model.CountryCode3,
+      model.RestrictionStart,
+      model.RestrictionEnd
     );
   };
 
@@ -59,8 +50,11 @@ class Location {
   public getLocationName = (): string => {
     return this.locationName;
   };
-  public getAirportCode = (): string => {
-    return this.airportCode;
+  public getLocationCode = (): string => {
+    return this.locationCode;
+  };
+  public getAirport = (): string => {
+    return this.airport;
   };
   public getCountryCode3 = (): string => {
     return this.countryCode3;
@@ -82,8 +76,11 @@ class Location {
   public setLocationName = (locationName: string) => {
     this.locationName = locationName;
   };
-  public setAirportCode = (airportCode: string) => {
-    this.airportCode = airportCode;
+  public setLocationCode = (locationCode: string) => {
+    this.locationCode = locationCode;
+  };
+  public setAirport = (airport: string) => {
+    this.airport = airport;
   };
   public setCountryCode3 = (countryCode3: string) => {
     this.countryCode3 = countryCode3;

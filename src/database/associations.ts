@@ -1,6 +1,4 @@
-import sequelize from "database";
 import { Sequelize } from "sequelize";
-import Location from "./models/Location";
 
 const applyAssociations = (sequelize: Sequelize) => {
   const {

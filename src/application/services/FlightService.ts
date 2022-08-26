@@ -10,7 +10,17 @@ interface FlightService {
     endDate: Date,
     returnFlag: boolean,
     seats: number
-  ) => Flight[];
+  ) => Promise<Flight[][]>;
+  createFlight: (
+    flightCode: string,
+    departureId: number,
+    departureDateTime: Date,
+    destinationId: number,
+    destinationDateTime: Date,
+    airlineCode: string,
+    planeCode: string,
+    duration: string
+  ) => Promise<Flight | null>;
 }
 
 export default FlightService;

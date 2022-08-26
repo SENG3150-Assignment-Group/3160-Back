@@ -1,55 +1,71 @@
-"use strict";
+import sequelize from "../";
+import {
+  DataTypes,
+  Model,
+  ForeignKey,
+  InferCreationAttributes,
+  InferAttributes,
+  CreationOptional,
+} from "sequelize";
+import { Account } from "./Account";
+import State from "../../domain/State";
 
-import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
+interface BookingInput extends InferCreationAttributes<Booking> {}
+interface BookingOutput extends InferAttributes<Booking> {}
 
-interface BookingAttributes {
-  BookingId: number;
-  AccountId: number;
-  Email: string;
-  DateCreated: Date;
-  State: number;
-  //TODO State is an enum in class diagram but int(1) in database
+class Booking extends Model<BookingOutput, BookingInput> {
+  BookingId!: CreationOptional<number>;
+  AccountId!: ForeignKey<number>;
+  Email!: string;
+  DateCreated!: Date;
+  State!: State;
 }
-
-export default (sequelize: any) => {
-  class Booking extends Model<BookingAttributes> implements BookingAttributes {
-    BookingId!: number;
-    AccountId!: number;
-    Email!: string;
-    DateCreated!: Date;
-    State!: number;
-  }
-  Booking.init(
-    {
-      BookingId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        unique: true,
-      },
-      AccountId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-      },
-      Email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      DateCreated: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      State: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+Booking.init(
+  {
+    BookingId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+      unique: true,
     },
-    {
-      sequelize,
-      timestamps: false,
-      modelName: "Booking",
-    }
-  );
-  return Booking;
-};
+    Email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    DateCreated: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    State: {
+      type: DataTypes.ENUM("confirmed", "passed", "cancelled"),
+      allowNull: false,
+      defaultValue: "confirmed",
+    },
+  },
+  {
+    sequelize: sequelize,
+    timestamps: false,
+    modelName: "Booking",
+  }
+);
+
+// Bookings are made in the name of one Account
+Booking.belongsTo(Account, {
+  as: "Account",
+  foreignKey: {
+    name: "AccountId",
+    allowNull: true,
+  },
+});
+
+// Accounts can have many Bookings
+Account.hasMany(Booking, {
+  as: "Bookings",
+  foreignKey: {
+    name: "AccountId",
+    allowNull: true,
+  },
+});
+
+export { BookingInput, BookingOutput, Booking };

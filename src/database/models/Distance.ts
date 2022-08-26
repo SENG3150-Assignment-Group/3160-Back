@@ -1,46 +1,54 @@
-"use strict";
+import sequelize from "../";
+import {
+  DataTypes,
+  ForeignKey,
+  InferAttributes,
+  InferCreationAttributes,
+  Model,
+} from "sequelize";
+import { Location } from "./Location";
 
-import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
-
-//TODO class is named Distance in domain and class diagram but Distances in database
 interface DistanceAttributes {
   LocationId1: number;
   LocationId2: number;
   DistanceInKms: number;
 }
 
-export default (sequelize: any) => {
-  class Distance
-    extends Model<DistanceAttributes>
-    implements DistanceAttributes
+interface DistanceInput extends InferCreationAttributes<Distance> {}
+interface DistanceOutput extends InferAttributes<Distance> {}
+
+class Distance
+  extends Model<DistanceOutput, DistanceInput>
+  implements DistanceAttributes
+{
+  LocationId1!: ForeignKey<number>;
+  LocationId2!: ForeignKey<number>;
+  DistanceInKms!: number;
+}
+
+Distance.init(
   {
-    LocationId1!: number;
-    LocationId2!: number;
-    DistanceInKms!: number;
-    static associate(models: any) {
-      // define association here
-    }
-  }
-  Distance.init(
-    {
-      LocationId1: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      LocationId2: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      DistanceInKms: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
+    DistanceInKms: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    {
-      sequelize,
-      timestamps: false,
-      modelName: "Distance",
-    }
-  );
-  return Distance;
-};
+  },
+  {
+    sequelize: sequelize,
+    timestamps: false,
+    modelName: "Distance",
+  }
+);
+
+Location.belongsToMany(Location, {
+  through: Distance,
+  as: "location1",
+  foreignKey: "LocationId1",
+});
+Location.belongsToMany(Location, {
+  through: Distance,
+  as: "location2",
+  foreignKey: "LocationId2",
+});
+
+export { DistanceInput, DistanceOutput, Distance };

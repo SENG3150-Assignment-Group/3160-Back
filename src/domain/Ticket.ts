@@ -1,3 +1,5 @@
+import { TicketOutput } from "database/models/Ticket";
+
 class Ticket {
   ticketCode: string;
   ticketClass: string;
@@ -6,12 +8,14 @@ class Ticket {
   transferrable: boolean;
   exchangeable: boolean;
   refundable: boolean;
-  accountId: number;
+  personName: string;
   personType: string;
   specialRequests: string;
   dietaryPreferences: string;
   carryOnBaggage: boolean;
   checkedBaggage: boolean;
+  flightId: number;
+  bookingId: number;
 
   constructor(
     ticketCode: string,
@@ -21,12 +25,14 @@ class Ticket {
     transferrable: boolean,
     exchangeable: boolean,
     refundable: boolean,
-    accountId: number,
+    personName: string,
     personType: string,
     specialRequests: string,
     dietaryPreferences: string,
     carryOnBaggage: boolean,
-    checkedBaggage: boolean
+    checkedBaggage: boolean,
+    flightId: number,
+    bookingId: number
   ) {
     this.ticketCode = ticketCode;
     this.ticketClass = ticketClass;
@@ -35,13 +41,35 @@ class Ticket {
     this.transferrable = transferrable;
     this.exchangeable = exchangeable;
     this.refundable = refundable;
-    this.accountId = accountId;
+    this.personName = personName;
     this.personType = personType;
     this.specialRequests = specialRequests;
     this.dietaryPreferences = dietaryPreferences;
     this.carryOnBaggage = carryOnBaggage;
     this.checkedBaggage = checkedBaggage;
+    this.flightId = flightId;
+    this.bookingId = bookingId;
   }
+
+  public static modelToDomain = (model: TicketOutput): Ticket => {
+    return new Ticket(
+      model.TicketCode,
+      model.TicketClass,
+      model.Price,
+      model.Booked,
+      model.Transferable,
+      model.Exchangable,
+      model.Refundable,
+      model.PersonName,
+      model.PersonType,
+      model.SpecialRequests,
+      model.DietaryPreferences,
+      model.CarryOnBaggage,
+      model.CheckedBaggage,
+      model.FlightId,
+      model.BookingId
+    );
+  };
 
   // Getters
   public getTicketCode = (): string => {
@@ -65,8 +93,8 @@ class Ticket {
   public isRefundable = (): boolean => {
     return this.refundable;
   };
-  public getAccountId = (): number => {
-    return this.accountId;
+  public getPersonName = (): string => {
+    return this.personName;
   };
   public getPersonType = (): string => {
     return this.personType;
@@ -82,6 +110,12 @@ class Ticket {
   };
   public getCheckedBaggage = (): boolean => {
     return this.checkedBaggage;
+  };
+  public getFlightId = (): number => {
+    return this.flightId;
+  };
+  public getBookingId = (): number => {
+    return this.bookingId;
   };
 
   // Setters
@@ -106,8 +140,8 @@ class Ticket {
   public setRefundable = (refundable: boolean) => {
     this.refundable = refundable;
   };
-  public setAccountId = (accountId: number) => {
-    this.accountId = accountId;
+  public setPersonName = (personName: string) => {
+    this.personName = personName;
   };
   public setPersonType = (personType: string) => {
     this.personType = personType;
@@ -123,6 +157,12 @@ class Ticket {
   };
   public setCheckedBaggage = (checkedBaggage: boolean) => {
     this.checkedBaggage = checkedBaggage;
+  };
+  public setFlightId = (flightId: number) => {
+    this.flightId = flightId;
+  };
+  public setBookingId = (bookingId: number) => {
+    this.bookingId = bookingId;
   };
 }
 

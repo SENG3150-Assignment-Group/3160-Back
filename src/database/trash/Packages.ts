@@ -2,34 +2,42 @@
 
 import { Sequelize, DataTypes, Model, UUIDV4 } from "sequelize";
 
-interface PackagesAttributes {
+interface PackageAttributes {
   PackageId: number;
   LocationCode: string;
+  FlightCode: string;
   AccountId: number;
   Accomodation: string;
   AccomodationCost: number;
-  FlightCodeList: string;
+  
 }
 
 export default (sequelize: any) => {
-  class Packages
-    extends Model<PackagesAttributes>
-    implements PackagesAttributes
+  class Package
+    extends Model<PackageAttributes>
+    implements PackageAttributes
   {
     PackageId!: number;
     LocationCode!: string;
+    FlightCode!: string;
     AccountId!: number;
     Accomodation!: string;
     AccomodationCost!: number;
-    FlightCodeList!: string;
+    
   }
-  Packages.init(
+  Package.init(
     {
       PackageId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
       },
       LocationCode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+       FlightCode: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -45,16 +53,13 @@ export default (sequelize: any) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
-      FlightCodeList: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+     
     },
     {
       sequelize,
       timestamps: false,
-      modelName: "Packages",
+      modelName: "Package",
     }
   );
-  return Packages;
+  return Package;
 };

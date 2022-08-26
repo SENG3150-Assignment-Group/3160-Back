@@ -1,3 +1,5 @@
+import { DistanceOutput } from "../database/models/Distance";
+
 class Distance {
   locationId1: number;
   locationId2: number;
@@ -8,6 +10,14 @@ class Distance {
     this.locationId2 = locationId2;
     this.distanceInKms = distanceInKms;
   }
+
+  public static modelToDomain = (model: DistanceOutput): Distance => {
+    return new Distance(
+      model.LocationId1,
+      model.LocationId2,
+      model.DistanceInKms
+    );
+  };
 
   // Getters
   public getLocationId1 = (): number => {
