@@ -39,6 +39,7 @@ class InvoiceDAO {
         RefundAmount: refundAmount,
       });
     } catch (error: any) {
+      console.log(error);
       return null;
     }
   };

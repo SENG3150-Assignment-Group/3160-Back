@@ -4,13 +4,11 @@ import BookingAggregate from "../../domain/Aggregates/BookingAggregate";
 interface BookingService {
   createBooking: (
     accountId: number,
-    email: string,
     creditCardNumber: string,
     subTotal: number,
-    tax: number,
-    refundAmount: number,
+    flightCode: string,
     ticketDetails: any[]
-  ) => Promise<BookingAggregate | null>;
+  ) => Promise<number | null>;
   updateBooking: (
     bookingId: number,
     state: string

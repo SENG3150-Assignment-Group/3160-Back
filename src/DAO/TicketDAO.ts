@@ -75,6 +75,7 @@ class TicketDAO {
         }
       );
     } catch (error: any) {
+      console.log(error);
       return [0, -1];
     }
   };

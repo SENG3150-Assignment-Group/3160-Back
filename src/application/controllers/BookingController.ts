@@ -19,8 +19,8 @@ class BookingController extends Controller {
 
   public initializeRoutes = (): void => {
     //this.router.get("/getBookings", this.getBookings);
-    this.router.post("/createBooking", this.createBooking);
-    this.router.put("/updateBooking", this.updateBooking);
+    this.router.post("/create", this.createBooking);
+    this.router.put("/update", this.updateBooking);
   };
 
   // private getBookings = async (req: express.Request, res: express.Response) => {
@@ -38,34 +38,29 @@ class BookingController extends Controller {
     req: express.Request,
     res: express.Response
   ) => {
-    res.json(req.body);
-    const accountId: number = parseInt(<string>req.body.accountId);
-    const email: string = <string>req.body.accountEmail;
+    const accountId: number = parseInt(<string>req.body.account);
+    const creditCardNumber = <string>req.body.cardNumber;
+    const subTotal = parseFloat(<string>req.body.price);
+    const flightCode = <string>req.body.flight;
 
     // tickets
     const tickets = <Array<any>>req.body.tickets;
-    console.log(tickets);
-
-    const creditCardNumber = <string>req.body.creditCardNumber;
-    const subTotal = parseFloat(<string>req.body.subTotal);
-    const tax = parseFloat(<string>req.body.tax);
-    const refundAmount = parseFloat(<string>req.body.price);
 
     const bookingService: BookingService = new BookingServiceImpl();
 
-    res
-      .status(200)
-      .send(
-        bookingService.createBooking(
-          accountId,
-          email,
-          creditCardNumber,
-          subTotal,
-          tax,
-          refundAmount,
-          tickets
-        )
-      );
+    const bookingId = await bookingService.createBooking(
+      accountId,
+      creditCardNumber,
+      subTotal,
+      flightCode,
+      tickets
+    );
+
+    if (bookingId == null) {
+      res.status(400).send();
+      return;
+    }
+    res.status(200).json({ id: bookingId });
   };
 
   private updateBooking = async (

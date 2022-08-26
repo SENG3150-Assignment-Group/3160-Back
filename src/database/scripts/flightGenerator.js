@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 // date range
 const startDate = new Date("2022-08-25");
 const endDate = new Date("2022-08-30");
@@ -31,6 +33,8 @@ const planes = [
   "A340-600",
   "A380",
 ];
+
+let flightNum = 1;
 
 // random time of day generator
 const rtg = () => {
@@ -82,6 +86,9 @@ const formatDateString = (dateString) => {
 const generateFlights = () => {
   let query =
     "INSERT INTO Flights (`FlightCode`,`DepartureId`,`DestinationId`,`DepartureDateTime`,`DestinationDateTime`,`StopOverId`,`AirlineCode`,`PlaneCode`,`Duration`)\nVALUES\n";
+  let tQuery =
+    "INSERT INTO Tickets (`TicketCode`, `TicketClass`, `Price`, `Booked`, `Transferable`, `Exchangable`, `Refundable`, `PersonName`, `PersonType`, `SpecialRequests`, `DietaryPreferences`, `CarryOnBaggage`, `CheckedBaggage`, `FlightId`, `BookingId`)\nVALUES\n";
+
   let currDate = new Date();
   currDate.setTime(startDate.getTime());
 
@@ -106,17 +113,30 @@ const generateFlights = () => {
         aDate.setTime(dDate.getTime() + dur * 60 * 60 * 1000);
         const aDateString = formatDateString(aDate.toISOString());
 
-        const flightcode = airline + rcg();
+        const flightcode = airline + String(flightNum).padStart(5, "0");
 
         const values = `('${flightcode}', '${leg.s}', '${leg.e}', '${dDateString}', '${aDateString}', null, '${airline}', '${plane}', '${durS}'),\n`;
+        for (let i = 0; i < 10; i++) {
+          const tValues = `('${
+            flightcode + "S" + i
+          }', 'economy', 500, false, true, false, false, null, null, null, null, true, false, ${flightNum}, null),\n`;
+          tQuery = tQuery.concat(tValues);
+        }
 
+        flightNum += 1;
         query = query.concat(values);
       }
     }
     currDate.setDate(currDate.getDate() + 1);
   }
   query = query.slice(0, query.length - 2).concat(";");
+  tQuery = tQuery.slice(0, tQuery.length - 2).concat(";");
 
-  return query;
+  // console.log(query);
+  // console.log(tQuery);
+
+  fs.writeFile("./generatedQueries.txt", query + "\n" + tQuery, (err) => {
+    console.log(err);
+  });
 };
-console.log(generateFlights());
+generateFlights();

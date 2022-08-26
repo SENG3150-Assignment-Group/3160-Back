@@ -1,5 +1,6 @@
 import AccountType from "../domain/AccountType";
 import { Account, AccountOutput } from "../database/models/Account";
+import { Op } from "sequelize";
 
 class AccountDAO {
   private model: typeof Account;
@@ -21,10 +22,7 @@ class AccountDAO {
     firstName: string,
     lastName: string,
     email: string,
-    password: string,
-    creditCardNumber: string,
-    creditCardDate: string,
-    creditCardSecurity: string
+    password: string
   ): Promise<AccountOutput | null> => {
     try {
       return await this.model.create({
@@ -33,13 +31,21 @@ class AccountDAO {
         LastName: lastName,
         Email: email,
         Password: password,
-        CreditCardNumber: creditCardNumber,
-        CreditCardDate: creditCardDate,
-        CreditCardSecurity: creditCardSecurity,
       });
     } catch (error: any) {
       return null;
     }
+  };
+
+  public readByEmailPassword = async (
+    email: string,
+    password: string
+  ): Promise<AccountOutput | null> => {
+    return await this.model.findOne({
+      where: {
+        [Op.and]: [{ Email: email }, { Password: password }],
+      },
+    });
   };
 
   public setCreditCardDetails = async (

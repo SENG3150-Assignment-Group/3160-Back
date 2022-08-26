@@ -9,13 +9,11 @@ import Invoice from "../../domain/Invoice";
 class BookingServiceImpl implements BookingService {
   public createBooking = async (
     accountId: number,
-    email: string,
     creditCardNumber: string,
     subTotal: number,
-    tax: number,
-    refundAmount: number,
+    flightCode: string,
     ticketDetails: any[]
-  ): Promise<BookingAggregate | null> => {
+  ): Promise<number | null> => {
     const bookingRepository = new BookingRepository();
     const dateCreated = new Date();
     dateCreated.setTime(Date.now());
@@ -23,24 +21,24 @@ class BookingServiceImpl implements BookingService {
     const booking = new Booking(
       -1,
       accountId,
-      email,
+      "",
       dateCreated,
       State.Confirmed
     );
 
     const tickets = ticketDetails.map((t) => {
       return new Ticket(
-        t.ticketCode,
+        flightCode + "S" + t.seat,
         "",
         -1,
         false,
         false,
         false,
         false,
-        t.personName,
-        t.personType,
-        t.specialRequests,
-        t.dietaryPreferences,
+        t.fullname,
+        "adult",
+        "",
+        "",
         false,
         false,
         -1,
@@ -53,16 +51,14 @@ class BookingServiceImpl implements BookingService {
       dateCreated,
       creditCardNumber,
       subTotal,
-      tax,
-      refundAmount,
+      subTotal * 0.1,
+      0,
       -1
     );
 
     const bookingAgg = new BookingAggregate(booking, tickets, invoice);
 
-    await bookingRepository.addBooking(bookingAgg);
-
-    return null;
+    return await bookingRepository.addBooking(bookingAgg);
   };
 
   public updateBooking = async (

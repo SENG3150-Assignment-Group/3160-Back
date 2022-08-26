@@ -36,22 +36,15 @@ class AccountRepository {
     firstName: string,
     lastName: string,
     email: string,
-    password: string,
-    creditCardNumber: string,
-    creditCardDate: string,
-    creditCardSecurity: string
+    password: string
   ): Promise<AccountAggregate | null> => {
     const accountDAO = new AccountDAO();
-
     const accountModel = await accountDAO.create(
       accountType,
       firstName,
       lastName,
       email,
-      password,
-      creditCardNumber,
-      creditCardDate,
-      creditCardSecurity
+      password
     );
 
     if (accountModel == null) return null;
@@ -59,6 +52,32 @@ class AccountRepository {
     const account = Account.modelToDomain(accountModel);
     const bookings = new Array<Booking>();
     const packages = new Array<Package>();
+
+    return new AccountAggregate(account, packages, bookings);
+  };
+
+  public login = async (
+    email: string,
+    password: string
+  ): Promise<AccountAggregate | null> => {
+    const accountDAO = new AccountDAO();
+    const accountModel = await accountDAO.readByEmailPassword(email, password);
+
+    if (accountModel == null) return null;
+
+    const account = Account.modelToDomain(accountModel);
+    const bookingDAO = new BookingDAO();
+    const packageDAO = new PackageDAO();
+
+    const bookingModels = await bookingDAO.readAccountsBookings(
+      account.getAccountId()
+    );
+    const packageModels = await packageDAO.readAccountsPackages(
+      account.getAccountId()
+    );
+
+    const bookings = bookingModels.map((model) => Booking.modelToDomain(model));
+    const packages = packageModels.map((model) => Package.modelToDomain(model));
 
     return new AccountAggregate(account, packages, bookings);
   };

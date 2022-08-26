@@ -39,6 +39,7 @@ class BookingDAO {
         State: state,
       });
     } catch (error: any) {
+      console.log(error);
       return null;
     }
   };

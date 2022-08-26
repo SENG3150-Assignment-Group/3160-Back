@@ -11,26 +11,30 @@ class AccountServiceImpl implements AccountService {
   };
 
   createAccount = async (
-    firstName: string,
-    lastName: string,
+    name: string,
     email: string,
     password: string,
-    accountType: string,
-    creditCardNumber: string,
-    creditCardDate: string,
-    creditCardSecurity: string
+    accountType: string
   ): Promise<AccountAggregate | null> => {
     const accountRepository = new AccountRepository();
+
+    const names = name.split(" ");
     return accountRepository.createAccount(
       <AccountType>accountType,
-      firstName,
-      lastName,
+      names[0],
+      names[1],
       email,
-      password,
-      creditCardNumber,
-      creditCardDate,
-      creditCardSecurity
+      password
     );
+  };
+
+  login = async (
+    email: string,
+    password: string
+  ): Promise<AccountAggregate | null> => {
+    const accountRepository = new AccountRepository();
+
+    return accountRepository.login(email, password);
   };
 
   setCreditCardDetails = async (

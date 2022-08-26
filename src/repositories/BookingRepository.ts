@@ -8,7 +8,9 @@ import Ticket from "../domain/Ticket";
 import State from "../domain/State";
 
 class BookingRepository {
-  public addBooking = async (bookingAggregate: BookingAggregate) => {
+  public addBooking = async (
+    bookingAggregate: BookingAggregate
+  ): Promise<number | null> => {
     const bookingDAO = new BookingDAO();
     const ticketDAO = new TicketDAO();
     const invoiceDAO = new InvoiceDAO();
@@ -23,7 +25,7 @@ class BookingRepository {
       bookingAggregate.getState()
     );
 
-    if (booking == null) return;
+    if (booking == null) return null;
 
     for (const ticket of bookingAggregate.tickets) {
       await ticketDAO.update(
@@ -36,14 +38,16 @@ class BookingRepository {
       );
     }
 
-    invoiceDAO.create(
-      await booking.BookingId,
+    await invoiceDAO.create(
+      booking.BookingId,
       bookingAggregate.getDate(),
       bookingAggregate.getCreditCardNumber(),
       bookingAggregate.getSubTotal(),
       bookingAggregate.getTax(),
       bookingAggregate.getRefundAmount()
     );
+
+    return booking.BookingId;
   };
 
   public updateBooking = async (bookingId: number, state: State) => {

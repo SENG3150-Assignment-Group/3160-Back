@@ -53,15 +53,15 @@ Account.init(
     },
     CreditCardNumber: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     CreditCardDate: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     CreditCardSecurity: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
