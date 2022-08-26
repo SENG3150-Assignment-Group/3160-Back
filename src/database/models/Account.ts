@@ -6,17 +6,18 @@ import {
   InferCreationAttributes,
   Model,
 } from "sequelize";
+import AccountType from "../../domain/AccountType";
 
 interface AccountInput extends InferCreationAttributes<Account> {}
 interface AccountOutput extends InferAttributes<Account> {}
 
 class Account extends Model<AccountOutput, AccountInput> {
   AccountId!: CreationOptional<number>;
+  AccountType!: AccountType;
   FirstName!: string;
   LastName!: string;
   Email!: string;
   Password!: string;
-  AccountType!: string;
   CreditCardNumber!: CreationOptional<string>;
   CreditCardDate!: CreationOptional<string>;
   CreditCardSecurity!: CreationOptional<string>;
@@ -28,6 +29,10 @@ Account.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+    },
+    AccountType: {
+      type: DataTypes.ENUM("admin", "user", "travelAgent", "staff"),
+      allowNull: false,
     },
     FirstName: {
       type: DataTypes.STRING,
@@ -43,10 +48,6 @@ Account.init(
       unique: true,
     },
     Password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    AccountType: {
       type: DataTypes.STRING,
       allowNull: false,
     },

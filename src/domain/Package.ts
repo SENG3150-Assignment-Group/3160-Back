@@ -1,7 +1,9 @@
-class TravelPackage {
+import { PackageOutput } from "../database/models/Package";
+
+class Package {
   packageId: number;
   locationCode: string;
-  flightCodes: Array<number>;
+  flightId: number;
   accountId: number;
   accomodation: string;
   accomodationCost: number;
@@ -9,18 +11,29 @@ class TravelPackage {
   constructor(
     packageId: number,
     locationCode: string,
-    flightCodes: Array<number>,
+    flightId: number,
     accountId: number,
     accomodation: string,
     accomodationCost: number
   ) {
     this.packageId = packageId;
     this.locationCode = locationCode;
-    this.flightCodes = flightCodes;
+    this.flightId = flightId;
     this.accountId = accountId;
     this.accomodation = accomodation;
     this.accomodationCost = accomodationCost;
   }
+
+  public static modelToDomain = (model: PackageOutput) => {
+    return new Package(
+      model.PackageId,
+      model.LocationCode,
+      model.FlightId,
+      model.AccountId,
+      model.Accomodation,
+      model.AccomodationCost
+    );
+  };
 
   // Getters
   public getPackageId = (): number => {
@@ -29,8 +42,8 @@ class TravelPackage {
   public getLocationCode = (): string => {
     return this.locationCode;
   };
-  public getFlightCodes = (): Array<number> => {
-    return this.flightCodes;
+  public getFlightId = (): number => {
+    return this.flightId;
   };
   public getAccountId = (): number => {
     return this.accountId;
@@ -49,8 +62,8 @@ class TravelPackage {
   public setLocationCode = (locationCode: string) => {
     this.locationCode = locationCode;
   };
-  public setFlightCodes = (flightCodes: Array<number>) => {
-    this.flightCodes = flightCodes;
+  public setFlightCode = (flightId: number) => {
+    this.flightId = flightId;
   };
   public setAccountId = (accountId: number) => {
     this.accountId = accountId;
@@ -63,4 +76,4 @@ class TravelPackage {
   };
 }
 
-export default TravelPackage;
+export default Package;

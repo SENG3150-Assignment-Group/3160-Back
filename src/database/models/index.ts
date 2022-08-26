@@ -10,6 +10,7 @@ import { Account } from "./Account";
 import { Booking } from "./Booking";
 import { Invoice } from "./Invoice";
 import { Ticket } from "./Ticket";
+import { Package } from "./Package";
 
 export {
   Country,
@@ -24,4 +25,5 @@ export {
   Booking,
   Invoice,
   Ticket,
+  Package,
 };

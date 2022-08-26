@@ -11,12 +11,13 @@ import {
   Booking,
   Invoice,
   Ticket,
+  Package,
 } from "./models";
 
 const mode = false;
 
 const sync = async () => {
-  await Country.sync({ alter: mode });
+  await Country.sync({ force: mode });
   await Airline.sync({ force: mode });
   await PlaneType.sync({ force: mode });
   await Location.sync({ force: mode });
@@ -28,6 +29,7 @@ const sync = async () => {
   await Booking.sync({ force: mode });
   await Invoice.sync({ force: mode });
   await Ticket.sync({ force: mode });
+  await Package.sync({ force: mode });
 };
 
 export default sync;

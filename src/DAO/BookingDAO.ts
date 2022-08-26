@@ -17,9 +17,9 @@ class BookingDAO {
     return await this.model.findByPk(id);
   };
 
-  public readAccountsBooking = async (
+  public readAccountsBookings = async (
     accountId: number
-  ): Promise<BookingOutput[] | null> => {
+  ): Promise<BookingOutput[]> => {
     return await this.model.findAll({
       where: { AccountId: accountId },
     });

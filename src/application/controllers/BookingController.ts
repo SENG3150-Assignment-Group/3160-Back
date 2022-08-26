@@ -21,7 +21,6 @@ class BookingController extends Controller {
     //this.router.get("/getBookings", this.getBookings);
     this.router.post("/createBooking", this.createBooking);
     this.router.put("/updateBooking", this.updateBooking);
-    this.router.post("/createTicket", this.createTicket);
   };
 
   // private getBookings = async (req: express.Request, res: express.Response) => {
@@ -79,20 +78,6 @@ class BookingController extends Controller {
 
     const bookingService: BookingService = new BookingServiceImpl();
     res.status(200).send(bookingService.updateBooking(bookingId, state));
-  };
-
-  private createTicket = async (
-    req: express.Request,
-    res: express.Response
-  ) => {
-    const tCode = <string>req.body.ticketCode;
-    const tClass = <string>req.body.ticketClass;
-    const price = parseFloat(<string>req.body.price);
-    const flightId = parseFloat(<string>req.body.flightId);
-
-    const ticketDAO = new TicketDAO();
-    const ticket = await ticketDAO.altCreate(tCode, tClass, price, flightId);
-    res.json(ticket);
   };
 }
 

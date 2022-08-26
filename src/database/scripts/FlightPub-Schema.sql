@@ -51,9 +51,15 @@ CREATE TABLE `accounts` (
   `LastName` varchar(30) NOT NULL,
   `Email` nvarchar(255) NOT NULL,
   `Password` varchar(35) NOT NULL,
+<<<<<<< HEAD
   `CreditCardNumber` varchar(16),
   `CreditCardDate` date,
   `CreditCardSecurity` char(3),
+=======
+  `CreditCardNumber` varchar(12) NOT NULL,
+  `CreditCardDate` varchar(5) NOT NULL,
+  `CreditCardSecurity` char(3) NOT NULL
+>>>>>>> oloughlin_account-setup
   PRIMARY KEY (`AccountId`)
 );
 
