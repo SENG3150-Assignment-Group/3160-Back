@@ -26,7 +26,7 @@ class BookingRepository {
     if (booking == null) return;
 
     for (const ticket of bookingAggregate.tickets) {
-      ticketDAO.update(
+      await ticketDAO.update(
         ticket.getTicketCode(),
         ticket.getPersonName(),
         ticket.getPersonType(),
@@ -37,7 +37,7 @@ class BookingRepository {
     }
 
     invoiceDAO.create(
-      booking.BookingId,
+      await booking.BookingId,
       bookingAggregate.getDate(),
       bookingAggregate.getCreditCardNumber(),
       bookingAggregate.getSubTotal(),
